@@ -1,7 +1,8 @@
-// Service Worker for Connect Digitals
-const CACHE_NAME = 'connect-digitals-v1'
-const STATIC_CACHE = 'static-v1'
-const IMAGE_CACHE = 'images-v1'
+// Service Worker for Connect Digitals - Production Ready
+const CACHE_NAME = 'connect-digitals-v1.0.0-final'
+const STATIC_CACHE = 'static-v1.0.0-final'
+const IMAGE_CACHE = 'images-v1.0.0-final'
+const CACHE_DURATION = 7 * 24 * 60 * 60 * 1000 // 7 days
 
 // Assets to cache immediately
 const STATIC_ASSETS = [

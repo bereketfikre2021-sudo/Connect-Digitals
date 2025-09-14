@@ -303,52 +303,57 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
   
   return (
     <main className="max-w-6xl mx-auto px-6 pt-24 pb-12">
-      <section id="hero" className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-8">
+      <section id="hero" className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center py-8 lg:py-12">
         <div>
-          <motion.h1 initial={{ opacity:0,y:20 }} animate={{ opacity:1,y:0 }} transition={{ duration:0.6 }} className="text-4xl md:text-5xl font-display font-bold text-primaryNavy">Connect. Create. Captivate.</motion.h1>
-          <motion.p initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2 }} className="mt-4 text-lg text-gray-700">
+          <motion.h1 initial={{ opacity:0,y:20 }} animate={{ opacity:1,y:0 }} transition={{ duration:0.6 }} className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-primaryNavy leading-tight">Connect. Create. Captivate.</motion.h1>
+          <motion.p initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2 }} className="mt-4 text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed">
             We connect your vision, create powerful brands, and captivate your audience with thoughtful design and strategy.
           </motion.p>
 
-          <div className="mt-6 flex items-center gap-4">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <button 
               onClick={onOpenQuoteModal}
-              className="inline-block px-6 py-3 rounded-md font-semibold shadow hover:bg-opacity-90 transition-colors" 
-              style={{ background:'#EC1C24', color:'#fff' }}
+              className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden text-center sm:text-left"
             >
-              Get Started
+              <span className="relative z-10">Get Started</span>
+              <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
             </button>
-            <a href="#portfolio" className="inline-block px-5 py-3 border rounded-md text-primaryNavy" style={{ borderColor:'#000F33' }}>View Portfolio</a>
+            <a 
+              href="#portfolio" 
+              className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-primaryNavy text-primaryNavy rounded-xl font-semibold hover:bg-primaryNavy hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg text-center sm:text-left"
+            >
+              View Portfolio
+            </a>
           </div>
 
-          <div className="mt-12 grid grid-cols-3 gap-6">
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             <div className="text-center group" ref={projectsRef}>
-              <div className="bg-gradient-to-br from-primaryNavy to-primaryNavy rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #000F33, #1a2a5c)' }}>
-                <div className="text-4xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">{projectsCount}+</div>
-                <div className="text-gray-200 font-medium">Projects Completed</div>
-                <div className="w-12 h-1 bg-white rounded-full mx-auto mt-3 opacity-60"></div>
+              <div className="bg-gradient-to-br from-primaryNavy to-primaryNavy rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #000F33, #1a2a5c)' }}>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">{projectsCount}+</div>
+                <div className="text-gray-200 font-medium text-xs sm:text-sm lg:text-base">Projects Completed</div>
+                <div className="w-8 sm:w-10 lg:w-12 h-1 bg-white rounded-full mx-auto mt-2 sm:mt-3 opacity-60"></div>
               </div>
             </div>
             
             <div className="text-center group" ref={satisfactionRef}>
-              <div className="bg-gradient-to-br from-accentRed to-accentRed rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #EC1C24, #c41e3a)' }}>
-                <div className="text-4xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">{satisfactionCount}%</div>
-                <div className="text-red-100 font-medium">Client Satisfaction</div>
-                <div className="w-12 h-1 bg-white rounded-full mx-auto mt-3 opacity-60"></div>
+              <div className="bg-gradient-to-br from-accentRed to-accentRed rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #EC1C24, #c41e3a)' }}>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">{satisfactionCount}%</div>
+                <div className="text-red-100 font-medium text-xs sm:text-sm lg:text-base">Client Satisfaction</div>
+                <div className="w-8 sm:w-10 lg:w-12 h-1 bg-white rounded-full mx-auto mt-2 sm:mt-3 opacity-60"></div>
               </div>
             </div>
             
             <div className="text-center group" ref={experienceRef}>
-              <div className="bg-gradient-to-br from-gold to-gold rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #D4AF37, #b8941f)' }}>
-                <div className="text-4xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">{experienceCount}+</div>
-                <div className="text-yellow-100 font-medium">Years Experience</div>
-                <div className="w-12 h-1 bg-white rounded-full mx-auto mt-3 opacity-60"></div>
+              <div className="bg-gradient-to-br from-gold to-gold rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #D4AF37, #b8941f)' }}>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">{experienceCount}+</div>
+                <div className="text-yellow-100 font-medium text-xs sm:text-sm lg:text-base">Years Experience</div>
+                <div className="w-8 sm:w-10 lg:w-12 h-1 bg-white rounded-full mx-auto mt-2 sm:mt-3 opacity-60"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="order-first md:order-last">
+        <div className="order-first lg:order-last">
           <motion.div 
             initial={{ scale:0.98, opacity:0 }} 
             animate={{ scale:1, opacity:1 }} 
@@ -356,7 +361,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             className="rounded-2xl overflow-hidden shadow-2xl relative group"
           >
             {/* Slideshow Container */}
-            <div className="relative w-full h-80 overflow-hidden">
+            <div className="relative w-full h-64 sm:h-80 lg:h-96 overflow-hidden">
               {heroImages.map((image, index) => (
                 <motion.div
                   key={index}
@@ -393,7 +398,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
               {/* Progress Bar */}
               <div className="absolute top-0 left-0 w-full h-1 bg-white/20">
                 <motion.div 
-                  className="h-full bg-gradient-to-r from-primaryNavy to-accentRed"
+                  className="h-full bg-primaryNavy"
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
                   transition={{ 
@@ -464,11 +469,11 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
       </section>
 
       <section id="about" className="py-10">
-        <div className="bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl p-8 shadow-lg border border-gray-100">
-          <div className="md:flex md:items-center md:justify-between">
-            <div className="md:flex-1">
+        <div className="bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100">
+          <div className="lg:flex lg:items-center lg:justify-between">
+            <div className="lg:flex-1">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-primaryNavy to-accentRed rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-primaryNavy rounded-full flex items-center justify-center shadow-lg">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
@@ -477,20 +482,20 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
               </div>
               
               <div className="space-y-4">
-                <p className="text-gray-700 max-w-xl leading-relaxed">
+                <p className="text-gray-700 max-w-xl leading-relaxed font-sans">
                   At <span className="font-semibold text-primaryNavy">Connect Digitals</span>, we believe every successful brand starts with a meaningful connection. We connect with your vision, create compelling designs, and help you captivate your audience — turning ideas into stories people remember.
                 </p>
                 
                 <div className="bg-gradient-to-r from-gold/10 to-accentRed/10 border-l-4 border-gold p-4 rounded-r-lg">
-                  <p className="text-gray-700 text-sm">
+                  <p className="text-gray-700 text-sm font-sans">
                     Founded by <span className="font-bold text-primaryNavy">Bereket Fikre</span>, a brand builder and creative designer with <span className="font-semibold text-accentRed">5+ years of experience</span>.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 md:mt-0 md:ml-8">
-              <div className="bg-gradient-to-br from-primaryNavy to-accentRed rounded-2xl p-6 text-white text-center">
+            <div className="mt-6 lg:mt-0 lg:ml-8">
+              <div className="bg-primaryNavy rounded-2xl p-6 text-white text-center shadow-xl">
                 <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -500,9 +505,9 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                 <p className="text-white/90 text-sm mb-4">Let's create something amazing together</p>
                 <button 
                   onClick={() => scrollToSection('contact')}
-                  className="w-full px-6 py-3 bg-white text-primaryNavy rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                  className="group w-full px-6 py-4 bg-white text-primaryNavy rounded-xl font-semibold border-2 border-white hover:border-primaryNavy transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl"
                 >
-                  Work with us
+                  <span className="group-hover:text-primaryNavy transition-colors duration-300">Work with us</span>
                 </button>
               </div>
             </div>
@@ -515,12 +520,13 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
           <h3 className="text-xl font-display font-semibold text-primaryNavy">Our Services</h3>
           <button
             onClick={onOpenPricingModal}
-            className="px-6 py-3 bg-gradient-to-r from-primaryNavy to-accentRed text-white rounded-xl font-semibold hover:from-accentRed hover:to-primaryNavy transition-all duration-500 transform hover:-translate-y-1 hover:shadow-lg"
+            className="group relative px-8 py-4 bg-accentRed text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
           >
-            View Pricing
+            <span className="relative z-10">View Pricing</span>
+            <div className="absolute inset-0 bg-primaryNavy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
           </button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {services.map(s => <ServiceCard key={s.id} {...s} />)}
         </div>
       </section>
@@ -532,12 +538,13 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             href="https://heyzine.com/flip-book/2e51bd7d15.html" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="px-6 py-3 bg-gradient-to-r from-primaryNavy to-accentRed text-white rounded-xl font-semibold hover:from-accentRed hover:to-primaryNavy transition-all duration-500 transform hover:-translate-y-1 hover:shadow-lg"
+            className="group relative px-8 py-4 bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
           >
-            Explore Full Portfolio
+            <span className="relative z-10">Explore Full Portfolio</span>
+            <div className="absolute inset-0 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
           </a>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {portfolio.map(p => (
             <PortfolioCard 
               key={p.id} 
@@ -560,13 +567,13 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
           <div className="flex animate-scroll" style={{ width: 'max-content' }}>
             {/* First set of testimonials */}
             {testimonials.map(t => (
-              <div key={t.id} className="flex-shrink-0 w-96 mr-8">
+              <div key={t.id} className="flex-shrink-0 w-80 sm:w-96 mr-6 sm:mr-8">
                 <TestimonialCard quote={t.quote} author={t.author} avatar={t.avatar} alt={t.alt} />
               </div>
             ))}
             {/* Second set for seamless loop */}
             {testimonials.map(t => (
-              <div key={`duplicate-${t.id}`} className="flex-shrink-0 w-96 mr-8">
+              <div key={`duplicate-${t.id}`} className="flex-shrink-0 w-80 sm:w-96 mr-6 sm:mr-8">
                 <TestimonialCard quote={t.quote} author={t.author} avatar={t.avatar} alt={t.alt} />
               </div>
             ))}
@@ -575,35 +582,35 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
       </section>
 
       <section id="contact" className="py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-display font-bold text-primaryNavy mb-4">Let's Create Something Amazing</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-primaryNavy mb-4">Let's Create Something Amazing</h2>
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto font-sans leading-relaxed">
             Ready to transform your vision into reality? Get in touch and let's discuss how we can bring your ideas to life.
           </p>
           </div>
 
-        <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-100">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl border border-gray-100">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Contact Information */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               <div>
-                <h3 className="text-2xl font-display font-semibold text-primaryNavy mb-6">Get in Touch</h3>
-                <p className="text-gray-600 mb-8 leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-display font-semibold text-primaryNavy mb-4 sm:mb-6">Get in Touch</h3>
+                <p className="text-gray-600 mb-6 sm:mb-8 leading-relaxed font-sans">
                   Whether you have a specific project in mind or just want to explore possibilities, 
                   we're here to help you achieve your goals.
                 </p>
               </div>
 
-              <div className="space-y-6">
-                <div className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-                  <div className="w-12 h-12 bg-primaryNavy rounded-full flex items-center justify-center">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primaryNavy rounded-full flex items-center justify-center">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
               </div>
               <div>
-                    <h4 className="font-semibold text-gray-900">Phone</h4>
-                    <p className="text-gray-600">+251 923 988 838</p>
+                    <h4 className="font-semibold text-gray-900 font-sans">Phone</h4>
+                    <p className="text-gray-600 font-sans">+251 923 988 838</p>
                   </div>
                 </div>
 
@@ -614,8 +621,8 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                     </svg>
               </div>
               <div>
-                    <h4 className="font-semibold text-gray-900">Email</h4>
-                    <p className="text-gray-600">digitalsconnect@gmail.com</p>
+                    <h4 className="font-semibold text-gray-900 font-sans">Email</h4>
+                    <p className="text-gray-600 font-sans">digitalsconnect@gmail.com</p>
                   </div>
                 </div>
 
@@ -626,8 +633,9 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                     </svg>
               </div>
               <div>
-                    <h4 className="font-semibold text-gray-900">Social</h4>
-                    <p className="text-gray-600">Connect with us</p>
+                    <h4 className="font-semibold text-gray-900 font-sans">Social</h4>
+                    <a href="https://linktr.ee/connectdigitals" target="_blank" rel="noopener noreferrer" className="text-gray-600 font-sans hover:text-primaryNavy transition-colors duration-300">linktr.ee/connectdigitals</a>
+                    {/* CACHE BUSTER v5 - Linktree Added */}
                   </div>
                 </div>
               </div>
@@ -651,13 +659,13 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             </div>
 
             {/* Contact Form */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-              <h3 className="text-xl font-display font-semibold text-primaryNavy mb-6">Send us a Message</h3>
+            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100">
+              <h3 className="text-lg sm:text-xl font-display font-semibold text-primaryNavy mb-4 sm:mb-6">Send us a Message</h3>
               <form 
                 className="space-y-6" 
                 onSubmit={handleContactSubmit}
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
                     <input 
@@ -702,8 +710,9 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full px-8 py-4 bg-gradient-to-r from-primaryNavy to-accentRed text-white rounded-xl font-semibold text-lg hover:from-accentRed hover:to-primaryNavy transition-all duration-500 transform hover:-translate-y-1 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="group relative w-full px-8 py-4 bg-primaryNavy text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
+                  <span className="relative z-10">
                   {isSubmitting ? (
                     <div className="flex items-center justify-center gap-2">
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -712,6 +721,8 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                   ) : (
                     'Send Message'
                   )}
+                  </span>
+                  <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 </button>
             </form>
             </div>
@@ -733,7 +744,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
               
               {/* Success Message */}
               <h3 className="text-2xl font-display font-bold text-primaryNavy mb-4">Message Sent!</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
+              <p className="text-gray-600 mb-6 leading-relaxed font-sans">
                 Thank you for reaching out! We've received your message and will get back to you within 24 hours.
               </p>
               
@@ -741,9 +752,10 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowSuccessModal(false)}
-                  className="flex-1 px-6 py-3 bg-gradient-to-r from-primaryNavy to-accentRed text-white rounded-xl font-semibold hover:from-accentRed hover:to-primaryNavy transition-all duration-300"
+                  className="group relative flex-1 px-6 py-3 bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
                 >
-                  Close
+                  <span className="relative z-10">Close</span>
+                  <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 </button>
                 <a
                   href="tel:+251923988838"

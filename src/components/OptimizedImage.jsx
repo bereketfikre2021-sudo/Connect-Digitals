@@ -24,7 +24,7 @@ export default function OptimizedImage({
       },
       { 
         threshold: 0.1,
-        rootMargin: '50px'
+        rootMargin: '100px'
       }
     )
 

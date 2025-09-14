@@ -83,12 +83,12 @@ export default function PricingModal({ isOpen, onClose }) {
       onClick={handleBackdropClick}
     >
       <div className="bg-white rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-8">
+        <div className="p-4 sm:p-6 lg:p-8">
           {/* Header */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4">
             <div>
-              <h2 className="text-3xl font-display font-bold text-primaryNavy">Our Pricing</h2>
-              <p className="text-gray-600 mt-2">Choose the perfect package for your project needs</p>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-primaryNavy">Our Pricing</h2>
+              <p className="text-gray-600 mt-2 font-sans text-sm sm:text-base">Choose the perfect package for your project needs</p>
             </div>
             <button
               onClick={onClose}
@@ -101,17 +101,17 @@ export default function PricingModal({ isOpen, onClose }) {
           </div>
 
           {/* Packages Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
             {packages.map((pkg) => (
               <div
                 key={pkg.id}
-                className={`relative bg-white rounded-2xl p-8 shadow-lg border-2 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 ${
+                className={`relative bg-white rounded-2xl p-6 sm:p-8 shadow-lg border-2 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 ${
                   pkg.popular ? 'border-primaryNavy ring-2 ring-primaryNavy ring-opacity-20' : 'border-gray-200'
                 }`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-primaryNavy to-accentRed text-white px-4 py-2 rounded-full text-sm font-semibold">
+                    <span className="bg-primaryNavy text-white px-4 py-2 rounded-full text-sm font-semibold shadow-md">
                       Most Popular
                     </span>
                   </div>
@@ -119,8 +119,8 @@ export default function PricingModal({ isOpen, onClose }) {
                 
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-display font-bold text-gray-900 mb-2">{pkg.name}</h3>
-                  <p className="text-gray-600 mb-4">{pkg.description}</p>
-                  <div className={`inline-block bg-gradient-to-r ${pkg.color} text-white px-6 py-3 rounded-xl font-bold text-xl`}>
+                  <p className="text-gray-600 mb-4 font-sans">{pkg.description}</p>
+                  <div className={`inline-block ${pkg.color === 'from-primaryNavy to-accentRed' ? 'bg-primaryNavy' : pkg.color} text-white px-6 py-3 rounded-xl font-bold text-xl shadow-lg`}>
                     {pkg.price}
                   </div>
                 </div>
@@ -138,13 +138,20 @@ export default function PricingModal({ isOpen, onClose }) {
 
                 <a
                   href="tel:+251923988838"
-                  className={`w-full py-3 rounded-xl font-semibold transition-all duration-300 text-center block ${
+                  className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 text-center block transform hover:-translate-y-1 hover:shadow-lg ${
                     pkg.popular
-                      ? 'bg-gradient-to-r from-primaryNavy to-accentRed text-white hover:from-accentRed hover:to-primaryNavy'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'group relative bg-primaryNavy text-white overflow-hidden'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-2 border-transparent hover:border-gray-300'
                   }`}
                 >
-                  Choose {pkg.name}
+                  {pkg.popular ? (
+                    <>
+                      <span className="relative z-10">Choose {pkg.name}</span>
+                      <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    </>
+                  ) : (
+                    `Choose ${pkg.name}`
+                  )}
                 </a>
               </div>
             ))}
@@ -161,7 +168,7 @@ export default function PricingModal({ isOpen, onClose }) {
                     <svg className="w-5 h-5 text-accentRed" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span className="text-gray-600 font-medium">{item.timeline}</span>
+                    <span className="text-gray-600 font-medium font-sans">{item.timeline}</span>
                   </div>
                 </div>
               ))}
@@ -169,7 +176,7 @@ export default function PricingModal({ isOpen, onClose }) {
           </div>
 
           {/* CTA Section */}
-          <div className="text-center bg-gradient-to-r from-primaryNavy to-accentRed rounded-2xl p-8 text-white">
+          <div className="text-center bg-primaryNavy rounded-2xl p-8 text-white shadow-xl">
             <h3 className="text-2xl font-display font-bold mb-4">Ready to Get Started?</h3>
             <p className="text-lg mb-6 opacity-90">
               Contact us for a personalized quote and let's bring your vision to life

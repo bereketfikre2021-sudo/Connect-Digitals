@@ -2,12 +2,19 @@ import React, { useState, useEffect } from 'react'
 
 export default function Header({ onOpenQuoteModal }){
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
+    // Close mobile menu when navigating
+    setIsMobileMenuOpen(false)
+  }
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
   useEffect(() => {
@@ -47,7 +54,7 @@ export default function Header({ onOpenQuoteModal }){
               <div className="font-display font-bold text-lg text-primaryNavy group-hover:text-accentRed transition-colors duration-300">
                 Connect Digitals
               </div>
-              <div className="text-xs text-gray-500 font-medium tracking-wide">
+              <div className="text-xs text-gray-500 font-medium tracking-wide font-sans">
                 Connect. Create. Captivate.
               </div>
             </div>
@@ -59,35 +66,35 @@ export default function Header({ onOpenQuoteModal }){
             <nav className="hidden lg:flex items-center gap-8">
               <button 
                 onClick={() => scrollToSection('about')} 
-                className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group"
+                className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group font-sans"
               >
                 About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primaryNavy transition-all duration-300 group-hover:w-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('services')} 
-                className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group"
+                className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group font-sans"
               >
                 Services
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primaryNavy transition-all duration-300 group-hover:w-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('portfolio')} 
-                className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group"
+                className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group font-sans"
               >
                 Portfolio
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primaryNavy transition-all duration-300 group-hover:w-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('testimonials')} 
-                className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group"
+                className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group font-sans"
               >
                 Testimonials
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primaryNavy transition-all duration-300 group-hover:w-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('contact')} 
-                className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group"
+                className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group font-sans"
               >
                 Contact
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primaryNavy transition-all duration-300 group-hover:w-full"></span>
@@ -95,53 +102,72 @@ export default function Header({ onOpenQuoteModal }){
             </nav>
 
 
-            {/* Mobile Menu Button */}
-            <button className="lg:hidden p-2 text-gray-700 hover:text-primaryNavy transition-colors">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            {/* Mobile Menu Button - Fancy Design - CACHE BUSTER v4 */}
+            <button 
+              onClick={toggleMobileMenu}
+              className="lg:hidden relative p-3 rounded-full bg-gradient-to-br from-primaryNavy/5 to-accentRed/5 hover:from-primaryNavy/10 hover:to-accentRed/10 transition-all duration-300 group"
+            >
+              {/* Animated Background Ring */}
+              <div className={`absolute inset-0 rounded-full border-2 transition-all duration-300 ${
+                isMobileMenuOpen 
+                  ? 'border-primaryNavy/30 scale-110' 
+                  : 'border-transparent group-hover:border-primaryNavy/20'
+              }`}></div>
+              
+              {/* Burger Icon with Smooth Animation */}
+              <div className="relative w-6 h-6 flex flex-col justify-center items-center">
+                <span className={`block w-5 h-0.5 bg-primaryNavy transition-all duration-300 ease-in-out ${
+                  isMobileMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-1.5'
+                }`}></span>
+                <span className={`block w-5 h-0.5 bg-primaryNavy transition-all duration-300 ease-in-out ${
+                  isMobileMenuOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
+                }`}></span>
+                <span className={`block w-5 h-0.5 bg-primaryNavy transition-all duration-300 ease-in-out ${
+                  isMobileMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-1.5'
+                }`}></span>
+              </div>
+              
+              {/* Subtle Glow Effect */}
+              <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                isMobileMenuOpen 
+                  ? 'bg-gradient-to-br from-primaryNavy/10 to-accentRed/10' 
+                  : 'bg-transparent group-hover:bg-gradient-to-br group-hover:from-primaryNavy/5 group-hover:to-accentRed/5'
+              }`}></div>
+              
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Navigation (Hidden for now - can be implemented later) */}
-      <div className="lg:hidden border-t border-gray-200 bg-white/95 backdrop-blur-lg">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <nav className="flex flex-col space-y-4">
-            <button 
-              onClick={() => scrollToSection('about')} 
-              className="text-left text-gray-700 hover:text-primaryNavy transition-colors font-medium py-2"
-            >
-              About
-            </button>
-            <button 
-              onClick={() => scrollToSection('services')} 
-              className="text-left text-gray-700 hover:text-primaryNavy transition-colors font-medium py-2"
-            >
-              Services
-            </button>
-            <button 
-              onClick={() => scrollToSection('portfolio')} 
-              className="text-left text-gray-700 hover:text-primaryNavy transition-colors font-medium py-2"
-            >
-              Portfolio
-            </button>
-            <button 
-              onClick={() => scrollToSection('testimonials')} 
-              className="text-left text-gray-700 hover:text-primaryNavy transition-colors font-medium py-2"
-            >
-              Testimonials
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')} 
-              className="text-left text-gray-700 hover:text-primaryNavy transition-colors font-medium py-2"
-            >
-              Contact
-            </button>
-          </nav>
+      {/* Mobile Navigation - Enhanced Design */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden border-t border-gray-200 bg-white/95 backdrop-blur-lg transition-all duration-300 shadow-lg">
+          <div className="max-w-6xl mx-auto px-6 py-6">
+            <nav className="flex flex-col space-y-1">
+              {[
+                { name: 'About', id: 'about' },
+                { name: 'Services', id: 'services' },
+                { name: 'Portfolio', id: 'portfolio' },
+                { name: 'Testimonials', id: 'testimonials' },
+                { name: 'Contact', id: 'contact' }
+              ].map((item, index) => (
+                <button 
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)} 
+                  className="group relative text-left text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-gradient-to-r hover:from-primaryNavy/5 hover:to-accentRed/5 font-sans"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <span className="relative z-10 flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primaryNavy/30 group-hover:bg-primaryNavy transition-colors duration-300"></div>
+                    {item.name}
+                  </span>
+                  <div className="absolute left-0 top-0 w-0 h-full bg-gradient-to-r from-primaryNavy/10 to-accentRed/10 rounded-lg transition-all duration-300 group-hover:w-full"></div>
+                </button>
+              ))}
+            </nav>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   )
 }

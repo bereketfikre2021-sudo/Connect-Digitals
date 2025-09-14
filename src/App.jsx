@@ -35,7 +35,7 @@ export default function App() {
           onOpenPricingModal={() => setIsPricingModalOpen(true)}
         />
       </main>
-      <Footer />
+      <Footer key={`footer-${Date.now()}`} />
       <QuoteModal
         isOpen={isQuoteModalOpen}
         onClose={() => setIsQuoteModalOpen(false)}

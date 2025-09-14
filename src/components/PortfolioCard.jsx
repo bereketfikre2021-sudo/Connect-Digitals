@@ -6,16 +6,16 @@ export default function PortfolioCard({img, title, alt, children, caseStudy}){
   
   return (
     <>
-      <div className="rounded-2xl overflow-hidden bg-white shadow hover:shadow-lg transition-shadow duration-300">
+      <div className="rounded-2xl overflow-hidden bg-white shadow hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
         <OptimizedImage 
           src={img} 
           alt={alt || title} 
           title={title}
-          className="w-full h-48" 
+          className="w-full h-40 sm:h-48" 
         />
-      <div className="p-4">
-        <div className="font-semibold">{title}</div>
-        <div className="text-sm text-gray-600 mt-2">{children}</div>
+      <div className="p-4 flex flex-col flex-grow">
+        <div className="font-semibold text-base sm:text-lg">{title}</div>
+        <div className="text-sm text-gray-600 mt-2 font-sans flex-grow">{children}</div>
         <div className="mt-3">
             <button 
               onClick={() => setIsModalOpen(true)}
@@ -98,9 +98,10 @@ export default function PortfolioCard({img, title, alt, children, caseStudy}){
             <div className="mt-8 flex gap-3">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="flex-1 px-6 py-3 bg-gradient-to-r from-primaryNavy to-accentRed text-white rounded-xl font-semibold hover:from-accentRed hover:to-primaryNavy transition-all duration-300"
+                className="group relative flex-1 px-6 py-3 bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
               >
-                Close
+                <span className="relative z-10">Close</span>
+                <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </button>
               <a
                 href="https://heyzine.com/flip-book/2e51bd7d15.html"

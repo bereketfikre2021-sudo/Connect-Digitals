@@ -2,11 +2,12 @@
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
+    fontFamily: {
+      'sans': ['Montserrat', 'system-ui', 'sans-serif'],
+      'display': ['Montserrat', 'system-ui', 'sans-serif'],
+      'body': ['Montserrat', 'system-ui', 'sans-serif'],
+    },
     extend: {
-      fontFamily: {
-        'sans': ['Montserrat', 'system-ui', 'sans-serif'],
-        'display': ['Montserrat', 'system-ui', 'sans-serif'],
-      },
       colors: {
         accentRed: '#EC1C24',
         primaryNavy: '#000F33',

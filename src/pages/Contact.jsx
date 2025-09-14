@@ -5,7 +5,7 @@ export default function Contact() {
     <div className="max-w-6xl mx-auto px-6 py-16">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-display font-bold text-primaryNavy mb-4">Contact Us</h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto font-sans">
           Ready to transform your vision into reality? Get in touch and let's discuss how we can bring your ideas to life.
         </p>
       </div>
@@ -16,7 +16,7 @@ export default function Contact() {
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl font-display font-semibold text-primaryNavy mb-6">Get in Touch</h2>
-              <p className="text-gray-600 mb-8 leading-relaxed">
+              <p className="text-gray-600 mb-8 leading-relaxed font-sans">
                 Whether you have a specific project in mind or just want to explore possibilities, 
                 we're here to help you achieve your goals.
               </p>
@@ -30,8 +30,8 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Phone</h3>
-                  <p className="text-gray-600">+251 923 988 838</p>
+                  <h3 className="font-semibold text-gray-900 font-sans">Phone</h3>
+                  <p className="text-gray-600 font-sans">+251 923 988 838</p>
                 </div>
               </div>
 
@@ -42,8 +42,8 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Email</h3>
-                  <p className="text-gray-600">digitalsconnect@gmail.com</p>
+                  <h3 className="font-semibold text-gray-900 font-sans">Email</h3>
+                  <p className="text-gray-600 font-sans">digitalsconnect@gmail.com</p>
                 </div>
               </div>
 
@@ -54,8 +54,8 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Social</h3>
-                  <p className="text-gray-600">Connect with us</p>
+                  <h3 className="font-semibold text-gray-900 font-sans">Social</h3>
+                  <p className="text-gray-600 font-sans">Connect with us</p>
                 </div>
               </div>
             </div>
@@ -130,9 +130,10 @@ export default function Contact() {
 
               <button 
                 type="submit" 
-                className="w-full px-8 py-4 bg-gradient-to-r from-primaryNavy to-accentRed text-white rounded-xl font-semibold text-lg hover:from-accentRed hover:to-primaryNavy transition-all duration-500 transform hover:-translate-y-1 hover:shadow-xl"
+                className="group relative w-full px-8 py-4 bg-primaryNavy text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
               >
-                Send Message
+                <span className="relative z-10">Send Message</span>
+                <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </button>
             </form>
           </div>

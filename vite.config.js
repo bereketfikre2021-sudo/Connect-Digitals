@@ -11,6 +11,7 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
       },
     },
     // Enable code splitting
@@ -38,10 +39,14 @@ export default defineConfig({
     },
     // Optimize asset handling
     assetsInlineLimit: 4096,
-    // Enable source maps for debugging
+    // Disable source maps for production
     sourcemap: false,
     // Optimize chunk size
     chunkSizeWarningLimit: 1000,
+    // Enable CSS code splitting
+    cssCodeSplit: true,
+    // Optimize target for modern browsers
+    target: 'es2015',
   },
   // Optimize dependencies
   optimizeDeps: {
