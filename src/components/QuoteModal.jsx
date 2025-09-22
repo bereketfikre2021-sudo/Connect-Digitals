@@ -1,8 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function QuoteModal({ isOpen, onClose }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+
+  // Handle ESC key press
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape' && isOpen) {
+        onClose()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscKey)
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey)
+    }
+  }, [isOpen, onClose])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

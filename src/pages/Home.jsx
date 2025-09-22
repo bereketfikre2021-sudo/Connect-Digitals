@@ -52,49 +52,81 @@ function useCountUp(end, start = 0, duration = 2000, trigger = true) {
   return [count, ref]
 }
 
-const services = [
-  { 
-    id:1, 
-    title:'Logo & Brand Identity', 
-    desc:'Create a strong first impression and build a brand that stands out.',
-    details:'Custom logos, color palettes, typography, and brand guidelines that define your business. We craft comprehensive brand identities that resonate with your target audience and differentiate you from competitors.',
-    icon:'🎨' 
+const serviceCategories = [
+  {
+    id: 'creative',
+    title: '🎨 Creative Design Services',
+    services: [
+      { 
+        id: 1, 
+        title: 'Graphic Design & Layout', 
+        desc: 'Professional design solutions for all your visual needs.',
+        details: 'From business cards to brochures, we create stunning graphic designs and layouts that communicate your message effectively. Our designs are both visually appealing and strategically crafted to achieve your business goals.',
+        icon: '📐' 
+      },
+      { 
+        id: 2, 
+        title: 'Branding & Visual Identity Design', 
+        desc: 'Build a strong brand that stands out from the competition.',
+        details: 'Complete branding solutions including logo design, color palettes, typography, and brand guidelines. We create cohesive visual identities that resonate with your target audience and differentiate you from competitors.',
+        icon: '🏷️' 
+      },
+      { 
+        id: 3, 
+        title: 'Packaging & Labeling Design', 
+        desc: 'Make your products irresistible with eye-catching packaging.',
+        details: 'Professional packaging and labeling design that attracts customers and protects your products. We create designs that not only look great but also comply with industry standards and regulations.',
+        icon: '📦' 
+      },
+      { 
+        id: 4, 
+        title: 'Digital Media Design', 
+        desc: 'Design-only solutions for your digital presence.',
+        details: 'Digital media design services including web graphics, social media assets, and digital marketing materials. We provide design files ready for implementation across all digital platforms (design only, no printing services).',
+        icon: '💻' 
+      }
+    ]
   },
-  { 
-    id:2, 
-    title:'Marketing & Advertising Design', 
-    desc:'Grab attention and turn viewers into customers.',
-    details:'Social media posts, digital ads, posters, flyers, and promotional materials tailored to your campaigns. We create compelling visuals that drive engagement and convert prospects into loyal customers.',
-    icon:'📢' 
+  {
+    id: 'digital',
+    title: '💻 Digital & Web Design Services',
+    services: [
+      { 
+        id: 5, 
+        title: 'Web Design & Development', 
+        desc: 'Build websites that work beautifully on all devices.',
+        details: 'Custom web design and development services that combine stunning visuals with seamless functionality. We create responsive websites that provide excellent user experience across desktop, tablet, and mobile devices.',
+        icon: '🌐' 
+      },
+      { 
+        id: 6, 
+        title: 'UI/UX Design & Prototyping', 
+        desc: 'Create intuitive user experiences that delight your customers.',
+        details: 'User interface and user experience design services including wireframing, prototyping, and usability testing. We ensure your digital products are not only beautiful but also easy to use and navigate.',
+        icon: '🎯' 
+      }
+    ]
   },
-  { 
-    id:3, 
-    title:'Web & Digital Graphics', 
-    desc:'Transform your online presence with sleek, user-friendly designs.',
-    details:'Website visuals, banners, user interface (UI), and user experience (UX) designs optimized for all devices. We ensure your digital presence is both beautiful and functional across all platforms.',
-    icon:'💻' 
-  },
-  { 
-    id:4, 
-    title:'Print Design', 
-    desc:'Leave a lasting impression on paper and beyond.',
-    details:'Business cards, brochures, packaging, event materials, and large-format designs. We create professional print materials that make a lasting impact and reinforce your brand identity.',
-    icon:'🖼️' 
-  },
-  { 
-    id:5, 
-    title:'Creative Illustrations & Icons', 
-    desc:'Bring your ideas to life with creativity and originality.',
-    details:'Custom illustrations, vector art, and icons that give your brand a unique personality. We create distinctive visual elements that set your brand apart and tell your story effectively.',
-    icon:'✨' 
-  },
-  { 
-    id:6, 
-    title:'Motion Graphics & Video Design', 
-    desc:'Engage your audience with movement, energy, and impact.',
-    details:'Animated visuals, intros, explainer videos, and dynamic video graphics for marketing and storytelling. We bring your brand to life with compelling motion graphics that capture attention and drive engagement.',
-    icon:'🎬' 
-  },
+  {
+    id: 'marketing',
+    title: '📢 Marketing Design Services',
+    services: [
+      { 
+        id: 7, 
+        title: 'Advertising & Marketing Design', 
+        desc: 'Create campaigns that capture attention and drive results.',
+        details: 'Professional advertising and marketing design for print, digital, and outdoor media. We create compelling visuals that communicate your message effectively and drive customer engagement and sales.',
+        icon: '📈' 
+      },
+      { 
+        id: 8, 
+        title: 'Social Media Marketing Design & Advertising Assets', 
+        desc: 'Engage your audience with stunning social media content.',
+        details: 'Social media marketing design and advertising assets including posts, stories, ads, and campaign materials. We create content that resonates with your audience and drives engagement across all social platforms.',
+        icon: '📱' 
+      }
+    ]
+  }
 ]
 
 const portfolio = [
@@ -515,6 +547,104 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
         </div>
       </section>
 
+      {/* Mission & Vision Section */}
+      <section className="py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Mission */}
+          <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-accentRed rounded-full flex items-center justify-center shadow-lg">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-display font-bold text-primaryNavy">Our Mission</h3>
+            </div>
+            
+            <div className="space-y-4">
+              <p className="text-neutralDark leading-relaxed font-sans">
+                To empower businesses and individuals with <span className="font-semibold text-accentRed">exceptional design solutions</span> that not only meet their immediate needs but also build lasting connections with their audiences.
+              </p>
+              
+              <div className="bg-cream border-l-4 border-accentRed p-4 rounded-r-lg">
+                <p className="text-neutralDark text-sm font-sans">
+                  <strong className="text-primaryNavy">We strive to:</strong> Transform complex ideas into simple, powerful visual stories that resonate, inspire, and drive meaningful engagement across all touchpoints.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Vision */}
+          <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center shadow-lg">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-display font-bold text-primaryNavy">Our Vision</h3>
+            </div>
+            
+            <div className="space-y-4">
+              <p className="text-neutralDark leading-relaxed font-sans">
+                To become the <span className="font-semibold text-gold">leading creative partner</span> in Ethiopia and beyond, recognized for our innovative approach to design and our commitment to helping brands tell their unique stories.
+              </p>
+              
+              <div className="bg-cream border-l-4 border-gold p-4 rounded-r-lg">
+                <p className="text-neutralDark text-sm font-sans">
+                  <strong className="text-primaryNavy">We envision:</strong> A world where every business, regardless of size, has access to world-class design that elevates their brand and creates genuine connections with their community.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Values Section */}
+        <div className="mt-8 bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 bg-primaryNavy rounded-full flex items-center justify-center shadow-lg">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <h3 className="text-2xl font-display font-bold text-primaryNavy">Our Core Values</h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-accentRed/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-accentRed" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4 className="font-display font-semibold text-primaryNavy mb-2">Quality First</h4>
+              <p className="text-neutralDark text-sm font-sans">We never compromise on quality. Every project receives our full attention and expertise.</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h4 className="font-display font-semibold text-primaryNavy mb-2">Client Partnership</h4>
+              <p className="text-neutralDark text-sm font-sans">We work as an extension of your team, understanding your goals and challenges.</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primaryNavy/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-primaryNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h4 className="font-display font-semibold text-primaryNavy mb-2">Innovation</h4>
+              <p className="text-neutralDark text-sm font-sans">We stay ahead of trends and continuously evolve our creative approach.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="services" className="py-10">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-xl font-display font-semibold text-primaryNavy">Our Services</h3>
@@ -526,8 +656,45 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             <div className="absolute inset-0 bg-primaryNavy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
           </button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {services.map(s => <ServiceCard key={s.id} {...s} />)}
+        <div className="space-y-20">
+          {serviceCategories.map((category, index) => (
+            <div key={category.id} className="relative">
+              {/* Modern Category Styling */}
+              <div className="relative mb-12">
+                <div className="flex items-center justify-center mb-8">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-primaryNavy rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-2xl">{category.title.split(' ')[0]}</span>
+                    </div>
+                    <div className="h-12 w-px bg-gray-300"></div>
+                    <h4 className="text-4xl font-display font-bold text-primaryNavy tracking-tight">
+                      {category.title.replace(/^[^\s]+\s/, '')}
+                    </h4>
+                  </div>
+                </div>
+                
+                {/* Decorative Elements */}
+                <div className="flex justify-center space-x-2 mb-8">
+                  <div className="w-2 h-2 bg-accentRed rounded-full"></div>
+                  <div className="w-8 h-px bg-accentRed"></div>
+                  <div className="w-2 h-2 bg-gold rounded-full"></div>
+                  <div className="w-8 h-px bg-gold"></div>
+                  <div className="w-2 h-2 bg-primaryNavy rounded-full"></div>
+                </div>
+              </div>
+              
+              {/* Services Grid with Enhanced Styling */}
+              <div className="relative">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                  {category.services.map((service, serviceIndex) => (
+                    <div key={service.id} className="transform hover:scale-105 transition-all duration-300">
+                      <ServiceCard {...service} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

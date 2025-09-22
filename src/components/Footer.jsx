@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Footer() {
+export default function Footer({ onOpenLegalModal }) {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -75,10 +75,34 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-gray-200 pt-8 text-center">
-          <p className="text-gray-500 text-sm font-sans">
+        <div className="border-t border-gray-200 pt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-gray-500 text-sm font-sans">
               © {new Date().getFullYear()} Connect Digitals. All rights reserved.
-          </p>
+            </p>
+            
+            {/* Legal Links */}
+            <div className="flex items-center gap-6">
+              <button 
+                onClick={() => onOpenLegalModal('privacy')}
+                className="text-gray-500 hover:text-primaryNavy text-sm font-sans transition-colors duration-200"
+              >
+                Privacy Policy
+              </button>
+              <button 
+                onClick={() => onOpenLegalModal('cookie')}
+                className="text-gray-500 hover:text-primaryNavy text-sm font-sans transition-colors duration-200"
+              >
+                Cookie Policy
+              </button>
+              <button 
+                onClick={() => onOpenLegalModal('terms')}
+                className="text-gray-500 hover:text-primaryNavy text-sm font-sans transition-colors duration-200"
+              >
+                Terms of Service
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

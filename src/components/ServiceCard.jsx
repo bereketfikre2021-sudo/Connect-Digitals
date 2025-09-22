@@ -5,7 +5,7 @@ export default function ServiceCard({icon, title, desc, details}){
   
   return (
     <div className="bg-white rounded-2xl p-4 sm:p-6 shadow hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
-      <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{icon}</div>
+      <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 text-center">{icon}</div>
       <h4 className="text-base sm:text-lg font-display font-semibold text-primaryNavy mb-2 sm:mb-3">{title}</h4>
       <p className="text-gray-600 text-sm leading-relaxed mb-4 font-sans flex-grow">{desc}</p>
       

@@ -1,7 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function PricingModal({ isOpen, onClose }) {
   const [selectedPackage, setSelectedPackage] = useState(null)
+
+  // Handle ESC key press
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape' && isOpen) {
+        onClose()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscKey)
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey)
+    }
+  }, [isOpen, onClose])
 
   const packages = [
     {
@@ -25,7 +42,7 @@ export default function PricingModal({ isOpen, onClose }) {
       name: 'Professional',
       description: 'Ideal for growing businesses',
       price: '10k - 15k',
-      color: 'from-primaryNavy to-accentRed',
+      color: 'from-blue-600 to-red-500',
       features: [
         'Complete Brand Identity',
         'Logo + Variations',
@@ -120,7 +137,15 @@ export default function PricingModal({ isOpen, onClose }) {
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-display font-bold text-gray-900 mb-2">{pkg.name}</h3>
                   <p className="text-gray-600 mb-4 font-sans">{pkg.description}</p>
-                  <div className={`inline-block ${pkg.color === 'from-primaryNavy to-accentRed' ? 'bg-primaryNavy' : pkg.color} text-white px-6 py-3 rounded-xl font-bold text-xl shadow-lg`}>
+                  <div 
+                    className="inline-block px-6 py-3 rounded-xl font-bold text-xl shadow-lg"
+                    style={{ 
+                      backgroundColor: pkg.id === 'starter' ? '#EC1C24' : pkg.id === 'professional' ? '#000F33' : '#D4AF37',
+                      color: 'white',
+                      minWidth: '120px',
+                      textAlign: 'center'
+                    }}
+                  >
                     {pkg.price}
                   </div>
                 </div>
