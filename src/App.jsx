@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
-import QuoteModal from './components/QuoteModal'
-import PricingModal from './components/PricingModal'
-import LegalModal from './components/LegalModal'
 import PerformanceMonitor from './components/PerformanceMonitor'
+import FloatingNavigation from './components/FloatingNavigation'
 import { verifyImages } from './utils/imageVerification'
+
+// Lazy load non-critical components
+const QuoteModal = lazy(() => import('./components/QuoteModal'))
+const PricingModal = lazy(() => import('./components/PricingModal'))
+const LegalModal = lazy(() => import('./components/LegalModal'))
 
 export default function App() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false)
@@ -613,7 +616,7 @@ export default function App() {
     <div className="min-h-screen bg-cream">
       <PerformanceMonitor />
       <Header onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
-      <main>
+      <main role="main" aria-label="Main content">
         <Home
           onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
           onOpenPricingModal={() => setIsPricingModalOpen(true)}
@@ -623,21 +626,32 @@ export default function App() {
         key={`footer-${Date.now()}`} 
         onOpenLegalModal={(type) => setLegalModal({ isOpen: true, type })}
       />
-      <QuoteModal
-        isOpen={isQuoteModalOpen}
-        onClose={() => setIsQuoteModalOpen(false)}
+      {/* Modals - Lazy loaded with Suspense */}
+      <Suspense fallback={null}>
+        <QuoteModal
+          isOpen={isQuoteModalOpen}
+          onClose={() => setIsQuoteModalOpen(false)}
+        />
+        <PricingModal
+          isOpen={isPricingModalOpen}
+          onClose={() => setIsPricingModalOpen(false)}
+        />
+        <LegalModal
+          isOpen={legalModal.isOpen}
+          onClose={() => setLegalModal({ isOpen: false, type: null })}
+          type={legalModal.type}
+          title={legalModal.type ? legalContent[legalModal.type].title : ''}
+          content={legalModal.type ? legalContent[legalModal.type].content : null}
+        />
+      </Suspense>
+      {/* ARIA Live Region for screen reader announcements */}
+      <div 
+        id="aria-live-region" 
+        aria-live="polite" 
+        aria-atomic="true" 
+        className="sr-only"
       />
-      <PricingModal
-        isOpen={isPricingModalOpen}
-        onClose={() => setIsPricingModalOpen(false)}
-      />
-      <LegalModal
-        isOpen={legalModal.isOpen}
-        onClose={() => setLegalModal({ isOpen: false, type: null })}
-        type={legalModal.type}
-        title={legalModal.type ? legalContent[legalModal.type].title : ''}
-        content={legalModal.type ? legalContent[legalModal.type].content : null}
-      />
+      <FloatingNavigation />
     </div>
   )
 }

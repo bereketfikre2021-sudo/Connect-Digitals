@@ -1,4 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { 
+  getOptimizedImageUrl, 
+  getResponsiveImageSources, 
+  generateBlurPlaceholder,
+  getBestImageFormat,
+  IMAGE_QUALITY 
+} from '../utils/imageOptimization'
 
 export default function OptimizedImage({ 
   src, 
@@ -6,15 +13,29 @@ export default function OptimizedImage({
   className = '', 
   placeholder = '/img/Connect.webp',
   title,
+  type = 'DEFAULT',
+  priority = false,
   ...props 
 }) {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [isInView, setIsInView] = useState(false)
+  const [isInView, setIsInView] = useState(priority) // Load immediately if priority
   const [hasError, setHasError] = useState(false)
   const [retryCount, setRetryCount] = useState(0)
   const imgRef = useRef(null)
 
+  // Get optimized image URL
+  const optimizedSrc = getOptimizedImageUrl(src, type)
+  const bestFormatSrc = getBestImageFormat(optimizedSrc)
+  const responsiveSources = getResponsiveImageSources(src, type)
+  const blurPlaceholder = generateBlurPlaceholder(src)
+
   useEffect(() => {
+    // Skip intersection observer for priority images
+    if (priority) {
+      setIsInView(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -24,7 +45,7 @@ export default function OptimizedImage({
       },
       { 
         threshold: 0.1,
-        rootMargin: '100px'
+        rootMargin: '50px' // Reduced from 100px for faster loading
       }
     )
 
@@ -33,7 +54,7 @@ export default function OptimizedImage({
     }
 
     return () => observer.disconnect()
-  }, [])
+  }, [priority])
 
   const handleLoad = () => {
     setIsLoaded(true)
@@ -59,26 +80,35 @@ export default function OptimizedImage({
 
   return (
     <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
-      {/* Placeholder/Loading State */}
+      {/* Blur Placeholder */}
       {!isLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
-          <div className="w-8 h-8 border-2 border-gray-300 border-t-primaryNavy rounded-full animate-spin"></div>
+        <div className="absolute inset-0 bg-gray-200 animate-pulse">
+          <img
+            src={blurPlaceholder}
+            alt=""
+            className="w-full h-full object-cover filter blur-sm scale-110"
+            aria-hidden="true"
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-6 h-6 border-2 border-gray-300 border-t-primaryNavy rounded-full animate-spin"></div>
+          </div>
         </div>
       )}
       
       {/* Actual Image */}
       {isInView && (
         <img
-          src={hasError ? placeholder : src}
-          alt={alt || 'Connect Digitals image'}
+          src={hasError ? placeholder : bestFormatSrc}
+          alt={alt || 'Professional graphic design and branding services by Connect Digitals in Addis Ababa, Ethiopia'}
           title={title || alt}
           onLoad={handleLoad}
           onError={handleError}
-          className={`w-full h-full object-cover transition-opacity duration-300 ${
+          className={`w-full h-full object-cover transition-opacity duration-500 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
           decoding="async"
+          fetchpriority={priority ? "high" : "auto"}
           {...props}
         />
       )}

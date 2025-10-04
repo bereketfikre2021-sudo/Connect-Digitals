@@ -9,7 +9,7 @@ export default function Footer({ onOpenLegalModal }) {
   }
 
   return (
-    <footer className="bg-gradient-to-b from-white to-gray-50 border-t border-gray-200 py-16 mt-20">
+    <footer className="bg-gradient-to-b from-white to-gray-50 border-t border-gray-200 py-16 mt-20" role="contentinfo">
       {/* CACHE BUSTER - Quick Links Removed */}
       <div className="max-w-6xl mx-auto px-6">
         {/* Main Content - Centered Layout */}
@@ -20,7 +20,7 @@ export default function Footer({ onOpenLegalModal }) {
               <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-primaryNavy/10 shadow-lg">
                 <img 
                   src="/img/Connect.webp" 
-                  alt="Connect Digitals" 
+                  alt="Connect Digitals - Leading Graphic Design and Branding Agency in Addis Ababa, Ethiopia" 
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -82,26 +82,29 @@ export default function Footer({ onOpenLegalModal }) {
             </p>
             
             {/* Legal Links */}
-            <div className="flex items-center gap-6">
+            <nav className="flex items-center gap-6" role="navigation" aria-label="Legal documents">
               <button 
                 onClick={() => onOpenLegalModal('privacy')}
                 className="text-gray-500 hover:text-primaryNavy text-sm font-sans transition-colors duration-200"
+                aria-label="Open Privacy Policy"
               >
                 Privacy Policy
               </button>
               <button 
                 onClick={() => onOpenLegalModal('cookie')}
                 className="text-gray-500 hover:text-primaryNavy text-sm font-sans transition-colors duration-200"
+                aria-label="Open Cookie Policy"
               >
                 Cookie Policy
               </button>
               <button 
                 onClick={() => onOpenLegalModal('terms')}
                 className="text-gray-500 hover:text-primaryNavy text-sm font-sans transition-colors duration-200"
+                aria-label="Open Terms of Service"
               >
                 Terms of Service
               </button>
-            </div>
+            </nav>
           </div>
         </div>
       </div>

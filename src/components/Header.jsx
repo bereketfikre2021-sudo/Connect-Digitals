@@ -26,24 +26,35 @@ export default function Header({ onOpenQuoteModal }){
   }, [])
 
   return (
-    <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200' 
-        : 'bg-white/80 backdrop-blur-md border-b border-gray-100'
-    }`}>
+    <header 
+      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200' 
+          : 'bg-white/80 backdrop-blur-md border-b border-gray-100'
+      }`}
+      role="banner"
+    >
+      {/* Skip link for keyboard navigation */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo Section */}
           <button 
             onClick={() => scrollToSection('hero')}
             className="flex items-center gap-4 hover:opacity-80 transition-all duration-300 group"
+            aria-label="Connect Digitals - Go to homepage"
           >
             <div className="relative">
               <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-white shadow-lg group-hover:ring-primaryNavy transition-all duration-300">
                 <img 
                   src="/img/Connect.webp" 
-                  alt="Connect Digitals Logo" 
+                  alt="Connect Digitals - Professional Graphic Design and Branding Agency Logo" 
                   className="w-full h-full object-cover"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="sync"
                 />
               </div>
               <div className="absolute -top-1 -right-1 w-4 h-4 bg-accentRed rounded-full flex items-center justify-center">
@@ -63,10 +74,11 @@ export default function Header({ onOpenQuoteModal }){
           {/* Navigation & CTA */}
           <div className="flex items-center gap-8">
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-8" role="navigation" aria-label="Main navigation">
               <button 
                 onClick={() => scrollToSection('about')} 
                 className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group font-sans"
+                aria-label="Navigate to About section"
               >
                 About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primaryNavy transition-all duration-300 group-hover:w-full"></span>
@@ -74,6 +86,7 @@ export default function Header({ onOpenQuoteModal }){
               <button 
                 onClick={() => scrollToSection('services')} 
                 className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group font-sans"
+                aria-label="Navigate to Services section"
               >
                 Services
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primaryNavy transition-all duration-300 group-hover:w-full"></span>
@@ -81,6 +94,7 @@ export default function Header({ onOpenQuoteModal }){
               <button 
                 onClick={() => scrollToSection('portfolio')} 
                 className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group font-sans"
+                aria-label="Navigate to Portfolio section"
               >
                 Portfolio
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primaryNavy transition-all duration-300 group-hover:w-full"></span>
@@ -88,6 +102,7 @@ export default function Header({ onOpenQuoteModal }){
               <button 
                 onClick={() => scrollToSection('testimonials')} 
                 className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group font-sans"
+                aria-label="Navigate to Testimonials section"
               >
                 Testimonials
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primaryNavy transition-all duration-300 group-hover:w-full"></span>
@@ -95,6 +110,7 @@ export default function Header({ onOpenQuoteModal }){
               <button 
                 onClick={() => scrollToSection('contact')} 
                 className="relative text-gray-700 hover:text-primaryNavy transition-all duration-300 font-medium group font-sans"
+                aria-label="Navigate to Contact section"
               >
                 Contact
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primaryNavy transition-all duration-300 group-hover:w-full"></span>
@@ -106,6 +122,9 @@ export default function Header({ onOpenQuoteModal }){
             <button 
               onClick={toggleMobileMenu}
               className="lg:hidden relative p-3 rounded-full bg-gradient-to-br from-primaryNavy/5 to-accentRed/5 hover:from-primaryNavy/10 hover:to-accentRed/10 transition-all duration-300 group"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {/* Animated Background Ring */}
               <div className={`absolute inset-0 rounded-full border-2 transition-all duration-300 ${
@@ -141,7 +160,12 @@ export default function Header({ onOpenQuoteModal }){
 
       {/* Mobile Navigation - Enhanced Design */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden border-t border-gray-200 bg-white/95 backdrop-blur-lg transition-all duration-300 shadow-lg">
+        <div 
+          id="mobile-navigation"
+          className="lg:hidden border-t border-gray-200 bg-white/95 backdrop-blur-lg transition-all duration-300 shadow-lg"
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
           <div className="max-w-6xl mx-auto px-6 py-6">
             <nav className="flex flex-col space-y-1">
               {[

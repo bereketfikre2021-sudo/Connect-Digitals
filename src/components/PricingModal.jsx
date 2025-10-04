@@ -1,24 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useFocusManagement, useKeyboardNavigation } from '../hooks/useFocusManagement'
 
 export default function PricingModal({ isOpen, onClose }) {
   const [selectedPackage, setSelectedPackage] = useState(null)
 
-  // Handle ESC key press
-  useEffect(() => {
-    const handleEscKey = (event) => {
-      if (event.key === 'Escape' && isOpen) {
-        onClose()
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscKey)
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscKey)
-    }
-  }, [isOpen, onClose])
+  // Focus management
+  const modalRef = useFocusManagement(isOpen)
+  useKeyboardNavigation(isOpen, onClose)
 
   const packages = [
     {
@@ -98,33 +86,39 @@ export default function PricingModal({ isOpen, onClose }) {
     <div 
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="pricing-modal-title"
+      aria-describedby="pricing-modal-description"
     >
-      <div className="bg-white rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+      <div ref={modalRef} className="bg-white rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-4 sm:p-6 lg:p-8">
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-display font-bold text-primaryNavy">Our Pricing</h2>
-              <p className="text-gray-600 mt-2 font-sans text-sm sm:text-base">Choose the perfect package for your project needs</p>
+              <h2 id="pricing-modal-title" className="text-2xl sm:text-3xl font-display font-bold text-primaryNavy">Our Pricing</h2>
+              <p id="pricing-modal-description" className="text-gray-600 mt-2 font-sans text-sm sm:text-base">Choose the perfect package for your project needs</p>
             </div>
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Close pricing modal"
             >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
 
           {/* Packages Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12" role="group" aria-label="Pricing packages">
             {packages.map((pkg) => (
-              <div
+              <article
                 key={pkg.id}
                 className={`relative bg-white rounded-2xl p-6 sm:p-8 shadow-lg border-2 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 ${
                   pkg.popular ? 'border-primaryNavy ring-2 ring-primaryNavy ring-opacity-20' : 'border-gray-200'
                 }`}
+                aria-label={`${pkg.name} package - ${pkg.price}`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -150,10 +144,10 @@ export default function PricingModal({ isOpen, onClose }) {
                   </div>
                 </div>
 
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-8" role="list" aria-label={`Features included in ${pkg.name} package`}>
                   {pkg.features.map((feature, index) => (
                     <li key={index} className="flex items-start space-x-3">
-                      <svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       <span className="text-gray-700">{feature}</span>
@@ -168,6 +162,7 @@ export default function PricingModal({ isOpen, onClose }) {
                       ? 'group relative bg-primaryNavy text-white overflow-hidden'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-2 border-transparent hover:border-gray-300'
                   }`}
+                  aria-label={`Call to choose ${pkg.name} package`}
                 >
                   {pkg.popular ? (
                     <>
@@ -178,7 +173,7 @@ export default function PricingModal({ isOpen, onClose }) {
                     `Choose ${pkg.name}`
                   )}
                 </a>
-              </div>
+              </article>
             ))}
           </div>
 

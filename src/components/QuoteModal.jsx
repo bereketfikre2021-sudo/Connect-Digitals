@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useFocusManagement, useKeyboardNavigation } from '../hooks/useFocusManagement'
 
 export default function QuoteModal({ isOpen, onClose }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  // Handle ESC key press
-  useEffect(() => {
-    const handleEscKey = (event) => {
-      if (event.key === 'Escape' && isOpen) {
-        onClose()
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscKey)
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscKey)
-    }
-  }, [isOpen, onClose])
+  // Focus management
+  const modalRef = useFocusManagement(isOpen)
+  useKeyboardNavigation(isOpen, onClose)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -50,17 +38,22 @@ export default function QuoteModal({ isOpen, onClose }) {
     <div 
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="quote-modal-title"
+      aria-describedby="quote-modal-description"
     >
-      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div ref={modalRef} className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-8">
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-display font-bold text-primaryNavy">Request a Quote</h2>
+            <h2 id="quote-modal-title" className="text-2xl font-display font-bold text-primaryNavy">Request a Quote</h2>
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Close quote request form"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -74,6 +67,7 @@ export default function QuoteModal({ isOpen, onClose }) {
               data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               className="space-y-6"
+              id="quote-modal-description"
             >
               {/* Hidden field for Netlify */}
               <input type="hidden" name="form-name" value="quote-request" />
@@ -177,6 +171,7 @@ export default function QuoteModal({ isOpen, onClose }) {
                   type="button"
                   onClick={onClose}
                   className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  aria-label="Cancel quote request and close modal"
                 >
                   Cancel
                 </button>
@@ -184,6 +179,7 @@ export default function QuoteModal({ isOpen, onClose }) {
                   type="submit"
                   disabled={isSubmitting}
                   className="flex-1 px-6 py-3 bg-primaryNavy text-white rounded-lg hover:bg-opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label={isSubmitting ? 'Submitting quote request' : 'Submit quote request'}
                 >
                   {isSubmitting ? 'Submitting...' : 'Request Quote'}
                 </button>

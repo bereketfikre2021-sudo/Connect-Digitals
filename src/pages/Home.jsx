@@ -134,7 +134,7 @@ const portfolio = [
     id:1, 
     title:'Zewd - Minimalist Brand Identity', 
     img:'/img/Zewd.webp',
-    alt:'Zewd minimalist brand identity design showing clean logo and typography',
+    alt:'Zewd minimalist brand identity design by Connect Digitals - clean logo, modern typography, and professional branding for Ethiopian tech company',
     caseStudy: {
       challenge: "Zewd needed a modern, minimalist brand identity that would stand out in the competitive tech market while maintaining simplicity and professionalism.",
       solution: "Created a clean, geometric logo design with a sophisticated color palette and comprehensive brand guidelines including typography, spacing, and application examples.",
@@ -149,7 +149,7 @@ const portfolio = [
     id:2, 
     title:'Swan Clothing - Complete Brand Identity', 
     img:'/img/swan-clothing.webp',
-    alt:'Swan Clothing complete brand identity design with logo, colors, and fashion branding elements',
+    alt:'Swan Clothing complete brand identity design by Connect Digitals - fashion logo, brand colors, and comprehensive fashion branding for Ethiopian clothing brand',
     caseStudy: {
       challenge: "Swan Clothing needed a complete brand overhaul to compete with established fashion brands and attract younger demographics.",
       solution: "Developed a comprehensive brand identity including logo, color scheme, typography, packaging design, and social media templates with a focus on elegance and modernity.",
@@ -164,7 +164,7 @@ const portfolio = [
     id:3, 
     title:'Finix - Digital Marketing Assets', 
     img:'/img/Finix.webp',
-    alt:'Finix digital marketing assets including social media graphics and promotional materials',
+    alt:'Finix digital marketing assets by Connect Digitals - social media graphics, promotional materials, and financial services branding for Ethiopian fintech company',
     caseStudy: {
       challenge: "Finix required compelling digital marketing materials to launch their new financial services platform and build trust with potential customers.",
       solution: "Created a series of professional marketing assets including social media graphics, banner ads, email templates, and presentation materials with consistent branding.",
@@ -179,7 +179,7 @@ const portfolio = [
     id:4, 
     title:'Lensa Fashion - Packaging Design', 
     img:'/img/Lensa Fashion Design & Makeup.webp',
-    alt:'Lensa Fashion packaging design with elegant typography and premium brand elements',
+    alt:'Lensa Fashion packaging design by Connect Digitals - elegant typography, premium brand elements, and luxury fashion packaging for Ethiopian beauty brand',
     caseStudy: {
       challenge: "Lensa Fashion needed eye-catching packaging design that would make their products stand out on retail shelves and reflect their premium brand positioning.",
       solution: "Designed premium packaging with elegant typography, sophisticated color schemes, and unique structural elements that enhanced the unboxing experience.",
@@ -194,7 +194,7 @@ const portfolio = [
     id:5, 
     title:'Professional Company Profile', 
     img:'/img/Company profile.webp',
-    alt:'Professional company profile design with modern layout and corporate branding',
+    alt:'Professional company profile design by Connect Digitals - modern layout, corporate branding, and business presentation materials for Ethiopian companies',
     caseStudy: {
       challenge: "A corporate client needed a professional company profile that would effectively communicate their expertise and attract high-value business partnerships.",
       solution: "Created a comprehensive company profile with modern design, compelling copy, infographics, and professional photography that showcased their capabilities and achievements.",
@@ -209,7 +209,7 @@ const portfolio = [
     id:6, 
     title:'Maleda Coffee - Product Advertisement', 
     img:'/img/Maleda Coffee.webp',
-    alt:'Maleda Coffee product advertisement design with premium coffee branding and lifestyle imagery',
+    alt:'Maleda Coffee product advertisement design by Connect Digitals - premium coffee branding, lifestyle imagery, and Ethiopian coffee marketing materials',
     caseStudy: {
       challenge: "Maleda Coffee needed compelling advertising materials to promote their premium coffee products and compete with established coffee brands in the market.",
       solution: "Developed a series of high-impact advertisements featuring lifestyle photography, compelling copy, and strategic placement across digital and print media.",
@@ -228,42 +228,42 @@ const testimonials = [
     quote:'Bereket transformed our small non-profit\'s fundraising campaign with his creative vision. The emotional storytelling in our donation posters increased contributions by 180% in just 3 months. His understanding of our mission made all the difference.', 
     author:'— Gedyon Megersa, Non-Profit Director',
     avatar:'/img/Gedy.webp',
-    alt:'Gedyon Megersa, Non-Profit Director client testimonial photo'
+    alt:'Gedyon Megersa, Non-Profit Director - satisfied client testimonial for Connect Digitals graphic design services in Ethiopia'
   },
   { 
     id:2, 
     quote:'Our tech startup needed a complete brand identity that would stand out in the competitive market. Connect Digitals delivered a modern logo, website design, and marketing materials that perfectly captured our innovative spirit. Investors loved our presentation!', 
     author:'— Dagmawi Yeshiwas, Creative Director',
     avatar:'/img/Dag.webp',
-    alt:'Dagmawi Yeshiwas, Creative Director client testimonial photo'
+    alt:'Dagmawi Yeshiwas, Creative Director - happy client testimonial for Connect Digitals branding and web design services in Addis Ababa'
   },
   { 
     id:3, 
     quote:'I needed a professional portfolio website that would showcase my digital marketing skills. Bereket created a stunning, responsive design that landed me 3 new clients within the first month. The attention to detail was incredible.', 
     author:'— Abenezer A, Digital Marketer',
     avatar:'/img/Abenezer.webp',
-    alt:'Abenezer A, Digital Marketer client testimonial photo'
+    alt:'Abenezer A, Digital Marketer - successful client testimonial for Connect Digitals portfolio website design services in Ethiopia'
   },
   { 
     id:4, 
     quote:'Running a local restaurant, I needed eye-catching menus and social media content. Connect Digitals created beautiful designs that made our food look irresistible. Our Instagram followers grew by 300% and reservations doubled!', 
     author:'— Kassaye Getachew, Business Owner',
     avatar:'/img/Kass.webp',
-    alt:'Kassaye Getachew, Business Owner client testimonial photo'
+    alt:'Kassaye Getachew, Business Owner - delighted client testimonial for Connect Digitals restaurant menu and social media design services in Ethiopia'
   },
   { 
     id:5, 
     quote:'As a freelance artist, I needed a cohesive brand that would attract high-end clients. Bereket designed a sophisticated logo and business cards that perfectly represented my artistic style. The quality exceeded my expectations.', 
     author:'— Micky, Digital Artist',
     avatar:'/img/Miko.webp',
-    alt:'Micky, Digital Artist client testimonial photo'
+    alt:'Micky, Digital Artist - pleased client testimonial for Connect Digitals logo design and business card services in Addis Ababa'
   },
   { 
     id:6, 
     quote:'I was launching my web development agency and needed a professional brand identity. Connect Digitals created a clean, modern logo and website that immediately established credibility. The design process was collaborative and the results were perfect.', 
     author:'— Hayleyesus, Web Developer',
     avatar:'/img/Hayle.webp',
-    alt:'Hayleyesus, Web Developer client testimonial photo'
+    alt:'Hayleyesus, Web Developer - satisfied client testimonial for Connect Digitals brand identity and website design services in Ethiopia'
   },
 ]
 
@@ -280,11 +280,11 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
   // Hero slideshow state
   const [currentSlide, setCurrentSlide] = useState(0)
   const heroImages = [
-    { src: '/img/BG.webp', alt: 'Connect Digitals creative workspace and design environment' },
-    { src: '/img/BG-2.webp', alt: 'Professional graphic design and branding studio setup' },
-    { src: '/img/BG-3.webp', alt: 'Modern design workspace with creative tools and materials' },
-    { src: '/img/BG-4.webp', alt: 'Innovative design process and creative collaboration space' },
-    { src: '/img/BG-5.webp', alt: 'Premium design studio with professional equipment and tools' }
+    { src: '/img/BG.webp', alt: 'Connect Digitals creative workspace showcasing professional graphic design and branding services in Addis Ababa, Ethiopia' },
+    { src: '/img/BG-2.webp', alt: 'Modern design studio with professional graphic design tools, logo design equipment, and branding materials in Ethiopia' },
+    { src: '/img/BG-3.webp', alt: 'Creative workspace featuring digital design tools, web design software, and marketing materials for Ethiopian businesses' },
+    { src: '/img/BG-4.webp', alt: 'Innovative design process and creative collaboration space for graphic design, branding, and digital marketing projects' },
+    { src: '/img/BG-5.webp', alt: 'Premium design studio with professional equipment, creative tools, and branding resources for Ethiopian companies' }
   ]
   
   // Auto-advance slideshow
@@ -334,8 +334,8 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
   }
   
   return (
-    <main className="max-w-6xl mx-auto px-6 pt-24 pb-12">
-      <section id="hero" className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center py-8 lg:py-12">
+    <main id="main-content" className="max-w-6xl mx-auto px-6 pt-24 pb-12">
+      <section id="hero" className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center py-8 lg:py-12" aria-label="Hero section">
         <div>
           <motion.h1 initial={{ opacity:0,y:20 }} animate={{ opacity:1,y:0 }} transition={{ duration:0.6 }} className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-primaryNavy leading-tight">Connect. Create. Captivate.</motion.h1>
           <motion.p initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2 }} className="mt-4 text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed">
@@ -346,6 +346,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             <button 
               onClick={onOpenQuoteModal}
               className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden text-center sm:text-left"
+              aria-label="Open quote request form"
             >
               <span className="relative z-10">Get Started</span>
               <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
@@ -353,15 +354,16 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             <a 
               href="#portfolio" 
               className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-primaryNavy text-primaryNavy rounded-xl font-semibold hover:bg-primaryNavy hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg text-center sm:text-left"
+              aria-label="Navigate to portfolio section"
             >
               View Portfolio
             </a>
           </div>
 
-          <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6" role="region" aria-label="Company statistics">
             <div className="text-center group" ref={projectsRef}>
               <div className="bg-gradient-to-br from-primaryNavy to-primaryNavy rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #000F33, #1a2a5c)' }}>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">{projectsCount}+</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300" aria-label={`${projectsCount} projects completed`}>{projectsCount}+</div>
                 <div className="text-gray-200 font-medium text-xs sm:text-sm lg:text-base">Projects Completed</div>
                 <div className="w-8 sm:w-10 lg:w-12 h-1 bg-white rounded-full mx-auto mt-2 sm:mt-3 opacity-60"></div>
               </div>
@@ -369,7 +371,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             
             <div className="text-center group" ref={satisfactionRef}>
               <div className="bg-gradient-to-br from-accentRed to-accentRed rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #EC1C24, #c41e3a)' }}>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">{satisfactionCount}%</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300" aria-label={`${satisfactionCount} percent client satisfaction`}>{satisfactionCount}%</div>
                 <div className="text-red-100 font-medium text-xs sm:text-sm lg:text-base">Client Satisfaction</div>
                 <div className="w-8 sm:w-10 lg:w-12 h-1 bg-white rounded-full mx-auto mt-2 sm:mt-3 opacity-60"></div>
               </div>
@@ -377,7 +379,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             
             <div className="text-center group" ref={experienceRef}>
               <div className="bg-gradient-to-br from-gold to-gold rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #D4AF37, #b8941f)' }}>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">{experienceCount}+</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300" aria-label={`${experienceCount} years of experience`}>{experienceCount}+</div>
                 <div className="text-yellow-100 font-medium text-xs sm:text-sm lg:text-base">Years Experience</div>
                 <div className="w-8 sm:w-10 lg:w-12 h-1 bg-white rounded-full mx-auto mt-2 sm:mt-3 opacity-60"></div>
               </div>
@@ -393,7 +395,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             className="rounded-2xl overflow-hidden shadow-2xl relative group"
           >
             {/* Slideshow Container */}
-            <div className="relative w-full h-64 sm:h-80 lg:h-96 overflow-hidden">
+            <div className="relative w-full h-64 sm:h-80 lg:h-96 overflow-hidden" role="img" aria-label="Connect Digitals workspace showcase">
               {heroImages.map((image, index) => (
                 <motion.div
                   key={index}
@@ -407,19 +409,36 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                     duration: 1.2,
                     ease: "easeInOut"
                   }}
+                  aria-hidden={index !== currentSlide}
                 >
-                  <OptimizedImage 
-                    src={image.src} 
-                    alt={image.alt} 
-                    title={`Connect Digitals - ${image.alt}`}
-                    className="w-full h-full transition-transform duration-[8000ms] ease-linear group-hover:scale-105" 
-                  />
+                  {index === 0 ? (
+                    // First image - no lazy loading, immediate discovery
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      title={`Connect Digitals - ${image.alt}`}
+                      className="w-full h-full transition-transform duration-[8000ms] ease-linear group-hover:scale-105"
+                      loading="eager"
+                      fetchpriority="high"
+                      decoding="sync"
+                    />
+                  ) : (
+                    // Other images - lazy loading
+                    <OptimizedImage 
+                      src={image.src} 
+                      alt={image.alt} 
+                      title={`Connect Digitals - ${image.alt}`}
+                      className="w-full h-full transition-transform duration-[8000ms] ease-linear group-hover:scale-105"
+                      type="HERO"
+                      priority={false}
+                    />
+                  )}
                   
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
                   
                   {/* Slide Number Badge */}
-                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
+                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1" aria-label={`Slide ${index + 1} of ${heroImages.length}`}>
                     <span className="text-white text-sm font-medium">
                       {index + 1} / {heroImages.length}
                     </span>
@@ -442,12 +461,16 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
               </div>
               
               {/* Slide Indicators */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3" role="tablist" aria-label="Image carousel controls">
                 {heroImages.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
                     className="group/indicator relative"
+                    role="tab"
+                    aria-selected={index === currentSlide}
+                    aria-label={`Go to slide ${index + 1}`}
+                    tabIndex={index === currentSlide ? 0 : -1}
                   >
                     <div className={`w-3 h-3 rounded-full transition-all duration-500 ${
                       index === currentSlide 
@@ -476,8 +499,9 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
               <button
                 onClick={() => setCurrentSlide((prev) => prev === 0 ? heroImages.length - 1 : prev - 1)}
                 className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 opacity-0 group-hover:opacity-100"
+                aria-label="Previous image"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
@@ -485,8 +509,9 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
               <button
                 onClick={() => setCurrentSlide((prev) => (prev + 1) % heroImages.length)}
                 className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 opacity-0 group-hover:opacity-100"
+                aria-label="Next image"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
@@ -538,6 +563,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                 <button 
                   onClick={() => scrollToSection('contact')}
                   className="group w-full px-6 py-4 bg-white text-primaryNavy rounded-xl font-semibold border-2 border-white hover:border-primaryNavy transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl"
+                  aria-label="Navigate to contact section to work with us"
                 >
                   <span className="group-hover:text-primaryNavy transition-colors duration-300">Work with us</span>
                 </button>
@@ -651,6 +677,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
           <button
             onClick={onOpenPricingModal}
             className="group relative px-8 py-4 bg-accentRed text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+            aria-label="View our pricing packages and service costs"
           >
             <span className="relative z-10">View Pricing</span>
             <div className="absolute inset-0 bg-primaryNavy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
@@ -920,6 +947,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                 <button
                   onClick={() => setShowSuccessModal(false)}
                   className="group relative flex-1 px-6 py-3 bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+                  aria-label="Close success message"
                 >
                   <span className="relative z-10">Close</span>
                   <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
