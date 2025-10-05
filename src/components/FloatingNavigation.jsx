@@ -52,9 +52,9 @@ export default function FloatingNavigation() {
 
   return (
     <>
-      {/* Left Side - Mobile: Percentage Counter, Desktop: Section Navigation */}
-      <div className="fixed left-4 top-1/2 transform -translate-y-1/2 z-50">
-        {/* Mobile: Simple percentage counter */}
+      {/* Left Side - Mobile: Percentage Counter in Footer, Desktop: Section Navigation */}
+      <div className="fixed left-4 bottom-4 z-50 md:top-1/2 md:transform md:-translate-y-1/2">
+        {/* Mobile: Simple percentage counter in footer */}
         <div className="md:hidden">
           <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-lg border border-gray-200 p-3">
             <div className="flex flex-col items-center space-y-1">
