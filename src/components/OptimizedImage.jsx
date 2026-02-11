@@ -15,6 +15,7 @@ export default function OptimizedImage({
   title,
   type = 'DEFAULT',
   priority = false,
+  objectFit = 'cover',
   ...props 
 }) {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -78,15 +79,17 @@ export default function OptimizedImage({
     }
   }
 
+  const isFitWidth = objectFit === 'fitWidth'
+
   return (
-    <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
+    <div ref={imgRef} className={`relative overflow-hidden ${isFitWidth ? 'min-h-[120px]' : ''} ${className}`}>
       {/* Blur Placeholder */}
       {!isLoaded && (
         <div className="absolute inset-0 bg-gray-200 animate-pulse">
           <img
             src={blurPlaceholder}
             alt=""
-            className="w-full h-full object-cover filter blur-sm scale-110"
+            className={`w-full ${isFitWidth ? 'h-auto' : 'h-full'} ${objectFit === 'contain' ? 'object-contain' : objectFit === 'fitWidth' ? 'object-contain' : 'object-cover'} filter blur-sm scale-110`}
             aria-hidden="true"
           />
           <div className="absolute inset-0 flex items-center justify-center">
@@ -103,7 +106,7 @@ export default function OptimizedImage({
           title={title || alt}
           onLoad={handleLoad}
           onError={handleError}
-          className={`w-full h-full object-cover transition-opacity duration-500 ${
+          className={`w-full ${isFitWidth ? 'h-auto' : 'h-full'} ${objectFit === 'contain' ? 'object-contain' : objectFit === 'fitWidth' ? 'object-contain' : 'object-cover'} transition-opacity duration-500 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           loading={priority ? "eager" : "lazy"}

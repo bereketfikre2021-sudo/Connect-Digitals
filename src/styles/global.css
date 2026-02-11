@@ -12,6 +12,18 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Prevent long unbroken strings from causing overflow */
+p, span, div, a, li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Optimize animations for better performance */
@@ -33,7 +45,10 @@ html {
   --neutralDark: #222222;
 }
 
-body { @apply bg-cream text-neutral-900 font-sans; }
+body { 
+  @apply bg-cream text-neutral-900 font-sans; 
+  overflow-x: hidden;
+}
 
 /* Ensure all text elements use Montserrat */
 * {
@@ -121,6 +136,8 @@ img {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   image-rendering: optimize-contrast;
+  max-width: 100%;
+  height: auto;
 }
 
 /* Reduce motion for users who prefer it */

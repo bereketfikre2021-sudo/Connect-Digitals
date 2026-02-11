@@ -11,7 +11,8 @@ export default function PortfolioCard({img, title, alt, children, caseStudy}){
           src={img} 
           alt={alt || title} 
           title={title}
-          className="w-full h-40 sm:h-48"
+          className="w-full"
+          objectFit="fitWidth"
           type="THUMBNAIL"
         />
       <div className="p-4 flex flex-col flex-grow">
@@ -52,12 +53,13 @@ export default function PortfolioCard({img, title, alt, children, caseStudy}){
               </button>
             </div>
 
-            <div className="mb-6">
+            <div className="mb-6 rounded-xl overflow-hidden">
               <OptimizedImage 
                 src={img} 
                 alt={alt || title}
                 title={title}
-                className="w-full h-64 rounded-xl"
+                className="w-full rounded-xl"
+                objectFit="fitWidth"
                 type="GALLERY"
               />
             </div>

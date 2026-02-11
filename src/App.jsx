@@ -331,23 +331,45 @@ export default function App() {
               <p className="text-neutralDark mb-4 font-sans leading-relaxed">
                 Connect Digitals provides comprehensive creative design services including but not limited to:
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div className="bg-white p-4 rounded-lg border border-accentRed">
-                  <h4 className="font-semibold text-primaryNavy mb-2">Creative Design Services</h4>
+                  <h4 className="font-semibold text-primaryNavy mb-2">Brand Design</h4>
                   <ul className="text-neutralDark font-sans text-sm space-y-1">
-                    <li>• Graphic Design & Layout</li>
-                    <li>• Branding & Visual Identity Design</li>
-                    <li>• Packaging & Labeling Design</li>
-                    <li>• Digital Media Design</li>
+                    <li>• Logo Design</li>
+                    <li>• Visual Identity</li>
+                    <li>• Brand Guidelines</li>
                   </ul>
                 </div>
                 <div className="bg-white p-4 rounded-lg border border-accentRed">
-                  <h4 className="font-semibold text-primaryNavy mb-2">Digital & Web Services</h4>
+                  <h4 className="font-semibold text-primaryNavy mb-2">Graphic Design</h4>
                   <ul className="text-neutralDark font-sans text-sm space-y-1">
-                    <li>• Web Design & Development</li>
-                    <li>• UI/UX Design & Prototyping</li>
-                    <li>• Advertising & Marketing Design</li>
-                    <li>• Social Media Marketing Design</li>
+                    <li>• Marketing & Advertising Graphics</li>
+                    <li>• Digital Media Design</li>
+                    <li>• Layout & Print Design</li>
+                  </ul>
+                </div>
+                <div className="bg-white p-4 rounded-lg border border-accentRed">
+                  <h4 className="font-semibold text-primaryNavy mb-2">Web & UI Design</h4>
+                  <ul className="text-neutralDark font-sans text-sm space-y-1">
+                    <li>• Website Design & Development</li>
+                    <li>• UI/UX Design</li>
+                    <li>• Wireframes & Prototypes</li>
+                  </ul>
+                </div>
+                <div className="bg-white p-4 rounded-lg border border-accentRed">
+                  <h4 className="font-semibold text-primaryNavy mb-2">Social Media Design</h4>
+                  <ul className="text-neutralDark font-sans text-sm space-y-1">
+                    <li>• Social Media Creatives</li>
+                    <li>• Ad Design</li>
+                    <li>• Campaign Visuals</li>
+                  </ul>
+                </div>
+                <div className="bg-white p-4 rounded-lg border border-accentRed">
+                  <h4 className="font-semibold text-primaryNavy mb-2">Packaging and Environmental Design</h4>
+                  <ul className="text-neutralDark font-sans text-sm space-y-1">
+                    <li>• Packaging Design</li>
+                    <li>• Label Design</li>
+                    <li>• Signage</li>
                   </ul>
                 </div>
               </div>
@@ -613,7 +635,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-cream overflow-x-hidden w-full">
       <PerformanceMonitor />
       <Header onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
       <main role="main" aria-label="Main content">
@@ -623,7 +645,6 @@ export default function App() {
         />
       </main>
       <Footer 
-        key={`footer-${Date.now()}`} 
         onOpenLegalModal={(type) => setLegalModal({ isOpen: true, type })}
       />
       {/* Modals - Lazy loaded with Suspense */}

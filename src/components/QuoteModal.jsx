@@ -117,12 +117,31 @@ export default function QuoteModal({ isOpen, onClose }) {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryNavy focus:border-transparent transition-colors"
                 >
                   <option value="">Select a service</option>
-                  <option value="logo-branding">Logo & Branding</option>
-                  <option value="digital-marketing">Digital Marketing</option>
-                  <option value="graphic-design">Graphic Design</option>
-                  <option value="social-media">Social Media Management</option>
-                  <option value="web-design">Web Design</option>
-                  <option value="ui-ux">UI/UX Design</option>
+                  <optgroup label="Brand Design">
+                    <option value="logo-design">Logo Design</option>
+                    <option value="visual-identity">Visual Identity</option>
+                    <option value="brand-guidelines">Brand Guidelines</option>
+                  </optgroup>
+                  <optgroup label="Graphic Design">
+                    <option value="marketing-advertising-graphics">Marketing & Advertising Graphics</option>
+                    <option value="digital-media-design">Digital Media Design</option>
+                    <option value="layout-print-design">Layout & Print Design</option>
+                  </optgroup>
+                  <optgroup label="Web & UI Design">
+                    <option value="website-design-development">Website Design & Development</option>
+                    <option value="ui-ux-design">UI/UX Design</option>
+                    <option value="wireframes-prototypes">Wireframes & Prototypes</option>
+                  </optgroup>
+                  <optgroup label="Social Media Design">
+                    <option value="social-media-creatives">Social Media Creatives</option>
+                    <option value="ad-design">Ad Design</option>
+                    <option value="campaign-visuals">Campaign Visuals</option>
+                  </optgroup>
+                  <optgroup label="Packaging and Environmental Design">
+                    <option value="packaging-design">Packaging Design</option>
+                    <option value="label-design">Label Design</option>
+                    <option value="signage">Signage</option>
+                  </optgroup>
                   <option value="multiple-services">Multiple Services</option>
                   <option value="consultation">Consultation</option>
                 </select>

@@ -1,18 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function Header({ onOpenQuoteModal }){
   const [isScrolled, setIsScrolled] = useState(false)
   const [currentSection, setCurrentSection] = useState('hero')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isMoreOpen, setIsMoreOpen] = useState(false)
-  const [isMobileMoreOpen, setIsMobileMoreOpen] = useState(false)
-  const moreRef = useRef(null)
-
   const navItems = [
     { id: 'about', name: 'About' },
     { id: 'services', name: 'Services' },
     { id: 'portfolio', name: 'Portfolio' },
-    { id: 'testimonials', name: 'Testimonials' },
     { id: 'contact', name: 'Contact' }
   ]
   
@@ -21,7 +16,6 @@ export default function Header({ onOpenQuoteModal }){
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
-    // Close mobile menu when navigating
     setIsMobileMenuOpen(false)
   }
 
@@ -30,10 +24,9 @@ export default function Header({ onOpenQuoteModal }){
   }
 
   useEffect(() => {
-    const sections = ['hero', 'about', 'services', 'portfolio', 'case-studies', 'blog', 'faq', 'testimonials', 'contact']
+    const sections = ['hero', 'about', 'services', 'portfolio', 'contact']
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
-      setIsMoreOpen(false)
       const scrollY = window.scrollY
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i])
@@ -48,29 +41,12 @@ export default function Header({ onOpenQuoteModal }){
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleMoreNav = (sectionId) => {
-    scrollToSection(sectionId)
-    setIsMoreOpen(false)
-  }
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (moreRef.current && !moreRef.current.contains(e.target)) {
-        setIsMoreOpen(false)
-      }
-    }
-    if (isMoreOpen) {
-      document.addEventListener('click', handleClickOutside)
-    }
-    return () => document.removeEventListener('click', handleClickOutside)
-  }, [isMoreOpen])
-
   return (
     <header 
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-2 sm:inset-x-4 md:inset-x-6 top-0 z-50 transition-all duration-300 overflow-x-hidden ${
         isScrolled 
-          ? 'bg-gray-900/25 backdrop-blur-2xl backdrop-saturate-150 rounded-b-3xl mx-4 border border-white/10' 
-          : 'bg-gray-900/20 backdrop-blur-2xl backdrop-saturate-150 rounded-b-3xl mx-4 border border-white/10'
+          ? 'bg-gray-900/25 backdrop-blur-2xl backdrop-saturate-150 rounded-b-3xl border border-white/10' 
+          : 'bg-gray-900/20 backdrop-blur-2xl backdrop-saturate-150 rounded-b-3xl border border-white/10'
       }`}
       role="banner"
     >
@@ -78,20 +54,20 @@ export default function Header({ onOpenQuoteModal }){
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
-      <div className="max-w-6xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between gap-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-5 md:px-6 py-4">
+        <div className="flex items-center justify-between gap-4 md:gap-6 min-w-0">
           {/* Logo Section */}
           <button 
             onClick={() => scrollToSection('hero')}
-            className="flex items-center gap-4 hover:opacity-80 transition-all duration-300 group"
+            className="flex items-center gap-2 sm:gap-4 hover:opacity-80 transition-all duration-300 group min-w-0 shrink-0"
             aria-label="Connect Digitals - Go to homepage"
           >
             <div className="relative">
-              <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-white/40 group-hover:ring-white/80 transition-all duration-300">
+              <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-white/40 group-hover:ring-white/80 transition-all duration-300 flex items-center justify-center p-1.5">
                 <img 
-                  src="/img/Connect.webp" 
+                  src="/Connect Icon.svg" 
                   alt="Connect Digitals - Professional Graphic Design and Branding Agency Logo" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   loading="eager"
                   fetchpriority="high"
                   decoding="sync"
@@ -112,7 +88,7 @@ export default function Header({ onOpenQuoteModal }){
           </button>
 
           {/* Navigation & CTA */}
-          <div className="flex items-center gap-4 flex-1 justify-end min-w-0">
+          <div className="flex items-center gap-2 sm:gap-4 flex-1 justify-end min-w-0 shrink-0">
             {/* Desktop Navigation - centered pill bar */}
             <nav className="hidden lg:flex items-center justify-center flex-1">
               <div className="flex items-center gap-1 p-1.5 rounded-2xl bg-black/20 backdrop-blur-sm" role="navigation" aria-label="Main navigation">
@@ -130,64 +106,17 @@ export default function Header({ onOpenQuoteModal }){
                   {item.name}
                 </button>
               ))}
-              <div className="relative" ref={moreRef}>
-                <button 
-                  onClick={(e) => { e.stopPropagation(); setIsMoreOpen(!isMoreOpen) }}
-                  className={`relative flex items-center gap-1 px-5 py-2.5 rounded-xl font-medium font-sans transition-all duration-300 ${
-                    ['case-studies', 'blog', 'faq'].includes(currentSection)
-                      ? 'bg-primaryNavy text-white'
-                      : isMoreOpen
-                        ? 'bg-white/10 text-white'
-                        : 'text-gray-300 hover:text-white hover:bg-white/10'
-                  }`}
-                  aria-label="More menu"
-                  aria-expanded={isMoreOpen}
-                  aria-haspopup="true"
-                >
-                  More
-                  <svg className={`w-4 h-4 transition-transform duration-300 ${isMoreOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {isMoreOpen && (
-                  <div 
-                    className="absolute top-full left-0 mt-2 py-2 w-48 bg-gray-900/90 backdrop-blur-2xl rounded-2xl border border-white/10 z-50"
-                    role="menu"
-                  >
-                    <button 
-                      onClick={() => handleMoreNav('case-studies')} 
-                      className="w-full text-left px-4 py-3 text-gray-300 hover:bg-white/10 hover:text-white transition-colors font-sans"
-                      role="menuitem"
-                    >
-                      Case Studies
-                    </button>
-                    <button 
-                      onClick={() => handleMoreNav('blog')} 
-                      className="w-full text-left px-4 py-3 text-gray-300 hover:bg-white/10 hover:text-white transition-colors font-sans"
-                      role="menuitem"
-                    >
-                      Blog
-                    </button>
-                    <button 
-                      onClick={() => handleMoreNav('faq')} 
-                      className="w-full text-left px-4 py-3 text-gray-300 hover:bg-white/10 hover:text-white transition-colors font-sans"
-                      role="menuitem"
-                    >
-                      FAQ
-                    </button>
-                  </div>
-                )}
-              </div>
             </div>
             </nav>
 
-            {/* Get Started CTA - Desktop */}
-            <button
-              onClick={onOpenQuoteModal}
+            {/* Call Now CTA - Desktop */}
+            <a
+              href="tel:+251923988838"
               className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accentRed hover:bg-accentRed/90 text-white font-semibold transition-all duration-300 shrink-0"
+              aria-label="Call Connect Digitals at +251 923 988 838"
             >
-              Get Started
-            </button>
+              Call Now
+            </a>
 
             {/* Mobile Menu Button */}
             <button 
@@ -217,19 +146,13 @@ export default function Header({ onOpenQuoteModal }){
       {isMobileMenuOpen && (
         <div 
           id="mobile-navigation"
-          className="lg:hidden border-t border-white/10 bg-gray-900/30 backdrop-blur-2xl rounded-b-2xl mx-4 mb-2 border border-white/10 transition-all duration-300"
+          className="lg:hidden border-t border-white/10 bg-gray-900/30 backdrop-blur-2xl rounded-b-2xl mb-2 border border-white/10 transition-all duration-300"
           role="navigation"
           aria-label="Mobile navigation"
         >
-          <div className="max-w-6xl mx-auto px-6 py-6">
+          <div className="max-w-6xl mx-auto px-4 sm:px-5 md:px-6 py-6">
             <nav className="flex flex-col gap-1">
-              {[
-                { name: 'About', id: 'about' },
-                { name: 'Services', id: 'services' },
-                { name: 'Portfolio', id: 'portfolio' },
-                { name: 'Testimonials', id: 'testimonials' },
-                { name: 'Contact', id: 'contact' }
-              ].map((item) => (
+              {navItems.map((item) => (
                 <button 
                   key={item.id}
                   onClick={() => scrollToSection(item.id)} 
@@ -242,42 +165,6 @@ export default function Header({ onOpenQuoteModal }){
                   {item.name}
                 </button>
               ))}
-              <div className="pt-2 mt-2 border-t border-white/10">
-                <button
-                  onClick={() => setIsMobileMoreOpen(!isMobileMoreOpen)}
-                  className={`w-full text-left font-medium py-3 px-4 rounded-xl font-sans transition-all duration-300 flex items-center justify-between ${
-                    ['case-studies', 'blog', 'faq'].includes(currentSection)
-                      ? 'bg-primaryNavy text-white'
-                      : 'text-gray-300 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  More
-                  <svg className={`w-4 h-4 transition-transform duration-300 ${isMobileMoreOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {isMobileMoreOpen && (
-                  <div className="pl-4 mt-1 space-y-1">
-                    {[
-                      { name: 'Case Studies', id: 'case-studies' },
-                      { name: 'Blog', id: 'blog' },
-                      { name: 'FAQ', id: 'faq' }
-                    ].map((item) => (
-                      <button 
-                        key={item.id}
-                        onClick={() => scrollToSection(item.id)} 
-                        className={`w-full text-left font-medium py-2 px-4 rounded-lg font-sans text-sm transition-all duration-300 ${
-                          currentSection === item.id
-                            ? 'bg-primaryNavy/50 text-white'
-                            : 'text-gray-400 hover:text-white hover:bg-white/10'
-                        }`}
-                      >
-                        {item.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
             </nav>
           </div>
         </div>

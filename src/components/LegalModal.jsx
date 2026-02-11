@@ -23,7 +23,7 @@ export default function LegalModal({ isOpen, onClose, type, title, content }) {
       aria-labelledby="legal-modal-title"
       aria-describedby="legal-modal-description"
     >
-      <div ref={modalRef} className="bg-white rounded-3xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+      <div ref={modalRef} className="bg-white rounded-3xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto overflow-x-hidden">
         <div className="p-6 sm:p-8">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
