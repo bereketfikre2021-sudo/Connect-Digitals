@@ -222,6 +222,50 @@ const portfolio = [
   }
 ]
 
+// FAQ Accordion Item
+function FAQItem({ question, answer }) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.4 }}
+      className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden"
+    >
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left hover:bg-gray-50/50 transition-colors duration-300"
+        aria-expanded={isOpen}
+        aria-controls={`faq-answer-${question.slice(0, 20).replace(/\s/g, '-')}`}
+      >
+        <span className="font-semibold text-primaryNavy font-sans">{question}</span>
+        <motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex-shrink-0 w-8 h-8 bg-primaryNavy/10 rounded-full flex items-center justify-center"
+        >
+          <svg className="w-5 h-5 text-primaryNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.span>
+      </button>
+      <motion.div
+        id={`faq-answer-${question.slice(0, 20).replace(/\s/g, '-')}`}
+        initial={false}
+        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="overflow-hidden"
+      >
+        <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-0">
+          <p className="text-gray-600 leading-relaxed font-sans border-t border-gray-100 pt-4">{answer}</p>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 const testimonials = [
   { 
     id:1, 
@@ -279,6 +323,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
   
   // Hero slideshow state
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [aboutSlide, setAboutSlide] = useState(0)
   const heroImages = [
     { src: '/img/BG.webp', alt: 'Connect Digitals creative workspace showcasing professional graphic design and branding services in Addis Ababa, Ethiopia' },
     { src: '/img/BG-2.webp', alt: 'Modern design studio with professional graphic design tools, logo design equipment, and branding materials in Ethiopia' },
@@ -295,6 +340,14 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
     
     return () => clearInterval(interval)
   }, [heroImages.length])
+
+  // Auto-advance about/mission/values carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAboutSlide((prev) => (prev + 1) % 4)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
   
   // Scroll to section function
   const scrollToSection = (sectionId) => {
@@ -360,28 +413,28 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             </a>
           </div>
 
-          <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6" role="region" aria-label="Company statistics">
+          <div className="mt-6 sm:mt-6 grid grid-cols-3 gap-2 sm:gap-3" role="region" aria-label="Company statistics">
             <div className="text-center group" ref={projectsRef}>
-              <div className="bg-gradient-to-br from-primaryNavy to-primaryNavy rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #000F33, #1a2a5c)' }}>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300" aria-label={`${projectsCount} projects completed`}>{projectsCount}+</div>
-                <div className="text-gray-200 font-medium text-xs sm:text-sm lg:text-base">Projects Completed</div>
-                <div className="w-8 sm:w-10 lg:w-12 h-1 bg-white rounded-full mx-auto mt-2 sm:mt-3 opacity-60"></div>
+              <div className="bg-gradient-to-br from-primaryNavy to-primaryNavy rounded-lg p-3 sm:p-4 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1" style={{ background: 'linear-gradient(135deg, #000F33, #1a2a5c)' }}>
+                <div className="text-lg sm:text-xl font-bold text-white mb-0.5 group-hover:scale-105 transition-transform duration-300" aria-label={`${projectsCount} projects completed`}>{projectsCount}+</div>
+                <div className="text-gray-200 font-medium text-[10px] sm:text-xs">Projects</div>
+                <div className="w-4 sm:w-6 h-0.5 bg-white rounded-full mx-auto mt-1 opacity-60"></div>
               </div>
             </div>
             
             <div className="text-center group" ref={satisfactionRef}>
-              <div className="bg-gradient-to-br from-accentRed to-accentRed rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #EC1C24, #c41e3a)' }}>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300" aria-label={`${satisfactionCount} percent client satisfaction`}>{satisfactionCount}%</div>
-                <div className="text-red-100 font-medium text-xs sm:text-sm lg:text-base">Client Satisfaction</div>
-                <div className="w-8 sm:w-10 lg:w-12 h-1 bg-white rounded-full mx-auto mt-2 sm:mt-3 opacity-60"></div>
+              <div className="bg-gradient-to-br from-accentRed to-accentRed rounded-lg p-3 sm:p-4 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1" style={{ background: 'linear-gradient(135deg, #EC1C24, #c41e3a)' }}>
+                <div className="text-lg sm:text-xl font-bold text-white mb-0.5 group-hover:scale-105 transition-transform duration-300" aria-label={`${satisfactionCount} percent client satisfaction`}>{satisfactionCount}%</div>
+                <div className="text-red-100 font-medium text-[10px] sm:text-xs">Satisfaction</div>
+                <div className="w-4 sm:w-6 h-0.5 bg-white rounded-full mx-auto mt-1 opacity-60"></div>
               </div>
             </div>
             
             <div className="text-center group" ref={experienceRef}>
-              <div className="bg-gradient-to-br from-gold to-gold rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #D4AF37, #b8941f)' }}>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300" aria-label={`${experienceCount} years of experience`}>{experienceCount}+</div>
-                <div className="text-yellow-100 font-medium text-xs sm:text-sm lg:text-base">Years Experience</div>
-                <div className="w-8 sm:w-10 lg:w-12 h-1 bg-white rounded-full mx-auto mt-2 sm:mt-3 opacity-60"></div>
+              <div className="bg-gradient-to-br from-gold to-gold rounded-lg p-3 sm:p-4 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1" style={{ background: 'linear-gradient(135deg, #D4AF37, #b8941f)' }}>
+                <div className="text-lg sm:text-xl font-bold text-white mb-0.5 group-hover:scale-105 transition-transform duration-300" aria-label={`${experienceCount} years of experience`}>{experienceCount}+</div>
+                <div className="text-yellow-100 font-medium text-[10px] sm:text-xs">Years Exp.</div>
+                <div className="w-4 sm:w-6 h-0.5 bg-white rounded-full mx-auto mt-1 opacity-60"></div>
               </div>
             </div>
           </div>
@@ -395,7 +448,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             className="rounded-2xl overflow-hidden shadow-2xl relative group"
           >
             {/* Slideshow Container */}
-            <div className="relative w-full h-64 sm:h-80 lg:h-96 overflow-hidden" role="img" aria-label="Connect Digitals workspace showcase">
+            <div className="relative w-full aspect-video overflow-hidden rounded-2xl" role="img" aria-label="Connect Digitals workspace showcase">
               {heroImages.map((image, index) => (
                 <motion.div
                   key={index}
@@ -446,10 +499,10 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                 </motion.div>
               ))}
               
-              {/* Progress Bar */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-white/20">
+              {/* Progress Bar - Glassmorphism */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-white/20 backdrop-blur-sm">
                 <motion.div 
-                  className="h-full bg-primaryNavy"
+                  className="h-full bg-primaryNavy/80 backdrop-blur-sm"
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
                   transition={{ 
@@ -526,147 +579,123 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
       </section>
 
       <section id="about" className="py-10">
-        <div className="bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100">
-          <div className="lg:flex lg:items-center lg:justify-between">
-            <div className="lg:flex-1">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-primaryNavy rounded-full flex items-center justify-center shadow-lg">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+        <div className="bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+          <div className="relative min-h-[280px]">
+            {[
+              /* Slide 1: Who we are */
+              <div key="who" className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-primaryNavy rounded-full flex items-center justify-center shadow-lg">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <h2 className="text-xl font-display font-bold text-primaryNavy">Who we are</h2>
                 </div>
-                <h2 className="text-2xl font-display font-bold text-primaryNavy">Who we are</h2>
-              </div>
-              
-              <div className="space-y-4">
-                <p className="text-gray-700 max-w-xl leading-relaxed font-sans">
-                  At <span className="font-semibold text-primaryNavy">Connect Digitals</span>, we believe every successful brand starts with a meaningful connection. We connect with your vision, create compelling designs, and help you captivate your audience — turning ideas into stories people remember.
+                <p className="text-gray-700 max-w-xl leading-relaxed font-sans text-sm sm:text-base">
+                  At <span className="font-semibold text-primaryNavy">Connect Digitals</span>, we believe every successful brand starts with a meaningful connection. Founded by <span className="font-bold text-primaryNavy">Bereket Fikre</span>, a brand builder with <span className="font-semibold text-accentRed">5+ years of experience</span>.
                 </p>
-                
-                <div className="bg-gradient-to-r from-gold/10 to-accentRed/10 border-l-4 border-gold p-4 rounded-r-lg">
-                  <p className="text-gray-700 text-sm font-sans">
-                    Founded by <span className="font-bold text-primaryNavy">Bereket Fikre</span>, a brand builder and creative designer with <span className="font-semibold text-accentRed">5+ years of experience</span>.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 lg:mt-0 lg:ml-8">
-              <div className="bg-primaryNavy rounded-2xl p-6 text-white text-center shadow-xl">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                </div>
-                <h3 className="font-display font-semibold text-lg mb-2">Ready to Connect?</h3>
-                <p className="text-white/90 text-sm mb-4">Let's create something amazing together</p>
                 <button 
                   onClick={() => scrollToSection('contact')}
-                  className="group w-full px-6 py-4 bg-white text-primaryNavy rounded-xl font-semibold border-2 border-white hover:border-primaryNavy transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl"
-                  aria-label="Navigate to contact section to work with us"
+                  className="mt-4 self-start px-6 py-2.5 bg-primaryNavy text-white rounded-xl font-semibold text-sm hover:bg-accentRed transition-colors duration-300"
                 >
-                  <span className="group-hover:text-primaryNavy transition-colors duration-300">Work with us</span>
+                  Work with us
                 </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision Section */}
-      <section className="py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Mission */}
-          <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-accentRed rounded-full flex items-center justify-center shadow-lg">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-display font-bold text-primaryNavy">Our Mission</h3>
-            </div>
-            
-            <div className="space-y-4">
-              <p className="text-neutralDark leading-relaxed font-sans">
-                To empower businesses and individuals with <span className="font-semibold text-accentRed">exceptional design solutions</span> that not only meet their immediate needs but also build lasting connections with their audiences.
-              </p>
-              
-              <div className="bg-cream border-l-4 border-accentRed p-4 rounded-r-lg">
-                <p className="text-neutralDark text-sm font-sans">
-                  <strong className="text-primaryNavy">We strive to:</strong> Transform complex ideas into simple, powerful visual stories that resonate, inspire, and drive meaningful engagement across all touchpoints.
+              </div>,
+              /* Slide 2: Our Mission */
+              <div key="mission" className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-accentRed rounded-full flex items-center justify-center shadow-lg">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <h2 className="text-xl font-display font-bold text-primaryNavy">Our Mission</h2>
+                </div>
+                <p className="text-neutralDark leading-relaxed font-sans text-sm sm:text-base">
+                  To empower businesses with <span className="font-semibold text-accentRed">exceptional design solutions</span> that build lasting connections. We transform complex ideas into simple, powerful visual stories.
                 </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Vision */}
-          <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center shadow-lg">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-display font-bold text-primaryNavy">Our Vision</h3>
-            </div>
-            
-            <div className="space-y-4">
-              <p className="text-neutralDark leading-relaxed font-sans">
-                To become the <span className="font-semibold text-gold">leading creative partner</span> in Ethiopia and beyond, recognized for our innovative approach to design and our commitment to helping brands tell their unique stories.
-              </p>
-              
-              <div className="bg-cream border-l-4 border-gold p-4 rounded-r-lg">
-                <p className="text-neutralDark text-sm font-sans">
-                  <strong className="text-primaryNavy">We envision:</strong> A world where every business, regardless of size, has access to world-class design that elevates their brand and creates genuine connections with their community.
+              </div>,
+              /* Slide 3: Our Vision */
+              <div key="vision" className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-gold rounded-full flex items-center justify-center shadow-lg">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                  </div>
+                  <h2 className="text-xl font-display font-bold text-primaryNavy">Our Vision</h2>
+                </div>
+                <p className="text-neutralDark leading-relaxed font-sans text-sm sm:text-base">
+                  To become the <span className="font-semibold text-gold">leading creative partner</span> in Ethiopia and beyond, giving every business access to world-class design.
                 </p>
+              </div>,
+              /* Slide 4: Our Core Values */
+              <div key="values" className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-primaryNavy rounded-full flex items-center justify-center shadow-lg">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </div>
+                  <h2 className="text-xl font-display font-bold text-primaryNavy">Our Core Values</h2>
+                </div>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <div className="w-10 h-10 bg-accentRed/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <svg className="w-5 h-5 text-accentRed" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h4 className="font-display font-semibold text-primaryNavy text-xs mb-1">Quality First</h4>
+                    <p className="text-neutralDark text-xs font-sans">Every project gets our full attention.</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-10 h-10 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <svg className="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                    </div>
+                    <h4 className="font-display font-semibold text-primaryNavy text-xs mb-1">Client Partnership</h4>
+                    <p className="text-neutralDark text-xs font-sans">We work as your team.</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-10 h-10 bg-primaryNavy/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <svg className="w-5 h-5 text-primaryNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <h4 className="font-display font-semibold text-primaryNavy text-xs mb-1">Innovation</h4>
+                    <p className="text-neutralDark text-xs font-sans">We evolve with trends.</p>
+                  </div>
+                </div>
               </div>
-            </div>
+            ].map((slide, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: index === aboutSlide ? 1 : 0 }}
+                transition={{ duration: 0.4 }}
+                className="absolute inset-0"
+                style={{ pointerEvents: index === aboutSlide ? 'auto' : 'none' }}
+              >
+                {slide}
+              </motion.div>
+            ))}
           </div>
-        </div>
-
-        {/* Values Section */}
-        <div className="mt-8 bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-primaryNavy rounded-full flex items-center justify-center shadow-lg">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-            </div>
-            <h3 className="text-2xl font-display font-bold text-primaryNavy">Our Core Values</h3>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-accentRed/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-accentRed" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h4 className="font-display font-semibold text-primaryNavy mb-2">Quality First</h4>
-              <p className="text-neutralDark text-sm font-sans">We never compromise on quality. Every project receives our full attention and expertise.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h4 className="font-display font-semibold text-primaryNavy mb-2">Client Partnership</h4>
-              <p className="text-neutralDark text-sm font-sans">We work as an extension of your team, understanding your goals and challenges.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primaryNavy/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-primaryNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h4 className="font-display font-semibold text-primaryNavy mb-2">Innovation</h4>
-              <p className="text-neutralDark text-sm font-sans">We stay ahead of trends and continuously evolve our creative approach.</p>
-            </div>
+          {/* Slide indicators */}
+          <div className="flex justify-center gap-2 py-4 border-t border-gray-100">
+            {[0, 1, 2, 3].map((i) => (
+              <button
+                key={i}
+                onClick={() => setAboutSlide(i)}
+                className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                  i === aboutSlide ? 'bg-primaryNavy scale-125' : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -749,6 +778,145 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             >
               Brief description goes here. Click to view more.
             </PortfolioCard>
+          ))}
+        </div>
+      </section>
+
+      <section id="case-studies" className="py-10">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 bg-accentRed rounded-full flex items-center justify-center shadow-lg">
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-display font-bold text-primaryNavy">Case Studies</h3>
+        </div>
+        <p className="text-gray-600 mb-6 max-w-2xl font-sans text-sm">Explore how we've helped businesses transform their brands and achieve measurable results.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {portfolio.slice(0, 4).map((p, index) => (
+            <motion.article
+              key={p.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 ${index === 3 ? 'hidden md:block' : ''}`}
+            >
+              <div className="relative w-full aspect-[4/3]">
+                <OptimizedImage 
+                  src={p.img} 
+                  alt={p.alt}
+                  title={p.title}
+                  className="w-full h-full object-cover"
+                  type="THUMBNAIL"
+                />
+                <div className="absolute top-2 left-2 bg-primaryNavy/90 text-white px-2 py-0.5 rounded-full text-xs font-medium">
+                  Case Study {index + 1}
+                </div>
+              </div>
+              <div className="p-5">
+                <h4 className="text-base font-display font-bold text-primaryNavy mb-2 line-clamp-2">{p.title}</h4>
+                {p.caseStudy && (
+                  <div className="space-y-1.5">
+                    <p className="text-gray-600 text-xs font-sans line-clamp-2">{p.caseStudy.challenge}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {p.caseStudy.results.map((r, i) => (
+                        <div key={i} className="bg-primaryNavy/5 rounded px-2 py-0.5">
+                          <span className="text-[10px] text-gray-500 font-medium">{r.metric}</span>
+                          <p className="text-primaryNavy font-semibold text-xs">{r.value}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      <section id="blog" className="py-10">
+        <div className="flex items-center gap-3 mb-8">
+          <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center shadow-lg">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16a6 6 0 01-5-5 6 6 0 0012 0 6 6 0 01-5 5m8 0h1m-4 0v-2c0-.996-.16-1.959-.453-2.86C19.5 11.5 20 10.5 20 9m-2 0h1a2 2 0 01-2 2" />
+            </svg>
+          </div>
+          <h3 className="text-2xl font-display font-bold text-primaryNavy">Blog</h3>
+        </div>
+        <p className="text-gray-600 mb-8 max-w-2xl font-sans">Design tips, industry insights, and creative inspiration from Connect Digitals.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            { title: '5 Essential Elements of a Strong Brand Identity', excerpt: 'Learn how to create a cohesive brand that resonates with your audience and stands out in the market.', date: 'Jan 15, 2025', tag: 'Branding', img: '/img/Zewd.webp', alt: 'Zewd minimalist brand identity - Connect Digitals branding case study' },
+            { title: 'Why Design Matters for Ethiopian Businesses', excerpt: 'The competitive advantage of professional design in the growing Ethiopian market.', date: 'Jan 8, 2025', tag: 'Insights', img: '/img/Company profile.webp', alt: 'Professional company profile - Connect Digitals design for Ethiopian businesses' },
+            { title: 'Social Media Design Best Practices for 2025', excerpt: 'Tips to create scroll-stopping content that drives engagement and conversion.', date: 'Dec 20, 2024', tag: 'Marketing', img: '/img/Finix.webp', alt: 'Finix digital marketing assets - Connect Digitals social media design' },
+            { title: 'Packaging Design That Sells on the Shelf', excerpt: 'How to make your products stand out and attract customers in retail environments.', date: 'Dec 12, 2024', tag: 'Packaging', img: '/img/Lensa Fashion Design & Makeup.webp', alt: 'Lensa Fashion packaging design - Connect Digitals packaging case study' }
+          ].map((post, index) => (
+            <motion.article
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group ${index === 3 ? 'hidden md:block' : ''}`}
+            >
+              <div className="h-40 relative overflow-hidden">
+                <OptimizedImage 
+                  src={post.img} 
+                  alt={post.alt}
+                  title={post.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  type="THUMBNAIL"
+                />
+              </div>
+              <div className="p-5">
+                <span className="text-xs font-semibold text-accentRed uppercase tracking-wide">{post.tag}</span>
+                <h4 className="font-display font-bold text-primaryNavy mt-2 mb-2 line-clamp-2">{post.title}</h4>
+                <p className="text-gray-600 text-sm font-sans line-clamp-2 mb-3">{post.excerpt}</p>
+                <p className="text-xs text-gray-400 font-sans">{post.date}</p>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      <section id="faq" className="py-10">
+        <div className="flex items-center gap-3 mb-8">
+          <div className="w-12 h-12 bg-primaryNavy rounded-full flex items-center justify-center shadow-lg">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 className="text-2xl font-display font-bold text-primaryNavy">Frequently Asked Questions</h3>
+        </div>
+        <div className="max-w-3xl mx-auto space-y-4">
+          {[
+            {
+              q: 'How long does a typical project take?',
+              a: 'Project timelines vary by scope. Simple designs like logos or business cards typically take 5-7 business days. Complex projects like full brand identity or website development can take 10-21 business days. We provide detailed timelines in our initial quote and keep you updated throughout the process.'
+            },
+            {
+              q: 'What payment methods do you accept?',
+              a: 'We accept bank transfer, mobile money (Ethiopia), PayPal for international clients, and cryptocurrency (Bitcoin, Ethereum). A 50% deposit is required before we begin work, with the remaining 50% due upon project completion and your approval.'
+            },
+            {
+              q: 'Do you offer revisions?',
+              a: 'Yes! Each package includes revision rounds—Beginner (2 rounds), Professional (5 rounds), and Premium (unlimited revisions). We want you to be completely satisfied with the final result. Additional revisions are available for $50 per round if needed.'
+            },
+            {
+              q: 'Do you work with clients outside Ethiopia?',
+              a: 'Absolutely! We work with businesses and individuals worldwide. We collaborate remotely via email, video calls, and project management tools. International clients can pay via PayPal or cryptocurrency for convenience.'
+            },
+            {
+              q: 'What is included in the design process?',
+              a: 'Our process includes an initial consultation to understand your vision, a creative brief, concept sketches, design iterations based on your feedback, and final delivery of all source files. We maintain clear communication throughout and ensure you\'re involved at every key stage.'
+            },
+            {
+              q: 'How do I get started?',
+              a: 'Simply fill out our quote request form or contact us directly. We\'ll schedule a brief call or chat to discuss your project, goals, and budget. From there, we\'ll provide a custom proposal and timeline. No obligation—we\'re happy to answer questions before you commit.'
+            }
+          ].map((item, index) => (
+            <FAQItem key={index} question={item.q} answer={item.a} />
           ))}
         </div>
       </section>
