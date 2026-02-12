@@ -31,18 +31,24 @@ export const RESPONSIVE_SIZES = {
 export function getOptimizedImageUrl(src, type = 'DEFAULT', width = null, height = null) {
   if (!src) return src
   
-  // For local images, we'll use CSS transforms and WebP format
-  // In production, you'd typically use a CDN or image optimization service
+  // For local static assets (paths starting with /), return as-is—no query params.
+  // Query params can break static file serving on some hosts; our static files don't support them.
+  const isLocalAsset = src.startsWith('/') && !src.startsWith('//')
+  if (isLocalAsset) {
+    return src
+  }
+  
+  // For external URLs, add optional CDN params (only if a CDN is used)
   const quality = IMAGE_QUALITY[type] || IMAGE_QUALITY.DEFAULT
-  
-  // Add quality parameter for potential CDN optimization
-  const url = new URL(src, window.location.origin)
-  url.searchParams.set('q', quality)
-  
-  if (width) url.searchParams.set('w', width)
-  if (height) url.searchParams.set('h', height)
-  
-  return url.toString()
+  try {
+    const url = new URL(src, typeof window !== 'undefined' ? window.location.origin : 'https://example.com')
+    url.searchParams.set('q', quality)
+    if (width) url.searchParams.set('w', width)
+    if (height) url.searchParams.set('h', height)
+    return url.toString()
+  } catch {
+    return src
+  }
 }
 
 /**

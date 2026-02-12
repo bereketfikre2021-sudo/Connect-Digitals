@@ -1189,7 +1189,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
 
       <section id="process" className="py-6 sm:py-10" aria-labelledby="process-heading">
         <h2 id="process-heading" className="text-lg sm:text-xl font-display font-semibold text-primaryNavy mb-4 sm:mb-6">How We Work</h2>
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
+        <div className="flex flex-wrap items-center justify-start sm:justify-center gap-3 sm:gap-6">
           {[
             { step: 'Discovery', short: 'Brief & goals' },
             { step: 'Concept', short: 'Ideas & strategy' },
@@ -1197,7 +1197,7 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             { step: 'Delivery', short: 'Final files & handoff' }
           ].map((item, i) => (
             <React.Fragment key={item.step}>
-              <div className="flex flex-col items-center text-center">
+              <div className="flex flex-col items-start sm:items-center text-left sm:text-center">
                 <span className="font-display font-semibold text-primaryNavy text-sm sm:text-base">{item.step}</span>
                 <span className="text-xs text-neutralDark/80 font-sans">{item.short}</span>
               </div>
