@@ -109,15 +109,6 @@ export default function Header({ onOpenQuoteModal }){
             </div>
             </nav>
 
-            {/* Call Now CTA - Desktop */}
-            <a
-              href="tel:+251923988838"
-              className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accentRed hover:bg-accentRed/90 text-white font-semibold transition-all duration-300 shrink-0"
-              aria-label="Call Connect Digitals at +251 923 988 838"
-            >
-              Call Now
-            </a>
-
             {/* Mobile Menu Button */}
             <button 
               onClick={toggleMobileMenu}
@@ -156,7 +147,7 @@ export default function Header({ onOpenQuoteModal }){
                 <button 
                   key={item.id}
                   onClick={() => scrollToSection(item.id)} 
-                  className={`text-left font-medium py-3 px-4 rounded-xl font-sans transition-all duration-300 ${
+                  className={`w-full text-left font-medium py-3 px-4 rounded-xl font-sans transition-all duration-300 ${
                     currentSection === item.id
                       ? 'bg-primaryNavy text-white'
                       : 'text-gray-300 hover:text-white hover:bg-white/10'

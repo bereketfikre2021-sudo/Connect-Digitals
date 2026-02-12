@@ -11,7 +11,7 @@ export default function OptimizedImage({
   src, 
   alt, 
   className = '', 
-  placeholder = '/img/Connect.webp',
+  placeholder = '/Connect Icon.svg',
   title,
   type = 'DEFAULT',
   priority = false,

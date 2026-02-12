@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import PortfolioCard from '../components/PortfolioCard'
+import { useBackButtonClose } from '../hooks/useBackButtonClose'
 import TestimonialCard from '../components/TestimonialCard'
 import OptimizedImage from '../components/OptimizedImage'
 
@@ -192,7 +193,7 @@ const serviceCategories = [
 const portfolio = [
   { 
     id:2, 
-    title:'Swan Clothing - Complete Brand Identity', 
+    title:'Branding - Swan Clothing', 
     img:'/Portfolio/Brand Design/Full brand identity for swan clothing.webp',
     category:'brand-design',
     alt:'Swan Clothing complete brand identity design by Connect Digitals - fashion logo, brand colors, and comprehensive fashion branding for Ethiopian clothing brand',
@@ -208,7 +209,7 @@ const portfolio = [
   },
   { 
     id:23, 
-    title:'Alta Counseling Ethiopia - Brand Identity', 
+    title:'Branding - Alta Counseling Ethiopia', 
     img:'/Portfolio/Brand Design/Brand Identity - Alta Counseling Ethiopia.webp',
     category:'brand-design',
     alt:'Alta Counseling Ethiopia brand identity by Connect Digitals - professional branding for counseling practice',
@@ -224,7 +225,7 @@ const portfolio = [
   },
   { 
     id:24, 
-    title:'Dumas Properties - Brand Identity', 
+    title:'Branding - Dumas Properties', 
     img:'/Portfolio/Brand Design/Brand Identity - Dumas Properties.webp',
     category:'brand-design',
     alt:'Dumas Properties brand identity by Connect Digitals - real estate branding and visual identity',
@@ -240,7 +241,7 @@ const portfolio = [
   },
   { 
     id:25, 
-    title:'Raya Hotel & Convention Center - Brand Identity', 
+    title:'Branding - Raya Hotel & Convention Center', 
     img:'/Portfolio/Brand Design/Brand Identity - Raya Hotel & Convention Center.webp',
     category:'brand-design',
     alt:'Raya Hotel & Convention Center brand identity by Connect Digitals - hospitality branding for Ethiopian hotel',
@@ -256,13 +257,13 @@ const portfolio = [
   },
   { 
     id:26, 
-    title:'Andegna Furniture - Office Signage', 
+    title:'Branding - Andegna Furniture', 
     img:'/Portfolio/Brand Design/Office Signage For Andegna Furniture.webp',
     category:'brand-design',
-    alt:'Andegna Furniture office signage by Connect Digitals - branded environmental design',
+    alt:'Andegna Furniture branding by Connect Digitals - branded environmental design',
     caseStudy: {
-      challenge: "Andegna Furniture needed office signage that would reinforce their brand in their showroom and workspace.",
-      solution: "Created branded office signage that integrated seamlessly with their space while strengthening brand visibility.",
+      challenge: "Andegna Furniture needed a cohesive brand identity to reinforce their presence in their showroom and market.",
+      solution: "Created comprehensive branding that integrated seamlessly with their space while strengthening brand visibility.",
       results: [
         { metric: "Brand Presence", value: "Enhanced in-space visibility" },
         { metric: "Professional Image", value: "Elevated showroom experience" },
@@ -272,13 +273,13 @@ const portfolio = [
   },
   { 
     id:27, 
-    title:'Medavail - Office Signage', 
+    title:'Branding - Medavail', 
     img:'/Portfolio/Brand Design/Office Signage Medavail-.webp',
     category:'brand-design',
-    alt:'Medavail office signage by Connect Digitals - pharmaceutical company branded signage',
+    alt:'Medavail branding by Connect Digitals - pharmaceutical company brand identity',
     caseStudy: {
-      challenge: "Medavail needed professional office signage that would reflect their pharmaceutical industry standards.",
-      solution: "Designed branded office signage with clean, professional aesthetics suitable for a healthcare environment.",
+      challenge: "Medavail needed professional branding that would reflect their pharmaceutical industry standards.",
+      solution: "Designed comprehensive branding with clean, professional aesthetics suitable for a healthcare environment.",
       results: [
         { metric: "Brand Authority", value: "Professional corporate presence" },
         { metric: "Consistency", value: "Brand-aligned signage" },
@@ -432,12 +433,12 @@ const portfolio = [
   },
   { 
     id:14, 
-    title:'Raya - Product & Packaging', 
+    title:'Raya Hotel & Convention Center - Product & Packaging', 
     img:'/Portfolio/Packaging & Enviromental Design/Product & Packaging - Raya.webp',
     category:'packaging-environmental-design',
-    alt:'Raya product and packaging design by Connect Digitals - product packaging and environmental design',
+    alt:'Raya Hotel & Convention Center product and packaging design by Connect Digitals - product packaging and environmental design',
     caseStudy: {
-      challenge: "Raya needed product packaging that would stand out and effectively communicate their brand values.",
+      challenge: "Raya Hotel & Convention Center needed product packaging that would stand out and effectively communicate their brand values.",
       solution: "Developed distinctive product and packaging design that combined functionality with strong visual appeal.",
       results: [
         { metric: "Shelf Appeal", value: "Improved retail visibility" },
@@ -480,12 +481,12 @@ const portfolio = [
   },
   { 
     id:5, 
-    title:'Professional Company Profile', 
+    title:'Medavail Pharmaceuticals - Professional Company Profile', 
     img:'/Portfolio/Print & Layout Design/Company Profile - Medavail Pharmaceuticals.webp',
     category:'print-layout',
-    alt:'Professional company profile design by Connect Digitals - modern layout, corporate branding, and business presentation materials for Ethiopian companies',
+    alt:'Medavail Pharmaceuticals company profile design by Connect Digitals - modern layout, corporate branding, and business presentation materials for Ethiopian companies',
     caseStudy: {
-      challenge: "A corporate client needed a professional company profile that would effectively communicate their expertise and attract high-value business partnerships.",
+      challenge: "Medavail Pharmaceuticals needed a professional company profile that would effectively communicate their expertise and attract high-value business partnerships.",
       solution: "Created a comprehensive company profile with modern design, compelling copy, infographics, and professional photography that showcased their capabilities and achievements.",
       results: [
         { metric: "Partnership Inquiries", value: "300% increase in business inquiries" },
@@ -496,12 +497,12 @@ const portfolio = [
   },
   { 
     id:17, 
-    title:'Raya - Business Card', 
+    title:'Raya Hotel & Convention Center - Business Card', 
     img:'/Portfolio/Print & Layout Design/Business Card - Raya.webp',
     category:'print-layout',
-    alt:'Raya business card design by Connect Digitals - professional print design for Ethiopian business',
+    alt:'Raya Hotel & Convention Center business card design by Connect Digitals - professional print design for Ethiopian business',
     caseStudy: {
-      challenge: "Raya needed professional business cards that would make a strong first impression and support their brand.",
+      challenge: "Raya Hotel & Convention Center needed professional business cards that would make a strong first impression and support their brand.",
       solution: "Designed elegant business cards with clear typography and brand-consistent visuals for effective networking.",
       results: [
         { metric: "Brand Impression", value: "Professional first impression" },
@@ -528,12 +529,12 @@ const portfolio = [
   },
   { 
     id:19, 
-    title:'Dumas - Letterhead Design', 
+    title:'Dumas Properties - Letterhead Design', 
     img:'/Portfolio/Print & Layout Design/Letterhead Design- Dumas.webp',
     category:'print-layout',
-    alt:'Dumas letterhead design by Connect Digitals - professional corporate stationery',
+    alt:'Dumas Properties letterhead design by Connect Digitals - professional corporate stationery',
     caseStudy: {
-      challenge: "Dumas needed professional letterhead that would reinforce their brand in official communications.",
+      challenge: "Dumas Properties needed professional letterhead that would reinforce their brand in official communications.",
       solution: "Designed elegant letterhead with sophisticated typography and brand elements for professional correspondence.",
       results: [
         { metric: "Professional Image", value: "Elevated corporate presence" },
@@ -624,10 +625,24 @@ const portfolio = [
   }
 ]
 
+const caseStudiesData = [
+  { id: 1, client: 'Andegna Furniture', title: 'Product Catalog Design', img: '/Case Studies/Andegna Cataloge.webp', overview: 'Andegna Furniture required a clean, professional product catalog to present its furniture collections clearly and attractively to clients.', challenge: ['Existing product presentation lacked structure and visual consistency', 'Needed a catalog that was easy to navigate and client-friendly', 'Required balance between aesthetics and clarity'], solution: 'I designed a simplified, well-structured product catalog with clear hierarchy, consistent layouts, and refined typography. The focus was on making products easy to view and compare while maintaining a polished brand appearance.', role: ['Catalog layout and design', 'Visual hierarchy and typography', 'Product presentation consistency'], outcome: 'A professional, easy-to-use product catalog that improved product presentation and supported client decision-making.' },
+  { id: 2, client: 'Alta Counseling', title: 'Rebranding & Visual Identity', img: '/Case Studies/Alta Counseling.webp', overview: 'Alta Counseling needed a refreshed brand identity that communicated trust, calmness, and professionalism.', challenge: ['Outdated visual identity', 'Need for a more approachable and consistent look', 'Required alignment across digital and print materials'], solution: 'I redesigned the brand identity using a restrained color palette, clean typography, and a cohesive visual system focused on clarity and emotional comfort.', role: ['Brand identity redesign', 'Logo refinement', 'Visual system development'], outcome: 'A modern, cohesive visual identity that strengthened trust and improved brand consistency across platforms.' },
+  { id: 3, client: 'Niqat Coffee', title: 'Social Media Campaign & Digital Design', img: '/Case Studies/Social Media Design for niqat coffee.webp', overview: 'Niqat Coffee needed to build its social media presence from scratch and establish a consistent visual voice.', challenge: ['No existing social media accounts', 'Lack of visual direction', 'Need to increase engagement and visibility'], solution: 'I created the social media accounts, defined a visual direction, and designed consistent content aligned with the brand\'s personality and audience.', role: ['Social media visual design', 'Content creation', 'Campaign consistency'], outcome: 'Improved engagement, stronger brand recognition, and a consistent digital presence.' },
+  { id: 4, client: 'MedAvail Pharmaceuticals', title: 'Company Profile & Corporate Design', img: '/Case Studies/Company Profile - Medavail Pharmaceuticals.webp', overview: 'MedAvail Pharmaceuticals required a professional company profile to communicate its mission, services, and credibility to partners and stakeholders.', challenge: ['Information-heavy content needed clear structure', 'Required a serious, trustworthy visual tone', 'Needed a document suitable for corporate and medical contexts'], solution: 'I designed a clean, structured company profile that emphasized readability, hierarchy, and professionalism. The layout balanced informative content with a polished visual presentation.', role: ['Company profile layout and design', 'Information hierarchy', 'Visual consistency'], outcome: 'A clear, professional company profile that supported corporate communication and reinforced brand credibility.' }
+]
+
+const blogData = [
+  { id: 1, title: 'Branding', shortDesc: 'Building strong brand identities that resonate', img: '/Portfolio/Blog/Branding.webp', slug: 'branding', description: 'A strong brand identity is the foundation of every successful business. It goes far beyond just a logo—it encompasses your visual language, messaging, color palette, typography, and the emotional connection you create with your audience.\n\nEffective branding builds recognition, trust, and loyalty over time. When customers see your brand consistently across touchpoints, they develop a sense of familiarity that makes choosing your business feel natural. We help businesses develop cohesive brand systems that communicate their values, differentiate them from competitors, and set them apart in the market.\n\nFrom startups to established enterprises, investing in thoughtful branding pays dividends. A well-crafted brand identity can increase perceived value, command premium pricing, and create lasting customer relationships. The key is consistency: every piece of communication—from your website to your business cards to your social media—should feel unmistakably like you.' },
+  { id: 2, title: 'Consistency', shortDesc: 'Why consistency matters in design', img: '/Portfolio/Blog/Consistency.webp', slug: 'consistency', description: 'Consistency in design creates familiarity and builds trust with your audience. When your visuals, tone, and messaging align across all touchpoints—from social media to print materials to packaging—you reinforce your brand\'s identity and make it easier for customers to recognize and remember you.\n\nThink of your favorite brands: chances are, you can identify them instantly by their colors, typography, or visual style. That recognition doesn\'t happen by accident. It\'s the result of meticulous attention to consistency across every customer interaction. Consistent design reduces cognitive load for your audience—they don\'t have to work to understand that this new post or ad belongs to you.\n\nInconsistency, on the other hand, can confuse customers and dilute your brand\'s impact. Mixed fonts, clashing colors, and varying tones make your brand feel unprofessional and forgettable. Whether you\'re a small business or a growing enterprise, maintaining design consistency should be a priority in every project you undertake.' },
+  { id: 3, title: 'Design Principles', shortDesc: 'Core principles that guide great design', img: '/Portfolio/Blog/Design principles.webp', slug: 'design-principles', description: 'Great design is guided by fundamental principles that have stood the test of time. Balance, hierarchy, contrast, alignment, repetition, and whitespace—these aren\'t arbitrary rules but proven frameworks that help create visuals that are both beautiful and effective.\n\nBalance distributes visual weight so that no single element dominates awkwardly. Hierarchy guides the eye to what matters most, ensuring your message gets across. Contrast creates emphasis and makes content readable. Alignment creates order and professionalism. Repetition builds recognition and reinforces your brand. And whitespace—often overlooked—gives your design room to breathe and helps important elements stand out.\n\nUnderstanding these principles isn\'t about following rigid rules; it\'s about having a toolkit to make intentional decisions. When a design feels "off," it\'s often because one of these principles has been neglected. At Connect Digitals, we apply these principles to every project, ensuring your designs communicate clearly, look professional, and resonate with your target audience.' },
+  { id: 4, title: 'Graphic Design Trends 2025', shortDesc: 'Trends shaping the design industry', img: '/Portfolio/Blog/Graphic Design Trends 2025.webp', slug: 'graphic-design-trends-2025', description: 'The design landscape continues to evolve with new trends each year, and 2025 is no exception. We\'re seeing bold typography make a comeback, with oversized headlines and expressive typefaces that demand attention. Sustainable design choices are increasingly important as brands align their visuals with environmental values.\n\nAI-assisted creativity is transforming how designers work—not replacing human creativity, but augmenting it. Tools that streamline repetitive tasks free up time for strategic thinking and unique ideas. There\'s also a renewed focus on authenticity: consumers are drawn to brands that feel genuine rather than overly polished or generic.\n\nStaying informed about these trends helps brands remain relevant while maintaining their unique voice in a crowded marketplace. The key is selective adoption: not every trend fits every brand. Working with experienced designers helps you identify which trends align with your identity and goals, and which to skip. At Connect Digitals, we help Ethiopian businesses navigate these trends while building designs that stand the test of time.' }
+]
+
 const faqItems = [
   { q: 'How long does a typical project take?', a: 'Project timelines vary by scope. Simple designs like logos or business cards typically take 5-7 business days. Complex projects like full brand identity or website development can take 10-21 business days. We provide detailed timelines in our initial quote and keep you updated throughout the process.' },
   { q: 'What payment methods do you accept?', a: 'We accept bank transfer, mobile money (Ethiopia), PayPal for international clients, and cryptocurrency (Bitcoin, Ethereum). A 50% deposit is required before we begin work, with the remaining 50% due upon project completion and your approval.' },
-  { q: 'Do you offer revisions?', a: 'Yes! Each package includes revision rounds—Beginner (2 rounds), Professional (5 rounds), and Premium (unlimited revisions). We want you to be completely satisfied with the final result. Additional revisions are available for $50 per round if needed.' },
+  { q: 'Do you offer revisions?', a: 'Yes! Each package includes revision rounds—Beginner (2 rounds), Professional (5 rounds), and Premium (unlimited revisions). We want you to be completely satisfied with the final result. Additional revisions are available for 1,500 ETB per round if needed.' },
   { q: 'Do you work with clients outside Ethiopia?', a: 'Absolutely! We work with businesses and individuals worldwide. We collaborate remotely via email, video calls, and project management tools. International clients can pay via PayPal or cryptocurrency for convenience.' },
   { q: 'What is included in the design process?', a: 'Our process includes an initial consultation to understand your vision, a creative brief, concept sketches, design iterations based on your feedback, and final delivery of all source files. We maintain clear communication throughout and ensure you\'re involved at every key stage.' },
   { q: 'How do I get started?', a: 'Simply fill out our quote request form or contact us directly. We\'ll schedule a brief call or chat to discuss your project, goals, and budget. From there, we\'ll provide a custom proposal and timeline. No obligation—we\'re happy to answer questions before you commit.' }
@@ -671,10 +686,10 @@ const testimonials = [
   },
   { 
     id:6, 
-    quote:'I was launching my web development agency and needed a professional brand identity. Connect Digitals created a clean, modern logo and website that immediately established credibility. The design process was collaborative and the results were perfect.', 
-    author:'— Hayleyesus, Web Developer',
+    quote:'Running my architecture firm, I needed a professional brand identity that would reflect the quality of our work. Connect Digitals created elegant designs for our business cards, portfolio presentations, and marketing materials. The brand identity has helped us secure high-profile projects and we receive consistent compliments from clients.', 
+    author:'— Tesfahun Tsegaye, Expert Architect',
     avatar:'/Testimonials/Tesfahun Tsegaye.webp',
-    alt:'Hayleyesus, Web Developer - satisfied client testimonial for Connect Digitals brand identity and website design services in Ethiopia'
+    alt:'Tesfahun Tsegaye, Expert Architect - satisfied client testimonial for Connect Digitals brand identity and design services in Ethiopia'
   },
 ]
 
@@ -687,18 +702,24 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
   // Contact form state
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
+  const closeSuccessModal = useBackButtonClose(showSuccessModal, () => setShowSuccessModal(false))
   
   // Hero slideshow state
   const [currentSlide, setCurrentSlide] = useState(0)
   const [aboutSlide, setAboutSlide] = useState(0)
   const [faqSlide, setFaqSlide] = useState(0)
   const [portfolioCategory, setPortfolioCategory] = useState('brand-design')
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState(null)
+  const closeCaseStudyModal = useBackButtonClose(!!selectedCaseStudy, () => setSelectedCaseStudy(null))
+  const [selectedBlog, setSelectedBlog] = useState(null)
+  const [copyLinkFeedback, setCopyLinkFeedback] = useState(false)
+  const closeBlogModal = useBackButtonClose(!!selectedBlog, () => { setSelectedBlog(null); setCopyLinkFeedback(false) })
   const heroImages = [
-    { src: '/Hero Images/BG.webp', alt: 'Connect Digitals creative workspace showcasing professional graphic design and branding services in Addis Ababa, Ethiopia' },
-    { src: '/Hero Images/BG-2.webp', alt: 'Modern design studio with professional graphic design tools, logo design equipment, and branding materials in Ethiopia' },
-    { src: '/Hero Images/BG-3.webp', alt: 'Creative workspace featuring digital design tools, web design software, and marketing materials for Ethiopian businesses' },
-    { src: '/Hero Images/BG-4.webp', alt: 'Innovative design process and creative collaboration space for graphic design, branding, and digital marketing projects' },
-    { src: '/Hero Images/BG-5.webp', alt: 'Premium design studio with professional equipment, creative tools, and branding resources for Ethiopian companies' }
+    { src: '/Hero Images/Barnas signage.webp', alt: 'Barnas signage design by Connect Digitals - professional environmental design and branding' },
+    { src: '/Hero Images/Logo Design for Zewd Architectural Designs.webp', alt: 'Logo design for Zewd Architectural Designs by Connect Digitals - professional architecture branding' },
+    { src: '/Hero Images/Office Signage For Andegna Furniture.webp', alt: 'Office signage for Andegna Furniture by Connect Digitals - branded environmental design' },
+    { src: '/Hero Images/Office Signage Medavail-.webp', alt: 'Office signage for Medavail by Connect Digitals - pharmaceutical company branded signage' },
+    { src: '/Hero Images/Swan Clothing - copy.webp', alt: 'Swan Clothing brand identity by Connect Digitals - fashion branding and design' }
   ]
   
   // Auto-advance slideshow
@@ -726,16 +747,38 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
     return () => clearInterval(interval)
   }, [])
 
-  // Close modals with ESC key (desktop)
+  // Close success modal with ESC key
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        if (showSuccessModal) setShowSuccessModal(false)
-      }
+      if (e.key === 'Escape' && showSuccessModal) closeSuccessModal()
     }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [showSuccessModal])
+    if (showSuccessModal) {
+      window.addEventListener('keydown', handleKeyDown)
+      return () => window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [showSuccessModal, closeSuccessModal])
+
+  // Close case study modal with ESC key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && selectedCaseStudy) closeCaseStudyModal()
+    }
+    if (selectedCaseStudy) {
+      window.addEventListener('keydown', handleKeyDown)
+      return () => window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [selectedCaseStudy, closeCaseStudyModal])
+
+  // Close blog modal with ESC key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && selectedBlog) closeBlogModal()
+    }
+    if (selectedBlog) {
+      window.addEventListener('keydown', handleKeyDown)
+      return () => window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [selectedBlog, closeBlogModal])
 
   // Scroll to section function
   const scrollToSection = (sectionId) => {
@@ -771,15 +814,15 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
     <main id="main-content" className="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-0 overflow-x-hidden min-w-0">
       <section id="hero" className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center py-8 lg:py-12" aria-label="Hero section">
         <div>
-          <motion.h1 initial={{ opacity:0,y:20 }} animate={{ opacity:1,y:0 }} transition={{ duration:0.6 }} className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-primaryNavy leading-tight">Connect. Create. Captivate.</motion.h1>
+          <motion.h1 initial={{ opacity:0,y:20 }} animate={{ opacity:1,y:0 }} transition={{ duration:0.6 }} className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-primaryNavy leading-tight">Connect. <span className="text-gold">Create</span>. <span className="text-accentRed">Captivate</span>.</motion.h1>
           <motion.p initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2 }} className="mt-4 text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed">
-            We connect your vision, create powerful brands, and captivate your audience with thoughtful design and strategy.
+            We connect your <span className="text-primaryNavy font-semibold">vision</span>, create powerful brands, and <span className="text-accentRed font-semibold">captivate</span> your audience with thoughtful design and strategy.
           </motion.p>
 
-          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="mt-6 sm:mt-8 flex flex-row items-center gap-2 sm:gap-4">
             <button 
               onClick={onOpenQuoteModal}
-              className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden text-center sm:text-left"
+              className="group relative flex-1 sm:flex-initial min-w-0 px-4 sm:px-8 py-2.5 sm:py-4 bg-primaryNavy text-white rounded-xl font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden text-center"
               aria-label="Open quote request form"
             >
               <span className="relative z-10">Get Started</span>
@@ -787,10 +830,11 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             </button>
             <a 
               href="#portfolio" 
-              className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-primaryNavy text-primaryNavy rounded-xl font-semibold hover:bg-primaryNavy hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg text-center sm:text-left"
+              className="group relative flex-1 sm:flex-initial min-w-0 px-4 sm:px-8 py-2.5 sm:py-4 border-2 border-primaryNavy text-primaryNavy rounded-xl font-semibold text-sm sm:text-base hover:border-accentRed hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg text-center overflow-hidden"
               aria-label="Navigate to portfolio section"
             >
-              View Portfolio
+              <span className="relative z-10">View Portfolio</span>
+              <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
             </a>
           </div>
 
@@ -959,30 +1003,6 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
         </div>
       </section>
 
-      <section id="trusted-by" className="py-8 sm:py-10">
-        <div className="text-center mb-6">
-          <p className="text-gray-500 text-sm font-sans font-medium uppercase tracking-wider">Trusted by</p>
-        </div>
-        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 lg:gap-16">
-          {[
-            { src: '/Trusted By/Andegna-Logo-Outline-7565946d.webp', alt: 'Andegna' },
-            { src: '/Trusted By/Gedylaw-53a5feb2.webp', alt: 'Gedylaw' },
-            { src: '/Trusted By/Medavail-logo-e49b9b88.webp', alt: 'Medavail' },
-            { src: '/Trusted By/Niqat-be4b5d56.webp', alt: 'Niqat' },
-            { src: '/Trusted By/PDC-Logo-2483595d.webp', alt: 'PDC' },
-            { src: '/Trusted By/Prime-All-3a38c568.webp', alt: 'Prime All' }
-          ].map((logo, index) => (
-            <div key={index} className="flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/80 border border-gray-100 shadow-sm grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 overflow-hidden shrink-0 p-0">
-              <img 
-                src={logo.src} 
-                alt={logo.alt} 
-                className="block w-full h-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section id="about" className="py-10">
         <div className="bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
           <div className="relative min-h-[280px]">
@@ -1002,9 +1022,10 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                 </p>
                 <button 
                   onClick={() => scrollToSection('contact')}
-                  className="mt-4 self-start px-6 py-2.5 bg-primaryNavy text-white rounded-xl font-semibold text-sm hover:bg-accentRed transition-colors duration-300"
+                  className="group relative mt-4 self-start px-6 py-2.5 bg-primaryNavy text-white rounded-xl font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
                 >
-                  Work with us
+                  <span className="relative z-10">Work with us</span>
+                  <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 </button>
               </div>,
               /* Slide 2: Our Mission */
@@ -1103,6 +1124,27 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             ))}
           </div>
         </div>
+        <div className="text-center mt-8 sm:mt-10">
+          <p className="text-sm font-sans font-medium uppercase tracking-wider mb-6"><span className="text-accentRed">Trusted</span> by</p>
+          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 lg:gap-16">
+            {[
+              { src: '/Trusted By/Andegna-Logo-Outline-7565946d.webp', alt: 'Andegna' },
+              { src: '/Trusted By/Gedylaw-53a5feb2.webp', alt: 'Gedylaw' },
+              { src: '/Trusted By/Medavail-logo-e49b9b88.webp', alt: 'Medavail' },
+              { src: '/Trusted By/Niqat-be4b5d56.webp', alt: 'Niqat' },
+              { src: '/Trusted By/PDC-Logo-2483595d.webp', alt: 'PDC' },
+              { src: '/Trusted By/Prime-All-3a38c568.webp', alt: 'Prime All' }
+            ].map((logo, index) => (
+              <div key={index} className="flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/80 border border-gray-100 shadow-sm grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 overflow-hidden shrink-0 p-0">
+                <img 
+                  src={logo.src} 
+                  alt={logo.alt} 
+                  className="block w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section id="services" className="py-6 sm:py-10">
@@ -1143,23 +1185,23 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             href="https://heyzine.com/flip-book/2e51bd7d15.html" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="group relative px-8 py-4 bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden w-fit"
+            className="group relative px-5 py-2.5 text-sm bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden w-fit"
           >
             <span className="relative z-10">Explore Full Portfolio</span>
-            <div className="absolute inset-0 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
           </a>
         </div>
 
-        {/* Portfolio Category Tabs */}
-        <div className="flex flex-wrap gap-2 mb-6">
+        {/* Portfolio Category Tabs - glass effect, horizontal scroll */}
+        <div className="flex flex-nowrap gap-2 mb-6 overflow-x-auto pb-1">
           {serviceCategories.map((category) => (
             <button
               key={category.id}
               onClick={() => setPortfolioCategory(category.id)}
-              className={`px-4 py-2 rounded-xl font-medium text-sm font-sans transition-all duration-300 ${
+              className={`px-4 py-2 rounded-xl font-medium text-sm font-sans transition-all duration-300 shrink-0 backdrop-blur-md border border-white/20 ${
                 portfolioCategory === category.id
-                  ? 'bg-primaryNavy text-white'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-primaryNavy'
+                  ? 'bg-primaryNavy/80 text-white shadow-lg'
+                  : 'bg-white/20 text-primaryNavy hover:bg-white/30 hover:border-white/30'
               }`}
             >
               {category.title.replace(/^[^\s]+\s/, '')}
@@ -1188,6 +1230,241 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
               </div>
             )
           })()}
+        </div>
+      </section>
+
+      {/* Case Studies - visible on tablet and desktop only. 3 on mobile/desktop, 4 on tablet only */}
+      <section id="case-studies" className="hidden md:block py-10">
+        <h3 className="text-xl font-display font-semibold text-primaryNavy text-center mb-2">Case Studies</h3>
+        <p className="text-gray-500 text-sm font-sans text-center mb-8 max-w-2xl mx-auto">How we helped businesses achieve their goals through <span className="text-primaryNavy font-semibold">strategic design</span></p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {caseStudiesData.map((cs) => (
+            <div key={cs.id} className={`rounded-2xl overflow-hidden bg-white shadow hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col ${cs.id === 4 ? 'lg:hidden' : ''}`}>
+              <OptimizedImage src={cs.img} alt={`${cs.client} - ${cs.title}`} title={cs.client} className="w-full aspect-video object-cover" objectFit="cover" type="THUMBNAIL" />
+              <div className="p-4 sm:p-5 flex flex-col flex-grow">
+                <p className="text-xs font-sans text-primaryNavy/70 mb-1">Case Study {String(cs.id).padStart(2, '0')}</p>
+                <h4 className="font-semibold text-primaryNavy font-sans text-sm sm:text-base mb-1">{cs.client}</h4>
+                <p className="text-xs font-medium text-accentRed mb-4 flex-grow">{cs.title}</p>
+                <button
+                  onClick={() => setSelectedCaseStudy(cs)}
+                  className="group relative w-full py-2.5 px-4 bg-primaryNavy text-white rounded-xl font-semibold text-sm font-sans shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+                >
+                  <span className="relative z-10">View Full Case Study</span>
+                  <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Case Study Modal */}
+      {selectedCaseStudy && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) closeCaseStudyModal() }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="case-study-modal-title"
+          aria-describedby="case-study-modal-description"
+        >
+          <div className="bg-white rounded-2xl p-6 sm:p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-start mb-6">
+              <div>
+                <p className="text-xs font-sans text-primaryNavy/70 mb-1">Case Study {String(selectedCaseStudy.id).padStart(2, '0')}</p>
+                <h2 id="case-study-modal-title" className="text-xl sm:text-2xl font-display font-bold text-primaryNavy">{selectedCaseStudy.client}</h2>
+                <p className="text-sm font-medium text-accentRed mt-1">{selectedCaseStudy.title}</p>
+              </div>
+              <button onClick={closeCaseStudyModal} className="text-gray-400 hover:text-gray-600 transition-colors p-2" aria-label="Close case study">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+            <div className="mb-6 rounded-xl overflow-hidden">
+              <OptimizedImage src={selectedCaseStudy.img} alt={`${selectedCaseStudy.client} - ${selectedCaseStudy.title}`} className="w-full" objectFit="fitWidth" type="GALLERY" />
+            </div>
+            <div id="case-study-modal-description" className="space-y-6">
+              <section>
+                <h3 className="font-semibold text-primaryNavy mb-2">Overview</h3>
+                <p className="text-gray-600 font-sans leading-relaxed">{selectedCaseStudy.overview}</p>
+              </section>
+              <section className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg">
+                <h3 className="font-semibold text-accentRed mb-2">Challenge</h3>
+                <ul className="text-red-700 font-sans space-y-1 list-disc list-inside">
+                  {selectedCaseStudy.challenge.map((c, i) => <li key={i}>{c}</li>)}
+                </ul>
+              </section>
+              <section className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                <h3 className="font-semibold text-primaryNavy mb-2">Solution</h3>
+                <p className="text-blue-700 font-sans leading-relaxed">{selectedCaseStudy.solution}</p>
+              </section>
+              <section>
+                <h3 className="font-semibold text-primaryNavy mb-2">My Role</h3>
+                <ul className="text-gray-600 font-sans space-y-1">
+                  {selectedCaseStudy.role.map((r, i) => <li key={i} className="flex items-center gap-2"><span className="text-primaryNavy">•</span> {r}</li>)}
+                </ul>
+              </section>
+              <section className="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
+                <h3 className="font-semibold text-gold mb-2">Outcome</h3>
+                <p className="text-green-700 font-sans leading-relaxed">{selectedCaseStudy.outcome}</p>
+              </section>
+            </div>
+            <button onClick={closeCaseStudyModal} className="group relative w-full mt-6 py-3 bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+              <span className="relative z-10">Close</span>
+              <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Blog - visible on tablet and desktop only */}
+      <section id="blog" className="hidden md:block py-10">
+        <h3 className="text-xl font-display font-semibold text-primaryNavy text-center mb-2">Blog</h3>
+        <p className="text-gray-500 text-sm font-sans text-center mb-8 max-w-2xl mx-auto">Insights on <span className="text-primaryNavy font-semibold">design</span>, <span className="text-accentRed font-semibold">branding</span>, and industry trends</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {blogData.map((post) => (
+            <article key={post.id} className="group rounded-2xl overflow-hidden bg-white shadow hover:shadow-lg transition-all duration-300 flex flex-col">
+              <OptimizedImage src={post.img} alt={post.title} title={post.title} className="w-full aspect-video object-cover" objectFit="cover" type="THUMBNAIL" />
+              <div className="p-4 flex flex-col flex-grow">
+                <h4 className="font-semibold text-primaryNavy font-sans text-sm group-hover:text-accentRed transition-colors">{post.title}</h4>
+                <p className="text-gray-600 text-xs mt-1 font-sans flex-grow">{post.shortDesc}</p>
+                <button
+                  onClick={() => setSelectedBlog(post)}
+                  className="group relative mt-3 w-full py-2 px-4 bg-primaryNavy text-white rounded-xl font-semibold text-sm font-sans shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+                >
+                  <span className="relative z-10">Read more</span>
+                  <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Blog Modal */}
+      {selectedBlog && (
+        <div 
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) closeBlogModal() }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="blog-modal-title"
+          aria-describedby="blog-modal-description"
+        >
+          <div 
+            className="bg-white rounded-2xl p-6 sm:p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-start mb-6">
+              <h2 id="blog-modal-title" className="text-xl sm:text-2xl font-display font-bold text-primaryNavy pr-8">{selectedBlog.title}</h2>
+              <button onClick={closeBlogModal} className="text-gray-400 hover:text-gray-600 transition-colors p-2 shrink-0" aria-label="Close blog">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+            <div className="mb-6 rounded-xl overflow-hidden ring-1 ring-gray-100">
+              <OptimizedImage src={selectedBlog.img} alt={selectedBlog.title} className="w-full" objectFit="fitWidth" type="GALLERY" />
+            </div>
+            <div id="blog-modal-description" className="blog-reader text-gray-700 font-sans leading-[1.8] space-y-5 text-base sm:text-[17px]">
+              {selectedBlog.description.split('\n\n').map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={async () => {
+                  const url = `${window.location.origin}${window.location.pathname}#blog-${selectedBlog.slug || selectedBlog.id}`
+                  try {
+                    await navigator.clipboard.writeText(url)
+                    setCopyLinkFeedback(true)
+                    setTimeout(() => setCopyLinkFeedback(false), 2000)
+                    const liveRegion = document.getElementById('aria-live-region')
+                    if (liveRegion) liveRegion.textContent = 'Link copied to clipboard'
+                  } catch {
+                    const liveRegion = document.getElementById('aria-live-region')
+                    if (liveRegion) liveRegion.textContent = 'Failed to copy link'
+                  }
+                }}
+                className="group relative flex-1 py-3 px-4 border-2 border-primaryNavy text-primaryNavy rounded-xl font-semibold hover:border-accentRed hover:text-white transition-all duration-300 overflow-hidden flex items-center justify-center gap-2 disabled:opacity-70"
+                disabled={copyLinkFeedback}
+              >
+                {copyLinkFeedback ? (
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    Copied!
+                  </span>
+                ) : (
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+                    Copy link
+                  </span>
+                )}
+                <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </button>
+              <button
+                onClick={async () => {
+                  const url = `${window.location.origin}${window.location.pathname}#blog-${selectedBlog.slug || selectedBlog.id}`
+                  if (navigator.share) {
+                    try {
+                      await navigator.share({
+                        title: `${selectedBlog.title} | Connect Digitals Blog`,
+                        text: selectedBlog.shortDesc,
+                        url
+                      })
+                    } catch (err) {
+                      if (err.name !== 'AbortError') {
+                        try {
+                          await navigator.clipboard.writeText(url)
+                          setCopyLinkFeedback(true)
+                          setTimeout(() => setCopyLinkFeedback(false), 2000)
+                        } catch {}
+                      }
+                    }
+                  } else {
+                    try {
+                      await navigator.clipboard.writeText(url)
+                      setCopyLinkFeedback(true)
+                      setTimeout(() => setCopyLinkFeedback(false), 2000)
+                    } catch {}
+                  }
+                }}
+                className="group relative flex-1 py-3 px-4 bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden flex items-center justify-center gap-2"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+                  Share
+                </span>
+                <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </button>
+              <button onClick={closeBlogModal} className="flex-1 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-colors">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <section id="testimonials" className="py-10">
+        <h3 className="text-xl font-display font-semibold mb-2 text-primaryNavy text-center">What clients say</h3>
+          <p className="text-gray-500 text-sm font-sans text-center mb-8 max-w-2xl mx-auto">Trusted by businesses across <span className="text-accentRed font-semibold">Ethiopia</span> and beyond</p>
+        
+        {/* Horizontal Scrolling Testimonials */}
+        <div className="relative overflow-hidden py-4">
+          {/* Gradient fades */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-cream to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-cream to-transparent z-10 pointer-events-none" />
+          <div className="flex animate-scroll" style={{ width: 'max-content' }}>
+            {/* First set of testimonials */}
+            {testimonials.map(t => (
+              <div key={t.id} className="flex-shrink-0 w-80 sm:w-96 mr-6 sm:mr-8">
+                <TestimonialCard quote={t.quote} author={t.author} avatar={t.avatar} alt={t.alt} />
+              </div>
+            ))}
+            {/* Second set for seamless loop */}
+            {testimonials.map(t => (
+              <div key={`duplicate-${t.id}`} className="flex-shrink-0 w-80 sm:w-96 mr-6 sm:mr-8">
+                <TestimonialCard quote={t.quote} author={t.author} avatar={t.avatar} alt={t.alt} />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1226,40 +1503,14 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
         </div>
       </section>
 
-      <section id="testimonials" className="py-10">
-        <h3 className="text-xl font-display font-semibold mb-2 text-primaryNavy text-center">What clients say</h3>
-        <p className="text-gray-500 text-sm font-sans text-center mb-8 max-w-2xl mx-auto">Trusted by businesses across Ethiopia and beyond</p>
-        
-        {/* Horizontal Scrolling Testimonials */}
-        <div className="relative overflow-hidden py-4">
-          {/* Gradient fades */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-cream to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-cream to-transparent z-10 pointer-events-none" />
-          <div className="flex animate-scroll" style={{ width: 'max-content' }}>
-            {/* First set of testimonials */}
-            {testimonials.map(t => (
-              <div key={t.id} className="flex-shrink-0 w-80 sm:w-96 mr-6 sm:mr-8">
-                <TestimonialCard quote={t.quote} author={t.author} avatar={t.avatar} alt={t.alt} />
-              </div>
-            ))}
-            {/* Second set for seamless loop */}
-            {testimonials.map(t => (
-              <div key={`duplicate-${t.id}`} className="flex-shrink-0 w-80 sm:w-96 mr-6 sm:mr-8">
-                <TestimonialCard quote={t.quote} author={t.author} avatar={t.avatar} alt={t.alt} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="contact" className="py-12 sm:py-16">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-xl sm:text-2xl font-display font-bold text-primaryNavy text-center mb-2">Get in Touch</h2>
-          <p className="text-gray-500 text-sm font-sans text-center mb-10">Ready to transform your vision? We'd love to hear from you.</p>
+          <p className="text-gray-500 text-sm font-sans text-center mb-10">Ready to <span className="text-gold font-semibold">transform</span> your vision? We'd love to hear from you.</p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-            <div className="space-y-6">
-              <a href="tel:+251923988838" className="group flex items-center gap-4 p-4 border border-gray-200 rounded-2xl hover:border-primaryNavy/30 hover:shadow-md transition-all duration-300">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+            <div className="space-y-6 min-w-0">
+              <a href="tel:+251923988838" className="group flex items-center gap-4 p-4 border border-gray-200 rounded-2xl hover:border-primaryNavy/30 hover:shadow-md transition-all duration-300 min-w-0">
                 <span className="w-12 h-12 rounded-xl bg-primaryNavy flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                   <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
                 </span>
@@ -1268,16 +1519,16 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                   <p className="font-semibold text-primaryNavy font-sans">+251 923 988 838</p>
                 </div>
               </a>
-              <a href="mailto:digitalsconnect@gmail.com" className="group flex items-center gap-4 p-4 border border-gray-200 rounded-2xl hover:border-accentRed/30 hover:shadow-md transition-all duration-300">
+              <a href="mailto:digitalsconnect@gmail.com" className="group flex items-center gap-4 p-4 border border-gray-200 rounded-2xl hover:border-accentRed/30 hover:shadow-md transition-all duration-300 min-w-0">
                 <span className="w-12 h-12 rounded-xl bg-accentRed flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                   <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
                 </span>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-xs font-sans text-gray-500 uppercase tracking-wider mb-0.5">Email</p>
                   <p className="font-semibold text-primaryNavy font-sans break-all">digitalsconnect@gmail.com</p>
                 </div>
               </a>
-              <a href="https://maps.google.com/?q=Addis+Ababa,Ethiopia" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 p-4 border border-gray-200 rounded-2xl hover:border-gold/40 hover:shadow-md transition-all duration-300">
+              <a href="https://maps.google.com/?q=Addis+Ababa,Ethiopia" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 p-4 border border-gray-200 rounded-2xl hover:border-gold/40 hover:shadow-md transition-all duration-300 min-w-0">
                 <span className="w-12 h-12 rounded-xl bg-gold flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                 </span>
@@ -1286,14 +1537,24 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                   <p className="font-semibold text-primaryNavy font-sans">Addis Ababa, Ethiopia</p>
                 </div>
               </a>
+              <a href="https://linktr.ee/Connectdigitals" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 p-4 border border-gray-200 rounded-2xl hover:border-primaryNavy/30 hover:shadow-md transition-all duration-300 min-w-0">
+                <span className="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+                </span>
+                <div>
+                  <p className="text-xs font-sans text-gray-500 uppercase tracking-wider mb-0.5">Linktree</p>
+                  <p className="font-semibold text-primaryNavy font-sans">Instagram · Facebook · TikTok</p>
+                </div>
+              </a>
             </div>
-            <form onSubmit={handleContactSubmit} className="space-y-4 p-6 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-sm">
+            <form onSubmit={handleContactSubmit} action="https://formspree.io/f/mgvzpqpq" method="POST" className="hidden md:flex flex-col lg:h-full p-6 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-sm min-h-0">
               <input type="hidden" name="subject" value="Contact form submission" />
-              <input name="name" required placeholder="Your name" className="w-full px-4 py-3 text-sm font-sans border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent outline-none transition-shadow" />
-              <input type="email" name="email" required placeholder="Email address" className="w-full px-4 py-3 text-sm font-sans border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent outline-none transition-shadow" />
-              <textarea name="message" required rows={4} placeholder="Tell us about your project..." className="w-full px-4 py-3 text-sm font-sans border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent resize-none outline-none transition-shadow" />
-              <button type="submit" disabled={isSubmitting} className="w-full py-3.5 bg-primaryNavy text-white rounded-xl font-semibold text-sm font-sans hover:bg-primaryNavy/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+              <input name="name" required placeholder="Your name" className="w-full px-4 py-3 text-sm font-sans border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent outline-none transition-shadow mb-4" />
+              <input type="email" name="email" required placeholder="Email address" className="w-full px-4 py-3 text-sm font-sans border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent outline-none transition-shadow mb-4" />
+              <textarea name="message" required placeholder="Tell us about your project..." className="flex-1 min-h-[120px] w-full px-4 py-3 text-sm font-sans border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent resize-none outline-none transition-shadow mb-4" />
+              <button type="submit" disabled={isSubmitting} className="group relative w-full py-3.5 bg-primaryNavy text-white rounded-xl font-semibold text-sm font-sans shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shrink-0">
+                <span className="relative z-10">{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </button>
             </form>
           </div>
@@ -1301,16 +1562,23 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
       </section>
                 
       {showSuccessModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div 
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) closeSuccessModal() }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="success-modal-title"
+        >
           <div className="bg-white rounded-xl p-6 max-w-sm w-full text-center">
             <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
               </div>
-            <h3 className="font-display font-semibold text-primaryNavy mb-2">Message Sent!</h3>
+            <h3 id="success-modal-title" className="font-display font-semibold text-primaryNavy mb-2">Message Sent!</h3>
             <p className="text-gray-600 text-sm mb-4 font-sans">We'll get back to you within 24 hours.</p>
-            <button onClick={() => setShowSuccessModal(false)} className="w-full py-2.5 bg-primaryNavy text-white rounded-lg font-medium text-sm hover:bg-opacity-90 transition-all">
-              Close
-                </button>
+            <button onClick={closeSuccessModal} className="group relative w-full py-2.5 bg-primaryNavy text-white rounded-lg font-medium text-sm shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+              <span className="relative z-10">Close</span>
+              <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </button>
           </div>
         </div>
       )}

@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import { useFocusManagement, useKeyboardNavigation } from '../hooks/useFocusManagement'
+import { useBackButtonClose } from '../hooks/useBackButtonClose'
 
 export default function PricingModal({ isOpen, onClose }) {
   const [selectedPackage, setSelectedPackage] = useState(null)
 
-  // Focus management
+  const closeModal = useBackButtonClose(isOpen, onClose)
   const modalRef = useFocusManagement(isOpen)
-  useKeyboardNavigation(isOpen, onClose)
+  useKeyboardNavigation(isOpen, closeModal)
 
   const packages = [
     {
       id: 'starter',
       name: 'Beginner',
       description: 'Perfect for small businesses and startups',
-      price: '5k - 10k',
+      price: '5k - 10k ETB',
       color: 'from-blue-500 to-blue-600',
       features: [
         'Logo Design (3 concepts)',
@@ -29,7 +30,7 @@ export default function PricingModal({ isOpen, onClose }) {
       id: 'professional',
       name: 'Professional',
       description: 'Ideal for growing businesses',
-      price: '10k - 15k',
+      price: '10k - 15k ETB',
       color: 'from-blue-600 to-red-500',
       features: [
         'Complete Brand Identity',
@@ -47,7 +48,7 @@ export default function PricingModal({ isOpen, onClose }) {
       id: 'premium',
       name: 'Premium',
       description: 'Comprehensive solution for established brands',
-      price: '15k - 20k',
+      price: '15k - 20k ETB',
       color: 'from-purple-500 to-pink-500',
       features: [
         'Full Brand Identity System',
@@ -76,7 +77,7 @@ export default function PricingModal({ isOpen, onClose }) {
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
-      onClose()
+      closeModal()
     }
   }
 
@@ -100,7 +101,7 @@ export default function PricingModal({ isOpen, onClose }) {
               <p id="pricing-modal-description" className="text-gray-600 mt-2 font-sans text-sm sm:text-base">Choose the perfect package for your project needs</p>
             </div>
             <button
-              onClick={onClose}
+              onClick={closeModal}
               className="text-gray-400 hover:text-gray-600 transition-colors"
               aria-label="Close pricing modal"
             >
@@ -204,15 +205,17 @@ export default function PricingModal({ isOpen, onClose }) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="tel:+251923988838"
-                className="px-8 py-3 bg-white text-primaryNavy rounded-xl font-semibold hover:bg-gray-100 transition-colors"
+                className="group relative px-8 py-3 bg-white text-primaryNavy rounded-xl font-semibold overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
               >
-                Call Now
+                <span className="relative z-10 group-hover:text-white transition-colors">Call Now</span>
+                <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </a>
               <a
                 href="mailto:digitalsconnect@gmail.com"
-                className="px-8 py-3 border-2 border-white text-white rounded-xl font-semibold hover:bg-white hover:text-primaryNavy transition-colors"
+                className="group relative px-8 py-3 border-2 border-white text-white rounded-xl font-semibold overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
               >
-                Send Email
+                <span className="relative z-10 group-hover:text-primaryNavy transition-colors">Send Email</span>
+                <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </a>
             </div>
           </div>

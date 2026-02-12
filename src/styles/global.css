@@ -93,8 +93,15 @@ html, body {
   border: 0;
 }
 
-/* Focus styles for better accessibility */
+/* Focus styles for better accessibility - visible for keyboard, subtle for mouse */
 *:focus {
+  outline: 2px solid #000F33;
+  outline-offset: 2px;
+}
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+*:focus-visible {
   outline: 2px solid #000F33;
   outline-offset: 2px;
 }
@@ -170,5 +177,28 @@ img {
 .blur-placeholder.loaded {
   filter: blur(0);
   transform: scale(1);
+}
+
+/* Blog modal – editorial, tempting to read */
+.blog-reader {
+  border-left: 4px solid #D4AF37;
+  padding-left: 1.25rem;
+  margin-left: -0.25rem;
+}
+.blog-reader p {
+  color: #374151;
+  letter-spacing: 0.01em;
+}
+.blog-reader p:first-of-type::first-letter {
+  font-size: 3.25rem;
+  font-weight: 700;
+  color: #000F33;
+  float: left;
+  line-height: 1;
+  margin-right: 0.5rem;
+  margin-top: 0.1rem;
+}
+.blog-reader p:first-of-type {
+  color: #1f2937;
 }
 

@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { useFocusManagement, useKeyboardNavigation } from '../hooks/useFocusManagement'
+import { useBackButtonClose } from '../hooks/useBackButtonClose'
 
 export default function QuoteModal({ isOpen, onClose }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  // Focus management
+  const closeModal = useBackButtonClose(isOpen, onClose)
   const modalRef = useFocusManagement(isOpen)
-  useKeyboardNavigation(isOpen, onClose)
+  useKeyboardNavigation(isOpen, closeModal)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -21,14 +22,14 @@ export default function QuoteModal({ isOpen, onClose }) {
       // Close modal after 2 seconds
       setTimeout(() => {
         setIsSubmitted(false)
-        onClose()
+        closeModal()
       }, 2000)
     }, 1000)
   }
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
-      onClose()
+      closeModal()
     }
   }
 
@@ -49,7 +50,7 @@ export default function QuoteModal({ isOpen, onClose }) {
           <div className="flex items-center justify-between mb-6">
             <h2 id="quote-modal-title" className="text-2xl font-display font-bold text-primaryNavy">Request a Quote</h2>
             <button
-              onClick={onClose}
+              onClick={closeModal}
               className="text-gray-400 hover:text-gray-600 transition-colors"
               aria-label="Close quote request form"
             >
@@ -188,7 +189,7 @@ export default function QuoteModal({ isOpen, onClose }) {
               <div className="flex gap-4 pt-4">
                 <button
                   type="button"
-                  onClick={onClose}
+                  onClick={closeModal}
                   className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                   aria-label="Cancel quote request and close modal"
                 >
@@ -197,10 +198,11 @@ export default function QuoteModal({ isOpen, onClose }) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 px-6 py-3 bg-primaryNavy text-white rounded-lg hover:bg-opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="group relative flex-1 px-6 py-3 bg-primaryNavy text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   aria-label={isSubmitting ? 'Submitting quote request' : 'Submit quote request'}
                 >
-                  {isSubmitting ? 'Submitting...' : 'Request Quote'}
+                  <span className="relative z-10">{isSubmitting ? 'Submitting...' : 'Request Quote'}</span>
+                  <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 </button>
               </div>
             </form>

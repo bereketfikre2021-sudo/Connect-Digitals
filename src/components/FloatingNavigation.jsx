@@ -19,34 +19,45 @@ export default function FloatingNavigation() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const scrollToTopButton = (tooltipLeft = false) => (
-    <button
-      onClick={scrollToTop}
-      className="group relative bg-primaryNavy text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
-      aria-label="Scroll to top"
-    >
-      <svg 
-        className="w-6 h-6" 
-        fill="none" 
-        stroke="currentColor" 
-        viewBox="0 0 24 24"
-        aria-hidden="true"
+  const progressCircle = (r = 14) => {
+    const circumference = 2 * Math.PI * r
+    return circumference
+  }
+
+  const combinedProgressButton = () => {
+    const r = 14
+    const circ = progressCircle(r)
+    return (
+      <button
+        onClick={scrollToTop}
+        className="group relative rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 bg-primaryNavy text-white w-12 h-12 sm:w-14 sm:h-14 overflow-hidden"
+        aria-label={`Scroll to top · Page progress: ${scrollPercentage}%`}
       >
-        <path 
-          strokeLinecap="round" 
-          strokeLinejoin="round" 
-          strokeWidth={2} 
-          d="M5 10l7-7m0 0l7 7m-7-7v18" 
-        />
-      </svg>
-      
-      {/* Tooltip - right of button when on left (mobile), left of button when on right (desktop) */}
-      <div className={`absolute top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap ${tooltipLeft ? 'left-full ml-3' : 'right-full mr-3'}`}>
-        Back to Top
-        <div className={`absolute top-1/2 transform -translate-y-1/2 w-2 h-2 bg-gray-900 rotate-45 ${tooltipLeft ? 'left-0 -translate-x-1' : 'right-0 translate-x-1'}`}></div>
-      </div>
-    </button>
-  )
+        <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
+        <svg className="absolute w-full h-full -rotate-90" viewBox="0 0 36 36" aria-hidden="true">
+          <circle cx="18" cy="18" r={r} fill="none" stroke="currentColor" strokeWidth="1.5" className="text-white/20" />
+          <circle 
+            cx="18" cy="18" r={r} 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="1.5" 
+            strokeDasharray={`${(scrollPercentage / 100) * circ} ${circ}`}
+            strokeLinecap="round"
+            className="text-white/60 transition-all duration-200 ease-out"
+          />
+        </svg>
+        <svg 
+          className="w-5 h-5 sm:w-6 sm:h-6 relative z-10" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </button>
+    )
+  }
 
   return (
     <>
@@ -58,45 +69,27 @@ export default function FloatingNavigation() {
         />
       </div>
 
-      {/* Mobile & Tablet: Home arrow on left, Call button on right */}
+      {/* Mobile & Tablet: Combined progress + scroll-to-top on left, Call button on right */}
       <div className="fixed left-4 bottom-4 z-50 lg:hidden">
-        {scrollToTopButton(true)}
+        {combinedProgressButton()}
       </div>
 
       <a
         href="tel:+251923988838"
-        className="fixed right-4 bottom-4 z-50 lg:hidden bg-accentRed text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
+        className="group relative fixed right-4 bottom-4 z-50 lg:hidden bg-accentRed text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 overflow-hidden"
         aria-label="Call +251 923 988 838"
       >
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+        <span className="relative z-10 block">
+          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
           <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
         </svg>
+        </span>
+        <div className="absolute inset-0 bg-primaryNavy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
       </a>
 
-      {/* Desktop: Page progress on left, Home arrow on right */}
-      <div className="fixed left-4 bottom-4 z-50 hidden lg:flex items-center gap-2">
-        <div 
-          className="group relative w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center"
-          aria-label={`Page progress: ${scrollPercentage}%`}
-        >
-          <svg className="w-12 h-12 -rotate-90" viewBox="0 0 36 36">
-            <circle cx="18" cy="18" r="16" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/20" />
-            <circle 
-              cx="18" cy="18" r="16" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeDasharray={`${(scrollPercentage / 100) * 100.53} 100.53`}
-              strokeLinecap="round"
-              className="text-primaryNavy transition-all duration-150"
-            />
-          </svg>
-          <span className="absolute text-[10px] font-semibold text-primaryNavy">{scrollPercentage}%</span>
-        </div>
-      </div>
-
+      {/* Desktop: Combined progress + scroll-to-top on right */}
       <div className="fixed right-4 bottom-4 z-50 hidden lg:block">
-        {scrollToTopButton(false)}
+        {combinedProgressButton()}
       </div>
     </>
   )

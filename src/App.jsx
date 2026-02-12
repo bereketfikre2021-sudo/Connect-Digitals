@@ -16,132 +16,49 @@ export default function App() {
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false)
   const [legalModal, setLegalModal] = useState({ isOpen: false, type: null })
 
-  // Legal content
+  // Legal content - minimal
+  const contactBlock = (
+    <div className="flex flex-col gap-2 mt-2">
+      <a href="mailto:digitalsconnect@gmail.com" className="text-accentRed font-medium break-all hover:underline">
+        digitalsconnect@gmail.com
+      </a>
+      <a href="tel:+251923988838" className="text-accentRed font-medium shrink-0">+251 923 988 838</a>
+    </div>
+  )
+
   const legalContent = {
     privacy: {
       title: "Privacy Policy",
       content: (
-        <div>
-          <section className="mb-8">
-            <div className="bg-cream border-l-4 border-primaryNavy p-6 rounded-r-lg mb-6">
-              <h3 className="text-2xl font-display font-semibold text-primaryNavy mb-4 flex items-center gap-2">
-                <span className="w-8 h-8 bg-primaryNavy rounded-full flex items-center justify-center text-white text-sm">1</span>
-                Information We Collect
-              </h3>
-              <p className="text-neutralDark mb-4 font-sans leading-relaxed">
-                We collect information you provide directly to us, such as when you create an account, 
-                make a purchase, or contact us for support. This may include your name, email address, 
-                phone number, and any other information you choose to provide.
-              </p>
-              <ul className="list-disc list-inside text-neutralDark font-sans ml-4 space-y-2">
-                <li>Personal identification information (name, email, phone number)</li>
-                <li>Business information (company name, industry, project details)</li>
-                <li>Communication records (emails, messages, feedback)</li>
-                <li>Payment information (processed securely through third-party providers)</li>
-              </ul>
-            </div>
+        <div className="space-y-4">
+          <section>
+            <h3 className="font-semibold text-primaryNavy mb-1">1. Information We Collect</h3>
+            <p className="leading-relaxed text-sm">
+              We collect information you provide directly: name, email, phone number, business info, and payment details (processed securely).
+            </p>
           </section>
-
-          <section className="mb-8">
-            <div className="bg-cream border-l-4 border-accentRed p-6 rounded-r-lg mb-6">
-              <h3 className="text-2xl font-display font-semibold text-primaryNavy mb-4 flex items-center gap-2">
-                <span className="w-8 h-8 bg-accentRed rounded-full flex items-center justify-center text-white text-sm">2</span>
-                How We Use Your Information
-              </h3>
-              <p className="text-neutralDark mb-4 font-sans leading-relaxed">
-                We use the information we collect to provide, maintain, and improve our services, 
-                process transactions, send you technical notices and support messages, and communicate 
-                with you about products, services, and promotional offers.
-              </p>
-              <ul className="list-disc list-inside text-neutralDark font-sans ml-4 space-y-2">
-                <li>To provide and maintain our design services</li>
-                <li>To process payments and manage billing</li>
-                <li>To communicate about projects and updates</li>
-                <li>To improve our services and user experience</li>
-                <li>To send marketing communications (with your consent)</li>
-              </ul>
-            </div>
+          <section>
+            <h3 className="font-semibold text-primaryNavy mb-1">2. How We Use Your Information</h3>
+            <p className="leading-relaxed text-sm">
+              We use it to provide services, process payments, communicate about projects, and improve our services.
+            </p>
           </section>
-
-          <section className="mb-8">
-            <div className="bg-cream border-l-4 border-gold p-6 rounded-r-lg mb-6">
-              <h3 className="text-2xl font-display font-semibold text-primaryNavy mb-4 flex items-center gap-2">
-                <span className="w-8 h-8 bg-gold rounded-full flex items-center justify-center text-white text-sm">3</span>
-                Information Sharing
-              </h3>
-              <p className="text-neutralDark mb-4 font-sans leading-relaxed">
-                We do not sell, trade, or otherwise transfer your personal information to third parties 
-                without your consent, except as described in this privacy policy or as required by law.
-              </p>
-              <div className="bg-white p-4 rounded-lg border border-gold">
-                <p className="text-neutralDark font-sans text-sm">
-                  <strong className="text-primaryNavy">We may share information with:</strong><br/>
-                  • Service providers who assist in our operations<br/>
-                  • Legal authorities when required by law<br/>
-                  • Business partners with your explicit consent
-                </p>
-              </div>
-            </div>
+          <section>
+            <h3 className="font-semibold text-primaryNavy mb-1">3. Information Sharing</h3>
+            <p className="leading-relaxed text-sm">
+              We do not sell your data. We may share with service providers, legal authorities when required, or partners with your consent.
+            </p>
           </section>
-
-          <section className="mb-8">
-            <div className="bg-cream border-l-4 border-primaryNavy p-6 rounded-r-lg mb-6">
-              <h3 className="text-2xl font-display font-semibold text-primaryNavy mb-4 flex items-center gap-2">
-                <span className="w-8 h-8 bg-primaryNavy rounded-full flex items-center justify-center text-white text-sm">4</span>
-                Data Security
-              </h3>
-              <p className="text-neutralDark mb-4 font-sans leading-relaxed">
-                We implement appropriate security measures to protect your personal information against 
-                unauthorized access, alteration, disclosure, or destruction.
-              </p>
-              <div className="bg-white p-4 rounded-lg border border-primaryNavy">
-                <p className="text-neutralDark font-sans text-sm">
-                  <strong className="text-primaryNavy">Security measures include:</strong><br/>
-                  • SSL encryption for data transmission<br/>
-                  • Secure servers and databases<br/>
-                  • Regular security audits and updates<br/>
-                  • Limited access to personal information
-                </p>
-              </div>
-            </div>
+          <section>
+            <h3 className="font-semibold text-primaryNavy mb-1">4. Data Security</h3>
+            <p className="leading-relaxed text-sm">
+              We use SSL encryption, secure servers, and limit access to protect your information.
+            </p>
           </section>
-
-          <section className="mb-8">
-            <div className="bg-cream border-l-4 border-accentRed p-6 rounded-r-lg">
-              <h3 className="text-2xl font-display font-semibold text-primaryNavy mb-4 flex items-center gap-2">
-                <span className="w-8 h-8 bg-accentRed rounded-full flex items-center justify-center text-white text-sm">5</span>
-                Contact Us
-              </h3>
-              <p className="text-neutralDark mb-4 font-sans leading-relaxed">
-                If you have any questions about this Privacy Policy, please contact us at:
-              </p>
-              <div className="bg-white p-6 rounded-lg border border-accentRed shadow-sm">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-accentRed/10 rounded-full flex items-center justify-center">
-                      <svg className="w-5 h-5 text-accentRed" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm text-neutralDark font-sans">Email</p>
-                      <p className="text-neutralDark font-sans font-medium">digitalsconnect@gmail.com</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gold/10 rounded-full flex items-center justify-center">
-                      <svg className="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm text-neutralDark font-sans">Phone</p>
-                      <p className="text-neutralDark font-sans font-medium">+251 923 988 838</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <section>
+            <h3 className="font-semibold text-primaryNavy mb-1">5. Contact Us</h3>
+            <p className="leading-relaxed text-sm mb-1">Questions? Contact us:</p>
+            {contactBlock}
           </section>
         </div>
       )
@@ -149,148 +66,29 @@ export default function App() {
     cookie: {
       title: "Cookie Policy",
       content: (
-        <div>
-          <section className="mb-8">
-            <div className="bg-cream border-l-4 border-primaryNavy p-6 rounded-r-lg mb-6">
-              <h3 className="text-2xl font-display font-semibold text-primaryNavy mb-4 flex items-center gap-2">
-                <span className="w-8 h-8 bg-primaryNavy rounded-full flex items-center justify-center text-white text-sm">1</span>
-                What Are Cookies
-              </h3>
-              <p className="text-neutralDark mb-4 font-sans leading-relaxed">
-                Cookies are small text files that are placed on your computer or mobile device when you 
-                visit our website. They help us provide you with a better experience by remembering your 
-                preferences and understanding how you use our site.
-              </p>
-              <div className="bg-white p-4 rounded-lg border border-primaryNavy">
-                <p className="text-neutralDark font-sans text-sm">
-                  <strong className="text-primaryNavy">Cookies help us:</strong><br/>
-                  • Remember your preferences and settings<br/>
-                  • Understand how you use our website<br/>
-                  • Improve our services and user experience<br/>
-                  • Provide personalized content and features
-                </p>
-              </div>
-            </div>
+        <div className="space-y-4">
+          <section>
+            <h3 className="font-semibold text-primaryNavy mb-1">1. What Are Cookies</h3>
+            <p className="leading-relaxed text-sm">
+              Small text files placed on your device when you visit. They help remember preferences and improve your experience.
+            </p>
           </section>
-
-          <section className="mb-8">
-            <div className="bg-cream border-l-4 border-accentRed p-6 rounded-r-lg mb-6">
-              <h3 className="text-2xl font-display font-semibold text-primaryNavy mb-4 flex items-center gap-2">
-                <span className="w-8 h-8 bg-accentRed rounded-full flex items-center justify-center text-white text-sm">2</span>
-                Types of Cookies We Use
-              </h3>
-              
-              <div className="space-y-6">
-                <div className="bg-white p-5 rounded-lg border border-accentRed">
-                  <h4 className="text-xl font-display font-semibold text-primaryNavy mb-3 flex items-center gap-2">
-                    <span className="w-6 h-6 bg-accentRed rounded-full flex items-center justify-center text-white text-xs">A</span>
-                    Essential Cookies
-                  </h4>
-                  <p className="text-neutralDark mb-3 font-sans">
-                    These cookies are necessary for the website to function properly. They enable basic 
-                    functions like page navigation and access to secure areas of the website.
-                  </p>
-                  <div className="bg-cream p-3 rounded border-l-2 border-accentRed">
-                    <p className="text-neutralDark font-sans text-sm">
-                      <strong>Examples:</strong> Session management, security, form submissions
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-white p-5 rounded-lg border border-accentRed">
-                  <h4 className="text-xl font-display font-semibold text-primaryNavy mb-3 flex items-center gap-2">
-                    <span className="w-6 h-6 bg-accentRed rounded-full flex items-center justify-center text-white text-xs">B</span>
-                    Analytics Cookies
-                  </h4>
-                  <p className="text-neutralDark mb-3 font-sans">
-                    These cookies help us understand how visitors interact with our website by collecting 
-                    and reporting information anonymously.
-                  </p>
-                  <div className="bg-cream p-3 rounded border-l-2 border-accentRed">
-                    <p className="text-neutralDark font-sans text-sm">
-                      <strong>Examples:</strong> Google Analytics, page views, user behavior tracking
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-white p-5 rounded-lg border border-accentRed">
-                  <h4 className="text-xl font-display font-semibold text-primaryNavy mb-3 flex items-center gap-2">
-                    <span className="w-6 h-6 bg-accentRed rounded-full flex items-center justify-center text-white text-xs">C</span>
-                    Preference Cookies
-                  </h4>
-                  <p className="text-neutralDark mb-3 font-sans">
-                    These cookies remember your choices and preferences to provide you with a more 
-                    personalized experience.
-                  </p>
-                  <div className="bg-cream p-3 rounded border-l-2 border-accentRed">
-                    <p className="text-neutralDark font-sans text-sm">
-                      <strong>Examples:</strong> Language settings, theme preferences, user customizations
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <section>
+            <h3 className="font-semibold text-primaryNavy mb-1">2. Types We Use</h3>
+            <p className="leading-relaxed text-sm">
+              <strong>Essential:</strong> Required for the site to work. <strong>Analytics:</strong> Help us understand usage. <strong>Preference:</strong> Remember your choices.
+            </p>
           </section>
-
-          <section className="mb-8">
-            <div className="bg-cream border-l-4 border-gold p-6 rounded-r-lg mb-6">
-              <h3 className="text-2xl font-display font-semibold text-primaryNavy mb-4 flex items-center gap-2">
-                <span className="w-8 h-8 bg-gold rounded-full flex items-center justify-center text-white text-sm">3</span>
-                Managing Cookies
-              </h3>
-              <p className="text-neutralDark mb-4 font-sans leading-relaxed">
-                You can control and manage cookies through your browser settings. Most browsers allow 
-                you to refuse cookies or delete them. However, disabling cookies may affect the 
-                functionality of our website.
-              </p>
-              <div className="bg-white p-4 rounded-lg border border-gold">
-                <p className="text-neutralDark font-sans text-sm">
-                  <strong className="text-primaryNavy">Browser Settings:</strong><br/>
-                  • Chrome: Settings → Privacy and Security → Cookies<br/>
-                  • Firefox: Options → Privacy & Security → Cookies<br/>
-                  • Safari: Preferences → Privacy → Cookies<br/>
-                  • Edge: Settings → Cookies and Site Permissions
-                </p>
-              </div>
-            </div>
+          <section>
+            <h3 className="font-semibold text-primaryNavy mb-1">3. Managing Cookies</h3>
+            <p className="leading-relaxed text-sm">
+              Control cookies via your browser settings (Chrome, Firefox, Safari, Edge). Disabling may affect site functionality.
+            </p>
           </section>
-
-          <section className="mb-8">
-            <div className="bg-cream border-l-4 border-primaryNavy p-6 rounded-r-lg">
-              <h3 className="text-2xl font-display font-semibold text-primaryNavy mb-4 flex items-center gap-2">
-                <span className="w-8 h-8 bg-primaryNavy rounded-full flex items-center justify-center text-white text-sm">4</span>
-                Contact Us
-              </h3>
-              <p className="text-neutralDark mb-4 font-sans leading-relaxed">
-                If you have any questions about our use of cookies, please contact us at:
-              </p>
-              <div className="bg-white p-6 rounded-lg border border-primaryNavy shadow-sm">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-accentRed/10 rounded-full flex items-center justify-center">
-                      <svg className="w-5 h-5 text-accentRed" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm text-neutralDark font-sans">Email</p>
-                      <p className="text-neutralDark font-sans font-medium">digitalsconnect@gmail.com</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gold/10 rounded-full flex items-center justify-center">
-                      <svg className="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm text-neutralDark font-sans">Phone</p>
-                      <p className="text-neutralDark font-sans font-medium">+251 923 988 838</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <section>
+            <h3 className="font-semibold text-primaryNavy mb-1">4. Contact Us</h3>
+            <p className="leading-relaxed text-sm mb-1">Questions about cookies?</p>
+            {contactBlock}
           </section>
         </div>
       )
@@ -329,7 +127,7 @@ export default function App() {
                 Services Description
               </h3>
               <p className="text-neutralDark mb-4 font-sans leading-relaxed">
-                Connect Digitals provides comprehensive creative design services including but not limited to:
+                Connect Digitals provides creative design services. All prices in ETB (Ethiopian Birr).
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div className="bg-white p-4 rounded-lg border border-accentRed">
@@ -452,7 +250,7 @@ export default function App() {
                     <li>• Beginner Package: 2 rounds of revisions included</li>
                     <li>• Professional Package: 5 rounds of revisions included</li>
                     <li>• Premium Package: Unlimited revisions included</li>
-                    <li>• Additional revisions: $50 per round</li>
+                    <li>• Additional revisions: 1,500 ETB per round</li>
                   </ul>
                 </div>
                 <div className="bg-white p-4 rounded-lg border border-accentRed">
@@ -461,7 +259,7 @@ export default function App() {
                     <li>• Beginner Package: 5-7 business days</li>
                     <li>• Professional Package: 10-14 business days</li>
                     <li>• Premium Package: 15-21 business days</li>
-                    <li>• Rush orders: 50% additional fee</li>
+                    <li>• Rush orders: 50% additional fee (ETB)</li>
                   </ul>
                 </div>
                 <div className="bg-white p-4 rounded-lg border border-accentRed">

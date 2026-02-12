@@ -1,9 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import OptimizedImage from './OptimizedImage'
+import { useBackButtonClose } from '../hooks/useBackButtonClose'
 
 export default function PortfolioCard({img, title, alt, children, caseStudy}){
   const [isModalOpen, setIsModalOpen] = useState(false)
-  
+  const closeModal = useBackButtonClose(isModalOpen, () => setIsModalOpen(false))
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isModalOpen) closeModal()
+    }
+    if (isModalOpen) {
+      window.addEventListener('keydown', handleKeyDown)
+      return () => window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isModalOpen, closeModal])
+
   return (
     <>
       <article className="rounded-2xl overflow-hidden bg-white shadow hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
@@ -18,7 +30,7 @@ export default function PortfolioCard({img, title, alt, children, caseStudy}){
       <div className="p-4 flex flex-col flex-grow">
         <h3 className="font-semibold text-base sm:text-lg">{title}</h3>
         <p className="text-sm text-gray-600 mt-2 font-sans flex-grow">{children}</p>
-        <div className="mt-3">
+        <div className="mt-3 hidden sm:block">
             <button 
               onClick={() => setIsModalOpen(true)}
               className="text-sm font-medium text-primaryNavy hover:text-accentRed transition-colors duration-300"
@@ -34,6 +46,7 @@ export default function PortfolioCard({img, title, alt, children, caseStudy}){
       {isModalOpen && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) closeModal() }}
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-title"
@@ -43,7 +56,7 @@ export default function PortfolioCard({img, title, alt, children, caseStudy}){
             <div className="flex justify-between items-start mb-6">
               <h2 id="modal-title" className="text-2xl font-display font-bold text-primaryNavy">{title}</h2>
               <button
-                onClick={() => setIsModalOpen(false)}
+                onClick={closeModal}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
                 aria-label="Close modal"
               >
@@ -109,7 +122,7 @@ export default function PortfolioCard({img, title, alt, children, caseStudy}){
 
             <div className="mt-8 flex gap-3">
               <button
-                onClick={() => setIsModalOpen(false)}
+                onClick={closeModal}
                 className="group relative flex-1 px-6 py-3 bg-primaryNavy text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
                 aria-label="Close portfolio case study modal"
               >
@@ -120,9 +133,10 @@ export default function PortfolioCard({img, title, alt, children, caseStudy}){
                 href="https://heyzine.com/flip-book/2e51bd7d15.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 px-6 py-3 border-2 border-primaryNavy text-primaryNavy rounded-xl font-semibold hover:bg-primaryNavy hover:text-white transition-all duration-300 text-center"
+                className="group relative flex-1 px-6 py-3 border-2 border-primaryNavy text-primaryNavy rounded-xl font-semibold hover:border-accentRed hover:text-white transition-all duration-300 overflow-hidden text-center"
               >
-                View Full Portfolio
+                <span className="relative z-10">View Full Portfolio</span>
+                <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </a>
         </div>
       </div>
