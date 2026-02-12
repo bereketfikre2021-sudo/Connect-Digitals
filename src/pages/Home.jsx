@@ -819,10 +819,10 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             We connect your <span className="text-primaryNavy font-semibold">vision</span>, create powerful brands, and <span className="text-accentRed font-semibold">captivate</span> your audience with thoughtful design and strategy.
           </motion.p>
 
-          <div className="mt-6 sm:mt-8 flex flex-row items-center gap-2 sm:gap-4">
+          <div className="mt-6 sm:mt-8 flex flex-row flex-wrap sm:flex-nowrap items-stretch sm:items-center gap-2 sm:gap-4">
             <button 
               onClick={onOpenQuoteModal}
-              className="group relative flex-1 sm:flex-initial min-w-0 px-4 sm:px-8 py-2.5 sm:py-4 bg-primaryNavy text-white rounded-xl font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden text-center"
+              className="group relative flex-1 sm:flex-initial min-w-0 px-4 sm:px-6 py-2.5 sm:py-4 bg-primaryNavy text-white rounded-xl font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden text-center flex items-center justify-center min-h-[44px] sm:min-h-0 whitespace-nowrap sm:shrink-0"
               aria-label="Open quote request form"
             >
               <span className="relative z-10">Get Started</span>
@@ -830,11 +830,20 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
             </button>
             <a 
               href="#portfolio" 
-              className="group relative flex-1 sm:flex-initial min-w-0 px-4 sm:px-8 py-2.5 sm:py-4 border-2 border-primaryNavy text-primaryNavy rounded-xl font-semibold text-sm sm:text-base hover:border-accentRed hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg text-center overflow-hidden"
+              className="group relative flex-1 sm:flex-initial min-w-0 px-4 sm:px-6 py-2.5 sm:py-4 border-2 border-primaryNavy text-primaryNavy rounded-xl font-semibold text-sm sm:text-base hover:border-accentRed hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg text-center overflow-hidden flex items-center justify-center min-h-[44px] sm:min-h-0 whitespace-nowrap sm:shrink-0"
               aria-label="Navigate to portfolio section"
             >
               <span className="relative z-10">View Portfolio</span>
               <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </a>
+            <a 
+              href="/Connect-Digital Portfolio.pdf" 
+              download="Connect-Digital Portfolio.pdf"
+              className="group relative flex-1 sm:flex-initial min-w-0 px-4 sm:px-6 py-2.5 sm:py-4 border-2 border-primaryNavy text-primaryNavy rounded-xl font-semibold text-sm sm:text-base hover:border-gold hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg text-center overflow-hidden flex items-center justify-center min-h-[44px] sm:min-h-0 whitespace-nowrap sm:shrink-0"
+              aria-label="Download CV portfolio PDF"
+            >
+              <span className="relative z-10">Download CV</span>
+              <div className="absolute inset-0 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
             </a>
           </div>
 
@@ -1174,6 +1183,28 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                 {category.services.map(s => s.title).join(' · ')}
               </p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="process" className="py-6 sm:py-10" aria-labelledby="process-heading">
+        <h2 id="process-heading" className="text-lg sm:text-xl font-display font-semibold text-primaryNavy mb-4 sm:mb-6">How We Work</h2>
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
+          {[
+            { step: 'Discovery', short: 'Brief & goals' },
+            { step: 'Concept', short: 'Ideas & strategy' },
+            { step: 'Design', short: 'Iterate & refine' },
+            { step: 'Delivery', short: 'Final files & handoff' }
+          ].map((item, i) => (
+            <React.Fragment key={item.step}>
+              <div className="flex flex-col items-center text-center">
+                <span className="font-display font-semibold text-primaryNavy text-sm sm:text-base">{item.step}</span>
+                <span className="text-xs text-neutralDark/80 font-sans">{item.short}</span>
+              </div>
+              {i < 3 && (
+                <span className="text-accentRed/60 font-bold text-lg shrink-0" aria-hidden="true">→</span>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </section>
@@ -1562,25 +1593,48 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
       </section>
                 
       {showSuccessModal && (
-        <div 
+        <motion.div 
           className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
           onClick={(e) => { if (e.target === e.currentTarget) closeSuccessModal() }}
           role="dialog"
           aria-modal="true"
           aria-labelledby="success-modal-title"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
         >
-          <div className="bg-white rounded-xl p-6 max-w-sm w-full text-center">
-            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-              </div>
+          <motion.div 
+            className="bg-white rounded-xl p-6 max-w-sm w-full text-center shadow-2xl"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+          >
+            <motion.div 
+              className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 15, delay: 0.1 }}
+            >
+              <motion.svg 
+                className="w-7 h-7 text-green-600" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.25, duration: 0.2 }}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </motion.svg>
+            </motion.div>
             <h3 id="success-modal-title" className="font-display font-semibold text-primaryNavy mb-2">Message Sent!</h3>
             <p className="text-gray-600 text-sm mb-4 font-sans">We'll get back to you within 24 hours.</p>
             <button onClick={closeSuccessModal} className="group relative w-full py-2.5 bg-primaryNavy text-white rounded-lg font-medium text-sm shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
               <span className="relative z-10">Close</span>
               <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
             </button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </main>
   )

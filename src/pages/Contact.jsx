@@ -1,6 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitError(null)
+    const form = e.target
+    const formData = new FormData(form)
+    try {
+      const response = await fetch('https://formspree.io/f/mgvzpqpq', {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      })
+      const data = await response.json()
+      if (data.ok) {
+        setIsSuccess(true)
+        form.reset()
+      } else {
+        setSubmitError(data.error || 'Something went wrong. Please try again.')
+      }
+    } catch (err) {
+      setSubmitError('Network error. Please check your connection and try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-16 w-full overflow-x-hidden">
       <div className="text-center mb-12">
@@ -106,67 +137,111 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-            <h3 className="text-xl font-display font-semibold text-primaryNavy mb-6">Send us a Message</h3>
-            <form 
-              className="space-y-6" 
-              action="https://formspree.io/f/mgvzpqpq" 
-              method="POST"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
-                  <input 
-                    name="name"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white" 
-                    placeholder="John Doe" 
-                    required 
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                  <input 
-                    type="email" 
-                    name="email"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                    title="Please enter a valid email address"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white" 
-                    placeholder="you@company.com" 
-                    required 
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
-                <input 
-                  name="subject"
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white" 
-                  placeholder="Project inquiry" 
-                />
-              </div>
+            {!isSuccess ? (
+              <>
+                <h3 className="text-xl font-display font-semibold text-primaryNavy mb-6">Send us a Message</h3>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {submitError && (
+                    <div className="p-3 rounded-lg bg-red-50 text-red-700 text-sm" role="alert">
+                      {submitError}
+                    </div>
+                  )}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                      <input 
+                        name="name"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white" 
+                        placeholder="John Doe" 
+                        required 
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                      <input 
+                        type="email" 
+                        name="email"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        title="Please enter a valid email address"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white" 
+                        placeholder="you@company.com" 
+                        required 
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                    <input 
+                      name="subject"
+                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white" 
+                      placeholder="Project inquiry" 
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                <textarea 
-                  name="message"
-                  rows={5}
-                  minLength={20}
-                  title="Please provide at least 20 characters"
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white resize-none" 
-                  placeholder="Tell us about your project, goals, and how we can help..." 
-                  required 
-                />
-              </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                    <textarea 
+                      name="message"
+                      rows={5}
+                      minLength={20}
+                      title="Please provide at least 20 characters"
+                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryNavy focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white resize-none" 
+                      placeholder="Tell us about your project, goals, and how we can help..." 
+                      required 
+                    />
+                  </div>
 
-              <button 
-                type="submit" 
-                className="group relative w-full px-8 py-4 bg-primaryNavy text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
-                aria-label="Submit contact form message"
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="group relative w-full px-8 py-4 bg-primaryNavy text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                    aria-label="Submit contact form message"
+                  >
+                    <span className="relative z-10">{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                    <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  </button>
+                </form>
+              </>
+            ) : (
+              <motion.div 
+                className="text-center py-12"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
               >
-                <span className="relative z-10">Send Message</span>
-                <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-              </button>
-            </form>
+                <motion.div 
+                  className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                >
+                  <motion.svg 
+                    className="w-8 h-8 text-green-600" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </motion.svg>
+                </motion.div>
+                <h3 className="text-xl font-display font-semibold text-primaryNavy mb-2">Message Sent!</h3>
+                <p className="text-gray-600 mb-6">
+                  Thank you for reaching out. We'll get back to you within 24 hours.
+                </p>
+                <button 
+                  type="button"
+                  onClick={() => setIsSuccess(false)}
+                  className="group relative px-6 py-3 bg-primaryNavy text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+                >
+                  <span className="relative z-10">Send another message</span>
+                  <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </button>
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

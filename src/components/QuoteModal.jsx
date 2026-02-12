@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 import { useFocusManagement, useKeyboardNavigation } from '../hooks/useFocusManagement'
 import { useBackButtonClose } from '../hooks/useBackButtonClose'
 
@@ -229,17 +230,35 @@ export default function QuoteModal({ isOpen, onClose }) {
             </form>
           ) : (
             /* Success Message */
-            <div className="text-center py-8">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <motion.div 
+              className="text-center py-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.div 
+                className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+              >
+                <motion.svg 
+                  className="w-8 h-8 text-green-600" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
+                </motion.svg>
+              </motion.div>
               <h3 className="text-xl font-display font-semibold text-gray-900 mb-2">Quote Request Sent!</h3>
               <p className="text-gray-600">
                 Thank you for your interest! We'll review your project details and get back to you within 24 hours with a personalized quote.
               </p>
-            </div>
+            </motion.div>
           )}
         </div>
       </div>
