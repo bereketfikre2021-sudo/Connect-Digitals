@@ -108,33 +108,6 @@ const serviceCategories = [
     ]
   },
   {
-    id: 'packaging-environmental-design',
-    title: '📦 Packaging and Environmental Design',
-    services: [
-      { 
-        id: 13, 
-        title: 'Packaging Design', 
-        desc: 'Eye-catching packaging that sells on the shelf.',
-        details: 'Professional packaging design that attracts customers and protects your products. We create designs that not only look great but also comply with industry standards and work effectively in retail environments.',
-        icon: '📦' 
-      },
-      { 
-        id: 14, 
-        title: 'Label Design', 
-        desc: 'Labels that inform and captivate.',
-        details: 'Custom label design for products, bottles, and packaging. We create labels that communicate essential information clearly while maintaining strong visual appeal and brand consistency.',
-        icon: '🏷️' 
-      },
-      { 
-        id: 15, 
-        title: 'Signage', 
-        desc: 'Signage that guides and brands your space.',
-        details: 'Professional signage design for retail, offices, events, and environmental graphics. We create impactful signs—from wayfinding systems to branded wall graphics—that enhance your space and reinforce your brand.',
-        icon: '🚧' 
-      }
-    ]
-  },
-  {
     id: 'print-layout',
     title: '📄 Print and Layout Design',
     services: [
@@ -158,6 +131,33 @@ const serviceCategories = [
         desc: 'Polished layouts for reports, brochures, and print materials.',
         details: 'Professional layout and print design for brochures, reports, business cards, and corporate materials. We create clean, organized designs that present your information clearly and professionally.',
         icon: '📄' 
+      }
+    ]
+  },
+  {
+    id: 'packaging-environmental-design',
+    title: '📦 Packaging and Environmental Design',
+    services: [
+      { 
+        id: 13, 
+        title: 'Packaging Design', 
+        desc: 'Eye-catching packaging that sells on the shelf.',
+        details: 'Professional packaging design that attracts customers and protects your products. We create designs that not only look great but also comply with industry standards and work effectively in retail environments.',
+        icon: '📦' 
+      },
+      { 
+        id: 14, 
+        title: 'Label Design', 
+        desc: 'Labels that inform and captivate.',
+        details: 'Custom label design for products, bottles, and packaging. We create labels that communicate essential information clearly while maintaining strong visual appeal and brand consistency.',
+        icon: '🏷️' 
+      },
+      { 
+        id: 15, 
+        title: 'Signage', 
+        desc: 'Signage that guides and brands your space.',
+        details: 'Professional signage design for retail, offices, events, and environmental graphics. We create impactful signs—from wayfinding systems to branded wall graphics—that enhance your space and reinforce your brand.',
+        icon: '🚧' 
       }
     ]
   },
@@ -1537,17 +1537,8 @@ export default function Home({ onOpenQuoteModal, onOpenPricingModal }){
                   <p className="font-semibold text-primaryNavy font-sans break-all">digitalsconnect@gmail.com</p>
                 </div>
               </a>
-              <a href="https://maps.google.com/?q=Addis+Ababa,Ethiopia" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 p-4 border border-gray-200 rounded-2xl hover:border-gold/40 hover:shadow-md transition-all duration-300 min-w-0">
-                <span className="w-12 h-12 rounded-xl bg-gold flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                </span>
-                <div>
-                  <p className="text-xs font-sans text-gray-500 uppercase tracking-wider mb-0.5">Location</p>
-                  <p className="font-semibold text-primaryNavy font-sans">Addis Ababa, Ethiopia</p>
-                </div>
-              </a>
               <a href="https://linktr.ee/Connectdigitals" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 p-4 border border-gray-200 rounded-2xl hover:border-primaryNavy/30 hover:shadow-md transition-all duration-300 min-w-0">
-                <span className="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <span className="w-12 h-12 rounded-xl bg-gold flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
                 </span>
                 <div>
