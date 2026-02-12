@@ -1,7 +1,11 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import CookieBanner from './components/CookieBanner'
 import Home from './pages/Home'
+import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 import PerformanceMonitor from './components/PerformanceMonitor'
 import FloatingNavigation from './components/FloatingNavigation'
 import { verifyImages } from './utils/imageVerification'
@@ -11,7 +15,19 @@ const QuoteModal = lazy(() => import('./components/QuoteModal'))
 const PricingModal = lazy(() => import('./components/PricingModal'))
 const LegalModal = lazy(() => import('./components/LegalModal'))
 
+function useHashScroll() {
+  const location = useLocation()
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash) {
+      const id = location.hash.slice(1)
+      const el = document.getElementById(id)
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100)
+    }
+  }, [location.pathname, location.hash])
+}
+
 export default function App() {
+  useHashScroll()
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false)
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false)
   const [legalModal, setLegalModal] = useState({ isOpen: false, type: null })
@@ -437,10 +453,11 @@ export default function App() {
       <PerformanceMonitor />
       <Header onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
       <main role="main" aria-label="Main content">
-        <Home
-          onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-          onOpenPricingModal={() => setIsPricingModalOpen(true)}
-        />
+        <Routes>
+          <Route path="/" element={<Home onOpenQuoteModal={() => setIsQuoteModalOpen(true)} onOpenPricingModal={() => setIsPricingModalOpen(true)} />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
       <Footer 
         onOpenLegalModal={(type) => setLegalModal({ isOpen: true, type })}
@@ -471,6 +488,7 @@ export default function App() {
         className="sr-only"
       />
       <FloatingNavigation />
+      <CookieBanner onOpenCookiePolicy={() => setLegalModal({ isOpen: true, type: 'cookie' })} />
     </div>
   )
 }

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 export default function Header({ onOpenQuoteModal }){
+  const location = useLocation()
+  const navigate = useNavigate()
+  const isHome = location.pathname === '/'
   const [isScrolled, setIsScrolled] = useState(false)
   const [currentSection, setCurrentSection] = useState('hero')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -8,15 +12,29 @@ export default function Header({ onOpenQuoteModal }){
     { id: 'about', name: 'About' },
     { id: 'services', name: 'Services' },
     { id: 'portfolio', name: 'Portfolio' },
-    { id: 'contact', name: 'Contact' }
+    { id: 'contact', name: 'Contact', isRoute: true }
   ]
   
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+  const handleNavClick = (item) => {
     setIsMobileMenuOpen(false)
+    if (item.isRoute) {
+      navigate('/contact')
+      return
+    }
+    if (isHome) {
+      const element = document.getElementById(item.id)
+      if (element) element.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate({ pathname: '/', hash: item.id })
+    }
+  }
+
+  const handleLogoClick = (e) => {
+    if (isHome) {
+      e.preventDefault()
+      const el = document.getElementById('hero')
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   const toggleMobileMenu = () => {
@@ -24,6 +42,11 @@ export default function Header({ onOpenQuoteModal }){
   }
 
   useEffect(() => {
+    if (!isHome) setCurrentSection(location.pathname === '/contact' ? 'contact' : 'hero')
+  }, [isHome, location.pathname])
+
+  useEffect(() => {
+    if (!isHome) return
     const sections = ['hero', 'about', 'services', 'portfolio', 'contact']
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -39,7 +62,7 @@ export default function Header({ onOpenQuoteModal }){
     handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isHome])
 
   return (
     <header 
@@ -57,8 +80,9 @@ export default function Header({ onOpenQuoteModal }){
       <div className="max-w-6xl mx-auto px-4 sm:px-5 md:px-6 py-4">
         <div className="flex items-center justify-between gap-4 md:gap-6 min-w-0">
           {/* Logo Section */}
-          <button 
-            onClick={() => scrollToSection('hero')}
+          <Link 
+            to="/"
+            onClick={handleLogoClick}
             className="flex items-center gap-2 sm:gap-4 hover:opacity-80 transition-all duration-300 group min-w-0 shrink-0"
             aria-label="Connect Digitals - Go to homepage"
           >
@@ -85,7 +109,7 @@ export default function Header({ onOpenQuoteModal }){
                 Connect. Create. Captivate.
               </div>
             </div>
-          </button>
+          </Link>
 
           {/* Navigation & CTA */}
           <div className="flex items-center gap-2 sm:gap-4 flex-1 justify-end min-w-0 shrink-0">
@@ -95,13 +119,13 @@ export default function Header({ onOpenQuoteModal }){
               {navItems.map((item) => (
                 <button 
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)} 
+                  onClick={() => handleNavClick(item)} 
                   className={`relative px-5 py-2.5 rounded-xl font-medium font-sans transition-all duration-300 ${
                     currentSection === item.id
                       ? 'bg-primaryNavy text-white'
                       : 'text-gray-300 hover:text-white hover:bg-white/10'
                   }`}
-                  aria-label={`Navigate to ${item.name} section`}
+                  aria-label={`Navigate to ${item.name}`}
                 >
                   {item.name}
                 </button>
@@ -146,7 +170,7 @@ export default function Header({ onOpenQuoteModal }){
               {navItems.map((item) => (
                 <button 
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)} 
+                  onClick={() => handleNavClick(item)} 
                   className={`w-full text-left font-medium py-3 px-4 rounded-xl font-sans transition-all duration-300 ${
                     currentSection === item.id
                       ? 'bg-primaryNavy text-white'

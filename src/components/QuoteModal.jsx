@@ -10,21 +10,37 @@ export default function QuoteModal({ isOpen, onClose }) {
   const modalRef = useFocusManagement(isOpen)
   useKeyboardNavigation(isOpen, closeModal)
 
+  const [submitError, setSubmitError] = useState(null)
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
-    // Simulate form submission delay
-    setTimeout(() => {
+    setSubmitError(null)
+    const form = e.target
+    const formData = new FormData(form)
+    formData.set('_subject', 'Quote Request - Connect Digitals')
+    try {
+      const response = await fetch('https://formspree.io/f/mgvzpqpq', {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      })
+      const data = await response.json()
+      if (data.ok) {
+        setIsSubmitted(true)
+        form.reset()
+        setTimeout(() => {
+          setIsSubmitted(false)
+          closeModal()
+        }, 2500)
+      } else {
+        setSubmitError(data.error || 'Something went wrong. Please try again.')
+      }
+    } catch (err) {
+      setSubmitError('Network error. Please check your connection and try again.')
+    } finally {
       setIsSubmitting(false)
-      setIsSubmitted(true)
-      
-      // Close modal after 2 seconds
-      setTimeout(() => {
-        setIsSubmitted(false)
-        closeModal()
-      }, 2000)
-    }, 1000)
+    }
   }
 
   const handleBackdropClick = (e) => {
@@ -63,18 +79,19 @@ export default function QuoteModal({ isOpen, onClose }) {
           {!isSubmitted ? (
             <form 
               name="quote-request" 
-              method="POST" 
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               className="space-y-6"
               id="quote-modal-description"
             >
-              {/* Hidden field for Netlify */}
-              <input type="hidden" name="form-name" value="quote-request" />
-              <div className="hidden">
-                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+              {/* Honeypot for spam */}
+              <div className="hidden" aria-hidden="true">
+                <label>Don't fill this out: <input name="_gotcha" tabIndex={-1} autoComplete="off" /></label>
               </div>
+              {submitError && (
+                <div className="p-3 rounded-lg bg-red-50 text-red-700 text-sm" role="alert">
+                  {submitError}
+                </div>
+              )}
 
               {/* Full Name */}
               <div>
@@ -101,6 +118,8 @@ export default function QuoteModal({ isOpen, onClose }) {
                   id="email"
                   name="email"
                   required
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  title="Please enter a valid email address"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryNavy focus:border-transparent transition-colors"
                   placeholder="Enter your email address"
                 />
@@ -179,9 +198,11 @@ export default function QuoteModal({ isOpen, onClose }) {
                   id="projectDetails"
                   name="projectDetails"
                   required
+                  minLength={20}
                   rows={4}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryNavy focus:border-transparent transition-colors resize-none"
                   placeholder="Tell us about your project, goals, timeline, and any specific requirements..."
+                  title="Please provide at least 20 characters"
                 />
               </div>
 

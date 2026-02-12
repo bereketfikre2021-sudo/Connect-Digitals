@@ -91,20 +91,6 @@ export default function FloatingNavigation() {
         </a>
       </div>
 
-      {/* Desktop: Call button on left, scroll-to-top on right */}
-      <a
-        href="tel:+251923988838"
-        className="group relative fixed left-4 bottom-4 z-[100] hidden lg:flex items-center justify-center bg-accentRed text-white w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 overflow-hidden touch-manipulation"
-        aria-label="Call +251 923 988 838"
-      >
-        <span className="relative z-10">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-          </svg>
-        </span>
-        <div className="absolute inset-0 bg-primaryNavy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
-      </a>
-
       {/* Desktop: Combined progress + scroll-to-top on right */}
       <div className="fixed right-4 bottom-4 z-[100] hidden lg:block">
         {combinedProgressButton()}
