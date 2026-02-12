@@ -8,6 +8,9 @@ yarn-error.log*
 dist/
 build/
 
+# Old/replaced assets (keeping Connect-Digital Portfolio.pdf as current)
+Graphics Portfolio 2025_compressed.pdf
+
 # Environment variables
 .env
 .env.local
