@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 export default function FloatingNavigation() {
   const [scrollPercentage, setScrollPercentage] = useState(0)
@@ -59,7 +60,7 @@ export default function FloatingNavigation() {
     )
   }
 
-  return (
+  const content = (
     <>
       {/* Page progress bar - visible on all screen sizes (mobile, tablet, desktop) */}
       <div className="fixed top-0 left-0 right-0 h-0.5 bg-white/20 backdrop-blur-sm z-[60]">
@@ -69,28 +70,47 @@ export default function FloatingNavigation() {
         />
       </div>
 
-      {/* Mobile & Tablet: Combined progress + scroll-to-top on left, Call button on right */}
-      <div className="fixed left-4 bottom-4 z-50 lg:hidden">
+      {/* Mobile & Tablet: Scroll-to-top on left */}
+      <div className="fixed left-4 bottom-4 z-[100] lg:hidden">
         {combinedProgressButton()}
       </div>
 
+      {/* Mobile & Tablet: Call button on right */}
+      <div className="fixed right-4 bottom-4 z-[100] lg:hidden">
+        <a
+          href="tel:+251923988838"
+          className="group relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-accentRed text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 overflow-hidden touch-manipulation"
+          aria-label="Call +251 923 988 838"
+        >
+          <span className="relative z-10 block">
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+            </svg>
+          </span>
+          <div className="absolute inset-0 bg-primaryNavy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
+        </a>
+      </div>
+
+      {/* Desktop: Call button on left, scroll-to-top on right */}
       <a
         href="tel:+251923988838"
-        className="group relative fixed right-4 bottom-4 z-50 lg:hidden bg-accentRed text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 overflow-hidden"
+        className="group relative fixed left-4 bottom-4 z-[100] hidden lg:flex items-center justify-center bg-accentRed text-white w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 overflow-hidden touch-manipulation"
         aria-label="Call +251 923 988 838"
       >
-        <span className="relative z-10 block">
+        <span className="relative z-10">
           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-        </svg>
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+          </svg>
         </span>
         <div className="absolute inset-0 bg-primaryNavy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
       </a>
 
       {/* Desktop: Combined progress + scroll-to-top on right */}
-      <div className="fixed right-4 bottom-4 z-50 hidden lg:block">
+      <div className="fixed right-4 bottom-4 z-[100] hidden lg:block">
         {combinedProgressButton()}
       </div>
     </>
   )
+
+  return createPortal(content, document.body)
 }
