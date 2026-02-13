@@ -31,7 +31,7 @@ export default function FloatingNavigation() {
     return (
       <button
         onClick={scrollToTop}
-        className="group relative rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 bg-primaryNavy text-white w-12 h-12 sm:w-14 sm:h-14 overflow-hidden"
+        className="group relative rounded-full flex flex-col items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 bg-primaryNavy text-white w-12 h-12 sm:w-14 sm:h-14 overflow-hidden"
         aria-label={`Scroll to top · Page progress: ${scrollPercentage}%`}
       >
         <div className="absolute inset-0 bg-accentRed transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
@@ -47,15 +47,18 @@ export default function FloatingNavigation() {
             className="text-white/60 transition-all duration-200 ease-out"
           />
         </svg>
-        <svg 
-          className="w-5 h-5 sm:w-6 sm:h-6 relative z-10" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
+        <span className="relative z-10 flex flex-col items-center leading-none">
+          <svg 
+            className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+          <span className="text-[9px] sm:text-[10px] font-medium mt-0.5 tabular-nums">{scrollPercentage}%</span>
+        </span>
       </button>
     )
   }
